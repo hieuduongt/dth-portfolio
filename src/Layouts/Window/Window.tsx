@@ -33,6 +33,7 @@ const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 export function Window(props: WindowProps) {
     const {
         theme,
+        blur,
         setIsRunningApp,
         openedApps,
         setAreOpenedApps,
@@ -53,7 +54,7 @@ export function Window(props: WindowProps) {
         <Rnd
             dragHandleClassName="action-bar"
             style={{ ...style, zIndex: expanded ? 8 : zIndex, transition: animation ? animation : style?.transition ? style.transition : "" }}
-            className={`window content ${theme} blur-3 ${!windowSize.width ? "br" : ""} ${className}`}
+            className={`window content ${theme} ${blur} ${!windowSize.width ? "br" : ""} ${className}`}
             minWidth={size?.width ? 0 : minWidth || 300}
             minHeight={size?.width ? 0 : minHeight || 300}
             default={{

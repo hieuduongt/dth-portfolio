@@ -1,5 +1,5 @@
 import './App.css';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import TaskBar from "./Layouts/Taskbar/TaskBar";
 import Home from './Pages/Home/Home';
 import PersonalInfo from './Pages/PersonalInfo/PersonalInfo';
@@ -10,8 +10,25 @@ import Works from './Pages/Works/Works';
 
 export const AppContext = createContext();
 
+export const standardTheme = {
+  light: "light-background",
+  dark: "dark-background",
+  lightTransparent: "light-background-transparent",
+  darkTransparent: "dark-background-transparent"
+}
+
+export const blurLevels = {
+  none: "",
+  level1: "blur-1",
+  level2: "blur-2",
+  level3: "blur-3",
+  level4: "blur-4",
+  level5: "blur-5"
+}
+
 function App() {
-  const [theme, setTheme] = useState("light-background");
+  const [blur, setBlur] = useState(blurLevels.none);
+  const [theme, setTheme] = useState(standardTheme.light);
   const [homeStyle, setHomeStyle] = useState({
     style: {},
     defaultPosition: {
@@ -97,7 +114,33 @@ function App() {
   ]);
 
   const setNewTheme = (value) => {
-    setTheme(value);
+    if (blur === blurLevels.none) {
+      setTheme(value);
+    } else if (value.includes("dark")) {
+      setTheme(standardTheme.darkTransparent);
+    } else {
+      setTheme(standardTheme.lightTransparent);
+    }
+  }
+
+  const setNewBlurLevel = (value) => {
+    if (value === blurLevels.none) {
+      setTheme(prev => {
+        if (prev.includes(standardTheme.light)) {
+          return standardTheme.light;
+        }
+        return standardTheme.dark;
+      });
+      setBlur(value);
+    } else {
+      setTheme(prev => {
+        if (prev.includes(standardTheme.light)) {
+          return standardTheme.lightTransparent;
+        }
+        return standardTheme.darkTransparent;
+      });
+      setBlur(value);
+    }
   }
 
   const setIsRunningApp = (value) => {
@@ -143,11 +186,22 @@ function App() {
     });
   }
 
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+    if (18 > currentHour > 6) {
+      setTheme(standardTheme.light);
+    } else {
+      setTheme(standardTheme.dark);
+    }
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
         theme,
         setNewTheme,
+        blur,
+        setNewBlurLevel,
         runningApp,
         setIsRunningApp,
         openedApps,

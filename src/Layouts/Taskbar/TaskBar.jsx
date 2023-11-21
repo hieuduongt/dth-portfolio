@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState, createRef } from "react";
-import { AppContext } from "../../App";
-import { Button } from "../../components/Button";
+import { AppContext, blurLevels } from "../../App";
 import { Input } from "../../components/Input";
-import { HiOutlineColorSwatch, HiColorSwatch } from 'react-icons/hi';
 import { BsSearch } from 'react-icons/bs';
-import { handleOpenAnApplication } from '../../Helpers/Helpers'
+import { handleOpenAnApplication } from '../../Helpers/Helpers';
+import { Switch } from '../../components/Switch';
 
 const CTime = () => {
     let time = new Date().toLocaleTimeString();
@@ -43,6 +42,8 @@ const CDate = () => {
 const TaskBar = (props) => {
     const {
         theme,
+        blur,
+        setNewBlurLevel,
         setNewTheme,
         runningApp,
         setIsRunningApp,
@@ -112,16 +113,28 @@ const TaskBar = (props) => {
 
     return (
         <div className="taskbar">
-            <div className={`taskbar-content ${theme} blur-3`}>
-                <Button icon={theme === "dark-background" ? <HiOutlineColorSwatch size={23} /> : <HiColorSwatch size={23} />} color="success-color" onClick={() => setNewTheme((prev) => { return prev === "dark-background" ? "light-background" : "dark-background" })}>
+            <div className={`taskbar-content ${theme} ${blur}`}>
+                <div className="theme-setting">
+                    <span className="settings" style={{ fontWeight: "bold" }}>
+                        <img src="settings-logo-app.png" />
+                    </span>
+                    <div className={`theme-config-list ${theme} ${blur}`}>
+                        <Switch label="Dark" checked={theme.includes("dark") ? false : true} onChange={(value) => {
+                            setNewTheme(value ? "dark-background" : "light-background")
+                        }} />
+                        <Switch label="Blur" onChange={(value) => { value ? setNewBlurLevel(blurLevels.level3) : setNewBlurLevel(blurLevels.none) }} />
+
+                    </div>
+                </div>
+                {/* <Button icon={theme === "dark-background" ? <HiOutlineColorSwatch size={23} /> : <HiColorSwatch size={23} />} color="success-color" onClick={() => setNewTheme((prev) => { return prev === "dark-background" ? "light-background" : "dark-background" })}>
                     {theme === "dark-background" ? "Light" : "Dark"}
-                </Button>
+                </Button> */}
                 <div className="search-area">
                     <Input className="br-3" scalesize="large" icon={<BsSearch />} iconposition="before" />
                 </div>
                 <div className="applications-area">
                     <div ref={refs[0]} className="application" onClick={(e) => handleOpenAnApplication(0, "home", homeStyle, setNewHomeStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                        <span className="application-name blur-3">
+                        <span className="application-name">
                             Home
                         </span>
                         <img src="home-logo-app.png" alt="home" />
@@ -129,7 +142,7 @@ const TaskBar = (props) => {
                         <span className="opened-app" style={{ display: runningApp === 0 ? "none" : (openedApps.home === 1 ? "block" : "none") }}></span>
                     </div>
                     <div ref={refs[1]} className="application" onClick={(e) => handleOpenAnApplication(1, "resume", resumeStyle, setNewResumeStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                        <span className="application-name blur-3">
+                        <span className="application-name">
                             Resume
                         </span>
                         <img src="resume-logo-app.png" alt="resume" />
@@ -137,7 +150,7 @@ const TaskBar = (props) => {
                         <span className="opened-app" style={{ display: runningApp === 1 ? "none" : (openedApps.resume === 1 ? "block" : "none") }}></span>
                     </div>
                     <div ref={refs[2]} className="application" onClick={(e) => handleOpenAnApplication(2, "works", worksStyle, setNewWorksStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                        <span className="application-name blur-3">
+                        <span className="application-name">
                             Works
                         </span>
                         <img src="works-logo-app.png" alt="works" />
@@ -145,7 +158,7 @@ const TaskBar = (props) => {
                         <span className="opened-app" style={{ display: runningApp === 2 ? "none" : (openedApps.works === 1 ? "block" : "none") }}></span>
                     </div>
                     <div ref={refs[3]} className="application" onClick={(e) => handleOpenAnApplication(3, "blogs", blogsStyle, setNewBlogsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                        <span className="application-name blur-3">
+                        <span className="application-name">
                             Blogs
                         </span>
                         <img src="blogs-logo-app.png" alt="blogs" />
@@ -153,7 +166,7 @@ const TaskBar = (props) => {
                         <span className="opened-app" style={{ display: runningApp === 3 ? "none" : (openedApps.blogs === 1 ? "block" : "none") }}></span>
                     </div>
                     <div ref={refs[4]} className="application" onClick={(e) => handleOpenAnApplication(4, "contact", contactStyle, setNewContactStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                        <span className="application-name blur-3">
+                        <span className="application-name">
                             Contact
                         </span>
                         <img src="contact-logo-app.png" alt="contact" />

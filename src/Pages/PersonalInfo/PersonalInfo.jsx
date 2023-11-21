@@ -10,7 +10,7 @@ import { TypeAnimation } from 'react-type-animation';
 import { Window } from "../../Layouts/Window";
 
 const Content = (props) => {
-    const { theme, className } = props;
+    const { theme, blur, className } = props;
     return (
         <div className={className}>
             <div className="avatar-content">
@@ -42,7 +42,7 @@ const Content = (props) => {
                 </div>
 
             </div>
-            <div className={`info ${theme} br-1`}>
+            <div className={`info ${theme} ${blur} br-1`}>
                 <div className="summary-info bd-b">
                     <Button icon={<BsPhone size={25} />} icononly="true" color="error-color" />
                     <div className="summary-text">
@@ -93,11 +93,11 @@ const Content = (props) => {
 }
 
 const PersonalInfo = (props) => {
-    const { theme, personalInfoStyle, zIndex, setNewZIndex } = useContext(AppContext);
+    const { theme, blur, personalInfoStyle, zIndex, setNewZIndex } = useContext(AppContext);
 
     return (
         <>
-            <Content theme={theme} className={`mobile content ${theme} br-1 blur-3`} />
+            <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} />
             <Window
                 minHeight={620}
                 minWidth={350}

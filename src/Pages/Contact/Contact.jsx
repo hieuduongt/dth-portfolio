@@ -13,11 +13,11 @@ const Content = (props) => {
 
 const Contact = (props) => {
     const { children } = props;
-    const { theme, contactStyle, setNewContactStyle, zIndex, setNewZIndex } = useContext(AppContext);
+    const { theme, blur, contactStyle, setNewContactStyle, zIndex, setNewZIndex } = useContext(AppContext);
 
     return (
         <>
-            <Content theme={theme} className={`mobile content ${theme} br-1 blur-3`} />
+            <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} />
             <Window
                 handleOnMouseDown={() => setNewZIndex("contact")}
                 zIndex={zIndex.find(item => item.name === "contact").zIndex}

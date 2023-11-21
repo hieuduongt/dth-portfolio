@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
-html, body {
+
+html,
+body {
   height: 100%;
 }
 
@@ -16,7 +18,23 @@ body:has(.light-background) {
   background-size: cover;
 }
 
+body:has(.light-background-transparent) {
+  background: url("../public/light-background-image.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 body:has(.dark-background) {
+  background: url("../public/dark-background-image.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body:has(.dark-background-transparent) {
   background: url("../public/dark-background-image.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -369,18 +387,33 @@ body:has(.dark-background) {
 }
 
 .light-background {
+  background-color: rgb(218, 218, 218);
+  color: black;
+  transition: background-color .3s ease-out;
+  border: 0.2px #ccc solid;
+}
+
+.light-background-transparent {
   background-color: rgba(255, 255, 255, 0.3);
   color: black;
   transition: background-color .3s ease-out;
   border: 0.2px #ccc solid;
-
+  backdrop-filter: blur(30px);
 }
 
 .dark-background {
+  background-color: rgb(71, 71, 71);
+  color: white;
+  transition: background-color .3s ease-out;
+  border: 0.2px #6f6f6f solid;
+}
+
+.dark-background-transparent {
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
   transition: background-color .3s ease-out;
   border: 0.2px #6f6f6f solid;
+  backdrop-filter: blur(30px);
 }
 
 .m-1 {
@@ -700,6 +733,129 @@ body:has(.dark-background) {
 .window {
   opacity: 1;
   visibility: visible;
+  width: 100%;
+  height: 100%;
+}
+
+.theme-setting {
+  margin-right: 10px;
+  margin-left: 10px;
+  min-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+}
+
+.theme-config-list {
+  position: absolute;
+  bottom: 115%;
+  height: max-content;
+  transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+  width: max-content;
+  padding: 10px;
+  visibility: hidden;
+}
+
+.theme-config-list::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 1) transparent transparent transparent;
+}
+
+/* .theme-config-list.light-background::after {
+  border-color: rgb(218, 218, 218) transparent transparent transparent;
+}
+
+.theme-config-list.light-background-transparent::after {
+  border-color: rgba(255, 255, 255, 0.3) transparent transparent transparent;
+}
+
+.theme-config-list.dark-background::after {
+  border-color: rgb(71, 71, 71) transparent transparent transparent;
+}
+
+.theme-config-list.dark-background-transparent::after {
+  border-color: rgba(0, 0, 0, 0.3) transparent transparent transparent;
+} */
+
+.theme-setting:hover .theme-config-list {
+  opacity: 1;
+  visibility: visible;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.switch-label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.switch-additional-label {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.switch {
+  border-radius: 20px;
+  min-height: 26px;
+  min-width: 50px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.switch:has(.switch-lever-inactive) {
+  background-color: rgb(191 191 191);
+  ;
+}
+
+.switch:has(.switch-lever-active) {
+  background-color: rgb(22 119 255);
+  ;
+}
+
+.switch-lever {
+  position: absolute;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px 0 rgba(0, 35, 11, .2);
+}
+
+.switch-lever-active {
+  margin-left: 21px;
+  top: 3px;
+}
+
+.switch-lever-inactive {
+  margin-left: -3px;
+  top: 3px;
+}
+
+.settings {
+  width: 50px;
+  height: 50px;
+}
+
+.settings>img {
   width: 100%;
   height: 100%;
 }
