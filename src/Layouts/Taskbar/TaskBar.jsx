@@ -158,19 +158,6 @@ const TaskBar = (props) => {
                         <span className="activating-app" style={{ display: runningApp === 4 ? "block" : "none" }}></span>
                         <span className="opened-app" style={{ display: runningApp === 4 ? "none" : (openedApps.contact === 1 ? "block" : "none") }}></span>
                     </div>
-                    <div className="application-devider"></div>
-                    <div className="theme-setting">
-                        <span className="settings" style={{ fontWeight: "bold" }}>
-                            <img src="settings-logo-app.png" />
-                        </span>
-                        <div className={`theme-config-list ${theme} ${blur}`}>
-                            <Switch label="Dark" checked={theme.includes("dark")} onChange={(value) => {
-                                setNewTheme(value ? "dark-background" : "light-background")
-                            }} />
-                            <Switch label="Blur" onChange={(value) => { value ? setNewBlurLevel(blurLevels.level3) : setNewBlurLevel(blurLevels.none) }} />
-
-                        </div>
-                    </div>
                 </div>
 
                 <div className="tool-area">
