@@ -26,9 +26,18 @@ export const blurLevels = {
   level5: "blur-5"
 }
 
+export const actionBarColors = {
+  color_1: "color-1",
+  color_2: "color-2",
+  color_3: "color-3",
+  color_4: "color-4",
+  color_5: "color-5"
+}
+
 function App() {
   const [blur, setBlur] = useState(blurLevels.none);
   const [theme, setTheme] = useState(standardTheme.light);
+  const [actionBarColor, setActionBarColor] = useState(actionBarColors.color_4);
   const [homeStyle, setHomeStyle] = useState({
     style: {},
     defaultPosition: {
@@ -175,6 +184,10 @@ function App() {
     setWorksStyle(value);
   }
 
+  const setNewActionBarColor = (value) => {
+    setActionBarColor(value);
+  }
+
   const setNewZIndex = (name) => {
     setZIndex((zIndex) => {
       const newzIndex = [...zIndex];
@@ -220,7 +233,9 @@ function App() {
         worksStyle,
         setNewWorksStyle,
         zIndex,
-        setNewZIndex
+        setNewZIndex,
+        actionBarColor,
+        setNewActionBarColor
       }}
     >
       <div className="main-container">
