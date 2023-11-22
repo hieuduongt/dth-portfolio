@@ -259,6 +259,11 @@ body:has(.dark-background-transparent) {
   box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75)
 }
 
+.search-area {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 @media screen and (max-width: 250px) {
 
   .not-support-message {
@@ -771,22 +776,6 @@ body:has(.dark-background-transparent) {
   border-color: rgba(0, 0, 0, 1) transparent transparent transparent;
 }
 
-/* .theme-config-list.light-background::after {
-  border-color: rgb(218, 218, 218) transparent transparent transparent;
-}
-
-.theme-config-list.light-background-transparent::after {
-  border-color: rgba(255, 255, 255, 0.3) transparent transparent transparent;
-}
-
-.theme-config-list.dark-background::after {
-  border-color: rgb(71, 71, 71) transparent transparent transparent;
-}
-
-.theme-config-list.dark-background-transparent::after {
-  border-color: rgba(0, 0, 0, 0.3) transparent transparent transparent;
-} */
-
 .theme-setting:hover .theme-config-list {
   opacity: 1;
   visibility: visible;
@@ -822,12 +811,10 @@ body:has(.dark-background-transparent) {
 
 .switch:has(.switch-lever-inactive) {
   background-color: rgb(191 191 191);
-  ;
 }
 
 .switch:has(.switch-lever-active) {
   background-color: rgb(22 119 255);
-  ;
 }
 
 .switch-lever {
@@ -858,4 +845,17 @@ body:has(.dark-background-transparent) {
 .settings>img {
   width: 100%;
   height: 100%;
+}
+
+.application-devider {
+  height: 70%;
+  margin-left: 10px;
+}
+
+.dark-background .application-devider, .dark-background-transparent .application-devider {
+  border-left: 1px solid #ccc;
+}
+
+.light-background .application-devider, .light-background-transparent .application-devider {
+  border-left: 1px solid #494949;
 }

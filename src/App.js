@@ -188,7 +188,8 @@ function App() {
 
   useEffect(() => {
     const currentHour = new Date().getHours();
-    if (18 > currentHour > 6) {
+    console.log(currentHour);
+    if (18 > currentHour && currentHour > 6) {
       setTheme(standardTheme.light);
     } else {
       setTheme(standardTheme.dark);

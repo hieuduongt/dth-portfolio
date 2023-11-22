@@ -26,7 +26,7 @@ export function Switch(props: SwitchProps) {
         <div className='switch-container'>
             <div className='switch-label'>{label}</div>
 
-            <button className='switch' role='switch' onClick={() => handleOnClick()}>
+            <button className='switch' role='switch' aria-checked={value} onClick={() => handleOnClick()}>
                 <div className={`switch-lever ${lever}`}></div>
             </button>
             <div className='switch-additional-label'>{additionalLabel}</div>
