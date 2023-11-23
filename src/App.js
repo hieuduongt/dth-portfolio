@@ -41,16 +41,16 @@ function App() {
   const [homeStyle, setHomeStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 50,
-      y: 400
+      x: 20,
+      y: 250
     }
   });
 
   const [personalInfoStyle, setPersonalInfoStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 500,
-      y: 50
+      x: 350,
+      y: 20
     }
   });
 
@@ -65,24 +65,24 @@ function App() {
   const [gameStyle, setGameStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 950,
-      y: 50
+      x: 730,
+      y: 20
     }
   });
 
   const [settingsStyle, setSettingsStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 50,
-      y: 50
+      x: 20,
+      y: 20
     }
   });
 
   const [worksStyle, setWorksStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 950,
-      y: 400
+      x: 730,
+      y: 250
     }
   });
 

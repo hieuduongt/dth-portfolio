@@ -99,7 +99,7 @@ const PersonalInfo = (props) => {
         <>
             <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} />
             <Window
-                minHeight={650}
+                minHeight={430}
                 minWidth={350}
                 handleOnMouseDown={() => setNewZIndex("personal")}
                 zIndex={zIndex.find(item => item.name === "personal").zIndex}
