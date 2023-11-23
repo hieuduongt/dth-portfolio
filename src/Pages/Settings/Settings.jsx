@@ -17,7 +17,7 @@ const Content = (props) => {
                             Theme
                         </div>
                         <div className="summary-text-content">
-                            Current Theme: {theme.includes("dark") ? "Dark" : "Light"}
+                            Current: {theme.includes("dark") ? "Dark" : "Light"}
                         </div>
                     </div>
                 </div>
@@ -79,6 +79,7 @@ const Settings = (props) => {
                 index={3}
                 styleContext={settingsStyle}
                 setStyleContext={setNewSettingsStyle}
+                name="Settings"
             >
                 <Content theme={theme} setNewTheme={setNewTheme} blur={blur} setNewBlurLevel={setNewBlurLevel} setNewActionBarColor={setNewActionBarColor} actionBarColor={actionBarColor}/>
             </Window>

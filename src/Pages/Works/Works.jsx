@@ -36,6 +36,7 @@ const Works = (props) => {
                 windowName="works"
                 index={2}
                 setStyleContext={setNewWorksStyle}
+                name="Works"
             >
                  <Content theme={theme}/>
             </Window>

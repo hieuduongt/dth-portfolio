@@ -66,7 +66,7 @@ function App() {
     style: {},
     defaultPosition: {
       x: 950,
-      y: 200
+      y: 50
     }
   });
 
@@ -89,7 +89,7 @@ function App() {
   const [runningApp, setRunningApp] = useState(0);
   const [openedApps, setOpenedApps] = useState({
     home: 1,
-    resume: 1,
+    personalInfo: 1,
     works: 1,
     settings: 1,
     game: 1
@@ -241,7 +241,6 @@ function App() {
         <Settings />
         <PersonalInfo />
         <Home />
-        <Resume />
         <Works />
         <Contact />
       </div>

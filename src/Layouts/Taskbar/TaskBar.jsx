@@ -123,13 +123,13 @@ const TaskBar = (props) => {
                         <span className="activating-app" style={{ display: runningApp === 0 ? "block" : "none" }}></span>
                         <span className="opened-app" style={{ display: runningApp === 0 ? "none" : (openedApps.home === 1 ? "block" : "none") }}></span>
                     </div>
-                    <div ref={refs[1]} className="application" onClick={(e) => handleOpenAnApplication(1, "resume", resumeStyle, setNewResumeStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                    <div ref={refs[1]} className="application" onClick={(e) => handleOpenAnApplication(1, "resume", personalInfoStyle, setNewPersonalInfoStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
                         <span className="application-name">
-                            Resume
+                            My Personal Information
                         </span>
-                        <img src="resume-logo-app.png" alt="resume" />
+                        <img src="personal-logo-app.png" alt="personal" />
                         <span className="activating-app" style={{ display: runningApp === 1 ? "block" : "none" }}></span>
-                        <span className="opened-app" style={{ display: runningApp === 1 ? "none" : (openedApps.resume === 1 ? "block" : "none") }}></span>
+                        <span className="opened-app" style={{ display: runningApp === 1 ? "none" : (openedApps.personalInfo === 1 ? "block" : "none") }}></span>
                     </div>
                     <div ref={refs[2]} className="application" onClick={(e) => handleOpenAnApplication(2, "works", worksStyle, setNewWorksStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
                         <span className="application-name">

@@ -36,6 +36,7 @@ const Game = (props) => {
                 index={4}
                 styleContext={gameStyle}
                 setStyleContext={setNewGameStyle}
+                name="Game"
             >
                 <Content theme={theme} />
             </Window>
