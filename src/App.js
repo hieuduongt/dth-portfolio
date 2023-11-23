@@ -37,7 +37,7 @@ export const actionBarColors = {
 function App() {
   const [blur, setBlur] = useState(blurLevels.none);
   const [theme, setTheme] = useState(standardTheme.light);
-  const [actionBarColor, setActionBarColor] = useState(actionBarColors.color_4);
+  const [actionBarColor, setActionBarColor] = useState(actionBarColors.color_3);
   const [homeStyle, setHomeStyle] = useState({
     style: {},
     defaultPosition: {
@@ -201,7 +201,6 @@ function App() {
 
   useEffect(() => {
     const currentHour = new Date().getHours();
-    console.log(currentHour);
     if (18 > currentHour && currentHour > 6) {
       setTheme(standardTheme.light);
     } else {
