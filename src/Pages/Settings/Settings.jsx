@@ -2,14 +2,17 @@ import { AppContext, actionBarColors, blurLevels } from "../../App";
 import { useContext } from 'react';
 import { Window } from '../../Layouts/Window';
 import { Switch } from "../../components/Switch";
+import { useEffect } from "react";
 
 const Content = (props) => {
     const { theme, setNewTheme, blur, setNewBlurLevel, className, actionBarColor, setNewActionBarColor } = props;
+
     return (
         <div className={className}>
             <div className={`info ${theme} ${blur} br-1`}>
                 <div className="summary-info bd-b">
                     <Switch checked={theme.includes("dark")} onChange={(value) => {
+                        console.log(value);
                         setNewTheme(value ? "dark-background" : "light-background")
                     }} />
                     <div className="summary-text">
@@ -56,11 +59,11 @@ const Content = (props) => {
 
 const Settings = (props) => {
     const { children } = props;
-    const { theme,setNewTheme, blur, setNewBlurLevel, actionBarColor, setNewActionBarColor, settingsStyle, setNewSettingsStyle, zIndex, setNewZIndex } = useContext(AppContext);
+    const { theme, setNewTheme, blur, setNewBlurLevel, actionBarColor, setNewActionBarColor, settingsStyle, setNewSettingsStyle, zIndex, setNewZIndex } = useContext(AppContext);
 
     return (
         <>
-            <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} setNewTheme={setNewTheme} blur={blur} setNewBlurLevel={setNewBlurLevel} setNewActionBarColor={setNewActionBarColor} actionBarColor={actionBarColor}/>
+            <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} setNewTheme={setNewTheme} blur={blur} setNewBlurLevel={setNewBlurLevel} setNewActionBarColor={setNewActionBarColor} actionBarColor={actionBarColor} />
             <Window
                 handleOnMouseDown={() => setNewZIndex("settings")}
                 zIndex={zIndex.find(item => item.name === "settings").zIndex}
@@ -81,7 +84,7 @@ const Settings = (props) => {
                 setStyleContext={setNewSettingsStyle}
                 name="Settings"
             >
-                <Content theme={theme} setNewTheme={setNewTheme} blur={blur} setNewBlurLevel={setNewBlurLevel} setNewActionBarColor={setNewActionBarColor} actionBarColor={actionBarColor}/>
+                <Content theme={theme} setNewTheme={setNewTheme} blur={blur} setNewBlurLevel={setNewBlurLevel} setNewActionBarColor={setNewActionBarColor} actionBarColor={actionBarColor} />
             </Window>
         </>
 
