@@ -18,6 +18,7 @@ const ActionBar = (props) => {
             borderTopRightRadius: expanded ? 0 : "7.5px",
         }}>
             <div className="action-buttons">
+
                 <button style={theme.includes("dark") ? { color: "white", borderTopRightRadius: !expanded ? "7.5px" : 0 } : { color: "black", borderTopRightRadius: !expanded ? "7.5px" : 0 }} className="action-icon" onClick={onSave || (() => { })}>
                     <AiOutlineClose size={13} />
                 </button>
@@ -27,6 +28,9 @@ const ActionBar = (props) => {
                 <button style={theme.includes("dark") ? { color: "white" } : { color: "black" }} className="action-icon" onClick={onClose || (() => { })}>
                     <GoDash size={13} />
                 </button>
+                <div className='drag-area'>
+                    &nbsp;
+                </div>
             </div>
         </div>
     )
