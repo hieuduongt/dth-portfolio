@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState, createRef } from "react";
-import { AppContext, blurLevels } from "../../App";
+import { AppContext } from "../../App";
 import { Input } from "../../components/Input";
 import { BsSearch } from 'react-icons/bs';
 import { handleOpenAnApplication } from '../../Helpers/Helpers';
-import { Switch } from '../../components/Switch';
 
 const CTime = () => {
     let time = new Date().toLocaleTimeString();
@@ -43,8 +42,6 @@ const TaskBar = (props) => {
     const {
         theme,
         blur,
-        setNewBlurLevel,
-        setNewTheme,
         runningApp,
         setIsRunningApp,
         openedApps,
@@ -55,10 +52,10 @@ const TaskBar = (props) => {
         setNewPersonalInfoStyle,
         resumeStyle,
         setNewResumeStyle,
-        contactStyle,
-        setNewContactStyle,
-        blogsStyle,
-        setNewBlogsStyle,
+        gameStyle,
+        setNewGameStyle,
+        settingsStyle,
+        setNewSettingsStyle,
         worksStyle,
         setNewWorksStyle
     } = useContext(AppContext);
@@ -82,9 +79,9 @@ const TaskBar = (props) => {
             setStyle: setNewWorksStyle
         },
         {
-            name: "contact",
-            style: contactStyle,
-            setStyle: setNewContactStyle
+            name: "game",
+            style: gameStyle,
+            setStyle: setNewGameStyle
         },
         {
             name: "personal",
@@ -92,9 +89,9 @@ const TaskBar = (props) => {
             setStyle: setNewPersonalInfoStyle
         },
         {
-            name: "blogs",
-            style: blogsStyle,
-            setStyle: setNewBlogsStyle
+            name: "settings",
+            style: settingsStyle,
+            setStyle: setNewSettingsStyle
         }
     ];
 
@@ -142,21 +139,22 @@ const TaskBar = (props) => {
                         <span className="activating-app" style={{ display: runningApp === 2 ? "block" : "none" }}></span>
                         <span className="opened-app" style={{ display: runningApp === 2 ? "none" : (openedApps.works === 1 ? "block" : "none") }}></span>
                     </div>
-                    <div ref={refs[3]} className="application" onClick={(e) => handleOpenAnApplication(3, "blogs", blogsStyle, setNewBlogsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                    <div ref={refs[3]} className="application" onClick={(e) => handleOpenAnApplication(4, "contact", gameStyle, setNewGameStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
                         <span className="application-name">
-                            Blogs
+                            Game
                         </span>
-                        <img src="blogs-logo-app.png" alt="blogs" />
-                        <span className="activating-app" style={{ display: runningApp === 3 ? "block" : "none" }}></span>
-                        <span className="opened-app" style={{ display: runningApp === 3 ? "none" : (openedApps.blogs === 1 ? "block" : "none") }}></span>
-                    </div>
-                    <div ref={refs[4]} className="application" onClick={(e) => handleOpenAnApplication(4, "contact", contactStyle, setNewContactStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                        <span className="application-name">
-                            Contact
-                        </span>
-                        <img src="contact-logo-app.png" alt="contact" />
+                        <img src="game-logo-app.png" alt="game" />
                         <span className="activating-app" style={{ display: runningApp === 4 ? "block" : "none" }}></span>
-                        <span className="opened-app" style={{ display: runningApp === 4 ? "none" : (openedApps.contact === 1 ? "block" : "none") }}></span>
+                        <span className="opened-app" style={{ display: runningApp === 4 ? "none" : (openedApps.game === 1 ? "block" : "none") }}></span>
+                    </div>
+                    <div className="application-devider"></div>
+                    <div ref={refs[4]} className="application" onClick={(e) => handleOpenAnApplication(3, "settings", settingsStyle, setNewSettingsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                        <span className="application-name">
+                            Settings
+                        </span>
+                        <img src="settings-logo-app.png" alt="settings" />
+                        <span className="activating-app" style={{ display: runningApp === 3 ? "block" : "none" }}></span>
+                        <span className="opened-app" style={{ display: runningApp === 3 ? "none" : (openedApps.settings === 1 ? "block" : "none") }}></span>
                     </div>
                 </div>
 
