@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppContext, actionBarColors, blurLevels } from "../../App";
+import { AppContext } from "../../App";
 import { Button } from "../../components/Button";
 import { BsPhone } from 'react-icons/bs';
 import { FaMapLocationDot } from 'react-icons/fa6';
@@ -93,7 +93,7 @@ const Content = (props) => {
 }
 
 const PersonalInfo = (props) => {
-    const { theme, blur, personalInfoStyle, zIndex, setNewZIndex } = useContext(AppContext);
+    const { theme, blur, personalInfoStyle, setNewPersonalInfoStyle, zIndex, setNewZIndex } = useContext(AppContext);
 
     return (
         <>
@@ -114,6 +114,9 @@ const PersonalInfo = (props) => {
                     width: personalInfoStyle?.size?.width || ""
                 }}
                 style={{ ...personalInfoStyle.style }}
+                styleContext={personalInfoStyle}
+                setStyleContext={setNewPersonalInfoStyle}
+                name="Personal Info"
             >
                 <Content theme={theme} blur={blur} />
             </Window>

@@ -5,7 +5,7 @@ import { AppContext } from "../../App";
 import { useContext } from 'react';
 
 const ActionBar = (props) => {
-    const { onSave, onClose, onExpand, expanded } = props;
+    const { onSave, onClose, onExpand, expanded, name } = props;
     const {
         theme,
         blur,
@@ -29,7 +29,7 @@ const ActionBar = (props) => {
                     <GoDash size={13} />
                 </button>
                 <div className='drag-area'>
-                    &nbsp;
+                    &nbsp;{name}
                 </div>
             </div>
         </div>

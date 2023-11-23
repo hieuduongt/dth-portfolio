@@ -157,6 +157,7 @@ const Home = (props) => {
                 styleContext={homeStyle}
                 windowName="home"
                 index={0}
+                name="Home"
             >
                 <Content theme={theme} />
             </Window>

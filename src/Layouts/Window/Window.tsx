@@ -26,6 +26,7 @@ interface WindowProps extends React.HTMLAttributes<HTMLDivElement> {
     index?: number;
     styleContext?: any;
     setStyleContext?: any;
+    name?: string;
 }
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
@@ -43,7 +44,7 @@ export function Window(props: WindowProps) {
         height: ""
     });
     const [expanded, setExpanded] = useState(false);
-    const { defaultPosition, style, children, className, zIndex, minWidth, minHeight, position, size, windowName, index, styleContext, setStyleContext } = props;
+    const { defaultPosition, style, children, className, zIndex, minWidth, minHeight, position, size, windowName, name, index, styleContext, setStyleContext } = props;
     const [windowPosition, setWindowPosition] = useState<Position>({
         x: defaultPosition?.x ? defaultPosition.x : 50,
         y: defaultPosition?.y ? defaultPosition.y : 50
@@ -103,6 +104,7 @@ export function Window(props: WindowProps) {
                 onClose={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps)}
                 onSave={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps)}
                 expanded={expanded}
+                name={name}
             />
             <div style={{ overflow: "auto", height: "100%"}}>
                 {children}
