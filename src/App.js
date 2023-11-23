@@ -4,8 +4,8 @@ import TaskBar from "./Layouts/Taskbar/TaskBar";
 import Home from './Pages/Home/Home';
 import PersonalInfo from './Pages/PersonalInfo/PersonalInfo';
 import Resume from './Pages/Resume/Resume';
-import Blogs from './Pages/Blogs/Blogs';
-import Contact from './Pages/Contact/Contact';
+import Settings from './Pages/Settings/Settings';
+import Contact from './Pages/Game/Game';
 import Works from './Pages/Works/Works';
 
 export const AppContext = createContext();
@@ -41,15 +41,15 @@ function App() {
   const [homeStyle, setHomeStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 500,
-      y: 50
+      x: 50,
+      y: 400
     }
   });
 
   const [personalInfoStyle, setPersonalInfoStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 50,
+      x: 500,
       y: 50
     }
   });
@@ -62,19 +62,19 @@ function App() {
     }
   });
 
-  const [contactStyle, setContactStyle] = useState({
+  const [gameStyle, setGameStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 500,
-      y: 400
+      x: 950,
+      y: 200
     }
   });
 
-  const [blogsStyle, setBlogsStyle] = useState({
+  const [settingsStyle, setSettingsStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 730,
-      y: 225
+      x: 50,
+      y: 50
     }
   });
 
@@ -91,30 +91,30 @@ function App() {
     home: 1,
     resume: 1,
     works: 1,
-    blogs: 1,
-    contact: 1
+    settings: 1,
+    game: 1
   });
 
   const [zIndex, setZIndex] = useState([
     {
       name: "home",
-      zIndex: 5
-    },
-    {
-      name: "resume",
       zIndex: 4
     },
     {
-      name: "works",
+      name: "resume",
       zIndex: 3
     },
     {
-      name: "blogs",
-      zIndex: 1
+      name: "works",
+      zIndex: 2
+    },
+    {
+      name: "settings",
+      zIndex: 5
     },
     {
       name: "contact",
-      zIndex: 2
+      zIndex: 1
     },
     {
       name: "personal",
@@ -172,12 +172,12 @@ function App() {
     setResumeStyle(value);
   }
 
-  const setNewContactStyle = (value) => {
-    setContactStyle(value);
+  const setNewGameStyle = (value) => {
+    setGameStyle(value);
   }
 
-  const setNewBlogsStyle = (value) => {
-    setBlogsStyle(value);
+  const setNewSettingsStyle = (value) => {
+    setSettingsStyle(value);
   }
 
   const setNewWorksStyle = (value) => {
@@ -225,10 +225,10 @@ function App() {
         setNewPersonalInfoStyle,
         resumeStyle,
         setNewResumeStyle,
-        contactStyle,
-        setNewContactStyle,
-        blogsStyle,
-        setNewBlogsStyle,
+        gameStyle,
+        setNewGameStyle,
+        settingsStyle,
+        setNewSettingsStyle,
         worksStyle,
         setNewWorksStyle,
         zIndex,
@@ -238,12 +238,12 @@ function App() {
       }}
     >
       <div className="main-container">
-        <Home />
+        <Settings />
         <PersonalInfo />
+        <Home />
         <Resume />
-        <Blogs />
-        <Contact />
         <Works />
+        <Contact />
       </div>
       <div className="not-support-message">
         Your device is not compatible with our current system, please upgrade your device or use a compatible device to make sure your experience should not be affected!

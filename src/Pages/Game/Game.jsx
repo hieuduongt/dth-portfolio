@@ -6,14 +6,14 @@ const Content = (props) => {
     const { theme, className } = props;
     return (
         <div className={className}>
-            Contact
+            Game
         </div>
     )
 }
 
-const Contact = (props) => {
+const Game = (props) => {
     const { children } = props;
-    const { theme, blur, contactStyle, setNewContactStyle, zIndex, setNewZIndex } = useContext(AppContext);
+    const { theme, blur, gameStyle, setNewGameStyle, zIndex, setNewZIndex } = useContext(AppContext);
 
     return (
         <>
@@ -22,20 +22,20 @@ const Contact = (props) => {
                 handleOnMouseDown={() => setNewZIndex("contact")}
                 zIndex={zIndex.find(item => item.name === "contact").zIndex}
                 className="window desktop"
-                defaultPosition={contactStyle.defaultPosition}
+                defaultPosition={gameStyle.defaultPosition}
                 position={{
-                    x: contactStyle?.position?.x || "",
-                    y: contactStyle?.position?.y || ""
+                    x: gameStyle?.position?.x || "",
+                    y: gameStyle?.position?.y || ""
                 }}
                 size={{
-                    height: contactStyle?.size?.height || "",
-                    width: contactStyle?.size?.width || "",
+                    height: gameStyle?.size?.height || "",
+                    width: gameStyle?.size?.width || "",
                 }}
-                style={{ ...contactStyle.style }}
+                style={{ ...gameStyle.style }}
                 windowName="contact"
                 index={4}
-                styleContext={contactStyle}
-                setStyleContext={setNewContactStyle}
+                styleContext={gameStyle}
+                setStyleContext={setNewGameStyle}
             >
                 <Content theme={theme} />
             </Window>
@@ -44,4 +44,4 @@ const Contact = (props) => {
     )
 }
 
-export default Contact;
+export default Game;
