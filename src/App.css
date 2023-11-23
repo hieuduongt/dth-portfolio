@@ -136,6 +136,11 @@ body:has(.dark-background-transparent) {
   font-size: 0.75rem;
 }
 
+.dark-background .summary-text-title,
+.dark-background-transparent .summary-text-title {
+  color: white;
+}
+
 .summary-text-content {
   font-family: Poppins, sans-serif;
   font-size: 1.1rem;
@@ -368,6 +373,10 @@ body:has(.dark-background-transparent) {
   }
 
   .taskbar {
+    display: none !important;
+  }
+
+  .color-section {
     display: none !important;
   }
 
@@ -759,8 +768,7 @@ body:has(.dark-background-transparent) {
 .window {
   opacity: 1;
   visibility: visible;
-  width: 100%;
-  height: 100%;
+  display: flex;
 }
 
 .theme-setting {
@@ -849,12 +857,12 @@ body:has(.dark-background-transparent) {
 }
 
 .switch-lever-active {
-  margin-left: 21px;
+  margin-left: 41%;
   top: 3px;
 }
 
 .switch-lever-inactive {
-  margin-left: -3px;
+  margin-left: -6%;
   top: 3px;
 }
 
@@ -928,9 +936,20 @@ body:has(.dark-background-transparent) {
 }
 
 .color-panel:hover {
-  width: 3000px;
+  width: 150%;
 }
 
 .current-color-panel {
   border: 2px solid rgb(22 119 255);
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 10px;
 }

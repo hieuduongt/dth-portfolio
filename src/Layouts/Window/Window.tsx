@@ -53,7 +53,7 @@ export function Window(props: WindowProps) {
     return (
         <Rnd
             dragHandleClassName="action-bar"
-            style={{ ...style, zIndex: expanded ? 8 : zIndex, transition: animation ? animation : style?.transition ? style.transition : "" }}
+            style={{ ...style, zIndex: expanded ? 8 : zIndex, transition: animation ? animation : style?.transition ? style.transition : "", display: "flex", flexDirection: "column" }}
             className={`window content ${theme} ${blur} ${!windowSize.width ? "br" : ""} ${className}`}
             minWidth={size?.width ? 0 : minWidth || 300}
             minHeight={size?.width ? 0 : minHeight || 300}
@@ -104,7 +104,10 @@ export function Window(props: WindowProps) {
                 onSave={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps)}
                 expanded={expanded}
             />
-            {children}
+            <div id='window-content' style={{ overflow: "auto", height: "100%"}}>
+                {children}
+            </div>
+
         </Rnd>
     )
 }

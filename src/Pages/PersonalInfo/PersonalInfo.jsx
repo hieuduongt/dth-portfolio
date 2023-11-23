@@ -104,7 +104,7 @@ const Content = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="summary-info bd-b">
+                <div className="summary-info">
                     <Switch onChange={(value) => { value ? setNewBlurLevel(blurLevels.level3) : setNewBlurLevel(blurLevels.none) }} />
                     <div className="summary-text">
                         <div className="summary-text-title">
@@ -142,9 +142,9 @@ const PersonalInfo = (props) => {
 
     return (
         <>
-            <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} />
+            <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} setNewTheme={setNewTheme} blur={blur} setNewBlurLevel={setNewBlurLevel} setNewActionBarColor={setNewActionBarColor} actionBarColor={actionBarColor}/>
             <Window
-                minHeight={800}
+                minHeight={650}
                 minWidth={350}
                 handleOnMouseDown={() => setNewZIndex("personal")}
                 zIndex={zIndex.find(item => item.name === "personal").zIndex}
