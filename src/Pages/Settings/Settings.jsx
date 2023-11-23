@@ -2,7 +2,6 @@ import { AppContext, actionBarColors, blurLevels } from "../../App";
 import { useContext } from 'react';
 import { Window } from '../../Layouts/Window';
 import { Switch } from "../../components/Switch";
-import { useEffect } from "react";
 
 const Content = (props) => {
     const { theme, setNewTheme, blur, setNewBlurLevel, className, actionBarColor, setNewActionBarColor } = props;
@@ -12,22 +11,24 @@ const Content = (props) => {
             <div className={`info ${theme} ${blur} br-1`}>
                 <div className="summary-info bd-b">
                     <Switch checked={theme.includes("dark")} onChange={(value) => {
-                        console.log(value);
                         setNewTheme(value ? "dark-background" : "light-background")
                     }} />
                     <div className="summary-text">
                         <div className="summary-text-title">
-                            Theme
+                            Current: {theme.includes("dark") ? "Dark" : "Light"}
                         </div>
                         <div className="summary-text-content">
-                            Current: {theme.includes("dark") ? "Dark" : "Light"}
+                            Theme
                         </div>
                     </div>
                 </div>
                 <div className="summary-info">
-                    <Switch onChange={(value) => { value ? setNewBlurLevel(blurLevels.level3) : setNewBlurLevel(blurLevels.none) }} />
+                    <Switch checked={blur ? true : false} onChange={(value) => { value ? setNewBlurLevel(blurLevels.level3) : setNewBlurLevel(blurLevels.none) }} />
                     <div className="summary-text">
                         <div className="summary-text-title">
+                            Current: {blur ? "Enabled" : "Disabled"}
+                        </div>
+                        <div className="summary-text-content">
                             Blurred option
                         </div>
                     </div>
