@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 interface SwitchProps {
     onChange: (value: boolean) => void;
@@ -9,11 +10,11 @@ interface SwitchProps {
 
 export function Switch(props: SwitchProps) {
     const { onChange, checked, label, additionalLabel } = props;
-    const [value, setValue] = useState(checked ? true : false);
-    const [lever, setLever] = useState(checked ? "switch-lever-active" : "switch-lever-inactive");
+    const [value, setValue] = useState<boolean>();
+    const [lever, setLever] = useState<string>();
     const handleOnClick = () => {
         setLever(prev => {
-            if (prev.includes("inactive")) {
+            if (prev?.includes("inactive")) {
                 return "switch-lever-active";
             } else {
                 return "switch-lever-inactive";
@@ -22,6 +23,11 @@ export function Switch(props: SwitchProps) {
         setValue(!value);
         if (onChange) onChange(!value);
     }
+    useEffect(() => {
+        setLever(checked ? "switch-lever-active" : "switch-lever-inactive");
+        setValue(checked ? true : false);
+    }, [checked]);
+
     return (
         <div className='switch-container'>
             <div className='switch-label'>{label}</div>

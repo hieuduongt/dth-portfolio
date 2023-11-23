@@ -55,7 +55,7 @@ export function Window(props: WindowProps) {
         <Rnd
             dragHandleClassName="drag-area"
             style={{ ...style, zIndex: expanded ? 8 : zIndex, transition: animation || (style?.transition ? style.transition : ""), display: "flex", flexDirection: "column" }}
-            className={`window content ${theme} ${blur} ${!windowSize.width ? "br" : ""} ${className}`}
+            className={`window content ${theme} ${blur} ${!windowSize.width ? "br-1" : ""} ${className}`}
             minWidth={size?.width ? 0 : minWidth || 300}
             minHeight={size?.width ? 0 : minHeight || 300}
             default={{
