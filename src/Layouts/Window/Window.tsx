@@ -52,7 +52,7 @@ export function Window(props: WindowProps) {
 
     return (
         <Rnd
-            dragHandleClassName="action-bar"
+            dragHandleClassName="drag-area"
             style={{ ...style, zIndex: expanded ? 8 : zIndex, transition: animation ? animation : style?.transition ? style.transition : "", display: "flex", flexDirection: "column" }}
             className={`window content ${theme} ${blur} ${!windowSize.width ? "br" : ""} ${className}`}
             minWidth={size?.width ? 0 : minWidth || 300}
