@@ -3,10 +3,11 @@ import { createContext, useEffect, useState } from 'react';
 import TaskBar from "./Layouts/Taskbar/TaskBar";
 import Home from './Pages/Home/Home';
 import PersonalInfo from './Pages/PersonalInfo/PersonalInfo';
-import Resume from './Pages/Resume/Resume';
 import Settings from './Pages/Settings/Settings';
 import Contact from './Pages/Game/Game';
 import Works from './Pages/Works/Works';
+import { Modal } from './components/Modal';
+import { isTablet, mobileModel, deviceType } from 'react-device-detect';
 
 export const AppContext = createContext();
 
@@ -35,6 +36,7 @@ export const actionBarColors = {
 }
 
 function App() {
+  const [open, setOpen] = useState(false);
   const [blur, setBlur] = useState(blurLevels.none);
   const [theme, setTheme] = useState(standardTheme.light);
   const [actionBarColor, setActionBarColor] = useState(actionBarColors.color_3);
@@ -206,6 +208,9 @@ function App() {
     } else {
       setTheme(standardTheme.dark);
     }
+    if (isTablet) {
+      setOpen(true);
+    }
   }, []);
 
   return (
@@ -248,6 +253,10 @@ function App() {
         Your device is not compatible with our current system, please upgrade your device or use a compatible device to make sure your experience should not be affected!
       </div>
       <TaskBar />
+      <Modal modalsize='small' backdropclose="true" isalert="true" modaltitle={`You are using ${mobileModel != "none" ? mobileModel : deviceType}`} show={open} onCancel={() => setOpen(false)}>
+        Your {mobileModel} is supported for the computer features, but we recommend you use a computer browser to have the best experience!
+        To use the computer features, please rotate your device to the horizontal view, and if the layout is broken, please reload the page!
+      </Modal>
     </AppContext.Provider >
   );
 }
