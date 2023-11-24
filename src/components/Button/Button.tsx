@@ -8,18 +8,18 @@ enum Colors {
 }
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-    color: "default-color" | "success-color" | "warning-color" | "error-color";
-    icon: React.ReactNode | null;
-    iconposition: "before" | "after";
-    icononly: boolean;
+    color?: "default-color" | "success-color" | "warning-color" | "error-color";
+    icon?: React.ReactNode | null;
+    iconposition?: "before" | "after";
+    icononly?: boolean;
 }
 
 export function Button(props: ButtonProps) {
     const { color, children, icon, iconposition, icononly } = props;
     return (
-        <button {...props} className={`btn ${color || Colors['default-color']} m-1`}>
+        <button {...props} className={`btn ${color || Colors['default-color']}`}>
             {icononly ?
-                <span>
+                <span style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                     {icon}
                 </span>
                 :
@@ -35,7 +35,7 @@ export function Button(props: ButtonProps) {
                         </span>
                         :
                         <span style={{ display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }}>
-                            <span style={{ marginRight: "5px", display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }}>
+                            <span style={{ marginRight: icon ? "5px" : "", display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }}>
                                 {icon}
                             </span>
                             <span>

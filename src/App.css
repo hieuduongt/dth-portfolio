@@ -53,12 +53,13 @@ body:has(.dark-background-transparent) {
 }
 
 .content {
-  box-shadow:
+  /* box-shadow:
     0 1px 1px hsl(0deg 0% 0% / 0.075),
     0 2px 2px hsl(0deg 0% 0% / 0.075),
     0 4px 4px hsl(0deg 0% 0% / 0.075),
     0 8px 8px hsl(0deg 0% 0% / 0.075),
-    0 16px 16px hsl(0deg 0% 0% / 0.075);
+    0 16px 16px hsl(0deg 0% 0% / 0.075); */
+  box-shadow: 0 22px 70px 4px rgba(0, 0, 0, 0.56);
 }
 
 .info {
@@ -125,6 +126,11 @@ body:has(.dark-background-transparent) {
   display: flex;
   align-items: center;
   align-content: center;
+  padding: 10px;
+}
+
+.summary-text {
+  margin-left: 10px;
 }
 
 .summary-text-title {
@@ -187,9 +193,10 @@ body:has(.dark-background-transparent) {
   position: relative;
   box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.75);
   border: none;
-  min-height: 45px;
+  min-height: 35px;
   text-align: center;
   font-size: 16px;
+  padding: 5px;
   font-weight: 600;
   color: #000000;
   cursor: pointer;
@@ -514,6 +521,14 @@ body:has(.dark-background-transparent) {
 
 .bd-b {
   border-bottom: 0.7px solid #ccc;
+}
+
+.bd-t {
+  border-top: 0.7px solid #ccc;
+}
+
+.bd-r {
+  border-right: 0.7px solid #ccc;
 }
 
 .bd-l {
@@ -915,8 +930,7 @@ body:has(.dark-background-transparent) {
 }
 
 .color-select-section {
-  margin-top: 5px;
-  min-height: 30px;
+  min-height: 40px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -935,7 +949,7 @@ body:has(.dark-background-transparent) {
 
 .color-panel {
   z-index: 1;
-  min-height: 30px;
+  min-height: 40px;
   width: 100%;
   cursor: pointer;
   transition: width 0.3s ease-in-out;
@@ -958,4 +972,152 @@ body:has(.dark-background-transparent) {
 
 *::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 0 10px;
+}
+
+.modal-header {
+  max-height: 50px;
+  min-height: 35px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0px 5px 15px -10px rgba(0, 0, 0, 0.45);
+}
+
+.modal-title {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.modal-body {
+  height: 100%;
+  padding: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  max-height: 50px;
+  min-height: 35px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 20px 20px;
+  flex-direction: row-reverse;
+  box-shadow: 0px -5px 15px -10px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes unfoldIn {
+  0% {
+    transform: scaleY(.005) scaleX(0);
+  }
+
+  50% {
+    transform: scaleY(.005) scaleX(1);
+  }
+
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform: scaleY(1) scaleX(1);
+  }
+
+  50% {
+    transform: scaleY(.005) scaleX(1);
+  }
+
+  100% {
+    transform: scaleY(.005) scaleX(0);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+.modal-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 19;
+  transition: visibility 1.5s ease-in-out;
+}
+
+.open {
+  transform: scaleY(.01) scaleX(0);
+  animation: unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  visibility: visible;
+}
+
+.close {
+  transform: scale(1);
+  animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  visibility: hidden;
+}
+
+.open .modal {
+  transform: scale(0);
+  animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  visibility: visible;
+}
+
+.close .modal {
+  animation: zoomOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  visibility: hidden;
+}
+
+.modal-background {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal {
+  border-radius: 20px;
+  box-shadow: 0 22px 70px 4px rgba(0, 0, 0, 0.56);
+  z-index: 20;
+  max-height: 600px;
+  transition: visibility 1s ease-in-out;
+}
+
+.modal-timing {
+  font-size: 20px;
 }
