@@ -88,6 +88,48 @@ function App() {
     }
   });
 
+  const initStyles = () => {
+    setHomeStyle(prev => ({
+      ...prev,
+      defaultPosition: {
+        x: 20,
+        y: 250
+      }
+    }));
+
+    setPersonalInfoStyle(prev => ({
+      ...prev,
+      defaultPosition: {
+        x: 350,
+        y: 20
+      }
+    }));
+
+    setGameStyle(prev => ({
+      ...prev,
+      defaultPosition: {
+        x: 730,
+        y: 20
+      }
+    }));
+
+    setSettingsStyle(prev => ({
+      ...prev,
+      defaultPosition: {
+        x: 20,
+        y: 20
+      }
+    }));
+
+    setWorksStyle(prev => ({
+      ...prev,
+      defaultPosition: {
+        x: 730,
+        y: 250
+      }
+    }));
+  }
+
   const [runningApp, setRunningApp] = useState(0);
   const [openedApps, setOpenedApps] = useState({
     home: 1,
@@ -211,6 +253,8 @@ function App() {
     if (isTablet) {
       setOpen(true);
     }
+    window.addEventListener("resize", initStyles);
+    return () => window.removeEventListener('resize', initStyles);
   }, []);
 
   return (

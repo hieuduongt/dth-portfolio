@@ -14,8 +14,8 @@ const ActionBar = (props) => {
 
     return (
         <div className={`action-bar blur-1 ${theme.includes("transparent") ? theme : actionBarColor} ${blur}`} style={{
-            borderTopLeftRadius: expanded ? 0 : "7.5px",
-            borderTopRightRadius: expanded ? 0 : "7.5px",
+            borderTopLeftRadius: expanded ? 0 : "10px",
+            borderTopRightRadius: expanded ? 0 : "10px",
         }}>
             <div className="action-buttons">
 

@@ -5,8 +5,8 @@ import { Window } from '../../Layouts/Window';
 const Content = (props) => {
     const { theme, className } = props;
     return (
-        <div className={className}>
-            Game
+        <div className={className} style={{height: "100%"}}>
+            <iframe src="https://hieuduongit-carogame.vercel.app/" height={"100%"} width={"100%"} style={{borderRadius: "10px", border: "none"}}/>
         </div>
     )
 }
