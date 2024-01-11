@@ -6,13 +6,15 @@ interface SwitchProps {
     checked: boolean;
     label: string;
     additionalLabel?: string;
+    disabled?: boolean;
 }
 
 export function Switch(props: SwitchProps) {
-    const { onChange, checked, label, additionalLabel } = props;
+    const { onChange, checked, label, additionalLabel, disabled } = props;
     const [value, setValue] = useState<boolean>();
     const [lever, setLever] = useState<string>();
     const handleOnClick = () => {
+        if(disabled) return;
         setLever(prev => {
             if (prev?.includes("inactive")) {
                 return "switch-lever-active";
@@ -32,7 +34,7 @@ export function Switch(props: SwitchProps) {
         <div className='switch-container'>
             <div className='switch-label'>{label}</div>
 
-            <button className='switch' role='switch' aria-checked={value} onClick={() => handleOnClick()}>
+            <button className='switch' disabled={disabled} role='switch' aria-checked={value} onClick={() => handleOnClick()}>
                 <div className={`switch-lever ${lever}`}></div>
             </button>
             <div className='switch-additional-label'>{additionalLabel}</div>

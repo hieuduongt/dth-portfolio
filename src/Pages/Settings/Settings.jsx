@@ -11,27 +11,27 @@ const ColorPanelContent = (props) => {
                 Color Panel Settings
             </div>
             <div className="color-selection">
-                <Switch checked={actionBarColor === actionBarColors.color_1} onChange={(value) => setNewActionBarColor(actionBarColors.color_1)} />
+                <Switch checked={actionBarColor === actionBarColors.color_1} disabled={actionBarColor === actionBarColors.color_1} onChange={(value) => setNewActionBarColor(actionBarColors.color_1)} />
                 <div className={`color-panel br-1 ${actionBarColor === actionBarColors.color_1 ? "current-color-panel" : ""} color-1`} onClick={() => setNewActionBarColor(actionBarColors.color_1)}>
                 </div>
             </div>
             <div className="color-selection">
-                <Switch checked={actionBarColor === actionBarColors.color_2} onChange={(value) => setNewActionBarColor(actionBarColors.color_2)} />
+                <Switch checked={actionBarColor === actionBarColors.color_2} disabled={actionBarColor === actionBarColors.color_2} onChange={(value) => setNewActionBarColor(actionBarColors.color_2)} />
                 <div className={`color-panel br-1 ${actionBarColor === actionBarColors.color_2 ? "current-color-panel" : ""} color-2`} onClick={() => setNewActionBarColor(actionBarColors.color_2)}>
                 </div>
             </div>
             <div className="color-selection">
-                <Switch checked={actionBarColor === actionBarColors.color_3} onChange={(value) => setNewActionBarColor(actionBarColors.color_3)} />
+                <Switch checked={actionBarColor === actionBarColors.color_3} disabled={actionBarColor === actionBarColors.color_3} onChange={(value) => setNewActionBarColor(actionBarColors.color_3)} />
                 <div className={`color-panel br-1 ${actionBarColor === actionBarColors.color_3 ? "current-color-panel" : ""} color-3`} onClick={() => setNewActionBarColor(actionBarColors.color_3)}>
                 </div>
             </div>
             <div className="color-selection">
-                <Switch checked={actionBarColor === actionBarColors.color_4} onChange={(value) => setNewActionBarColor(actionBarColors.color_4)} />
+                <Switch checked={actionBarColor === actionBarColors.color_4} disabled={actionBarColor === actionBarColors.color_4} onChange={(value) => setNewActionBarColor(actionBarColors.color_4)} />
                 <div className={`color-panel br-1 ${actionBarColor === actionBarColors.color_4 ? "current-color-panel" : ""} color-4`} onClick={() => setNewActionBarColor(actionBarColors.color_4)}>
                 </div>
             </div>
             <div className="color-selection">
-                <Switch checked={actionBarColor === actionBarColors.color_5} onChange={(value) => setNewActionBarColor(actionBarColors.color_5)} />
+                <Switch checked={actionBarColor === actionBarColors.color_5} disabled={actionBarColor === actionBarColors.color_5} onChange={(value) => setNewActionBarColor(actionBarColors.color_5)} />
                 <div className={`color-panel br-1 ${actionBarColor === actionBarColors.color_5 ? "current-color-panel" : ""} color-5`} onClick={() => setNewActionBarColor(actionBarColors.color_5)}>
                 </div>
             </div>
