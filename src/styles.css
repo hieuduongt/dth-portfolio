@@ -380,6 +380,14 @@ body {
     height: auto;
   }
 
+  .main-settings {
+    max-width: 100% !important;
+  }
+
+  .setting-content {
+    display: block !important;
+  }
+
   body {
     overflow: auto;
   }
