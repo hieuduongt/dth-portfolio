@@ -37,38 +37,38 @@ export const actionBarColors = {
 
 export const backGrounds = {
   appearance_dynamic: {
-    dark: "./appearance-dynamic-dark.png",
-    light: "./appearance-dynamic-light.png",
+    dark: "../../appearance-dynamic-dark.png",
+    light: "../../appearance-dynamic-light.png",
     name: "appearance_dynamic"
   },
   colorful: {
-    dark: "colorful-dark.jpg",
-    light: "colorful-light.jpg",
+    dark: "../../colorful-dark.jpg",
+    light: "../../colorful-light.jpg",
     name: "colorful"
   },
   ventura: {
-    dark: "ventura-dark.jpg",
-    light: "ventura-light.jpg",
+    dark: "../../ventura-dark.jpg",
+    light: "../../ventura-light.jpg",
     name: "ventura"
   },
   window7: {
-    dark: "window-7-dark.jpg",
-    light: "window-7-light.jpg",
+    dark: "../../window-7-dark.jpg",
+    light: "../../window-7-light.jpg",
     name: "window7"
   },
   window_bliss: {
-    dark: "window-bliss-light.jpg",
-    light: "window-bliss-light.jpg",
+    dark: "../../window-bliss-light.jpg",
+    light: "../../window-bliss-light.jpg",
     name: "window_bliss"
   },
   window_default: {
-    dark: "window-default-dark.jpg",
-    light: "window-default-light.jpg",
+    dark: "../../window-default-dark.jpg",
+    light: "../../window-default-light.jpg",
     name: "window_default"
   },
   window_flower: {
-    dark: "window-flower-dark.jpg",
-    light: "window-flower-light.jpg",
+    dark: "../../window-flower-dark.jpg",
+    light: "../../window-flower-light.jpg",
     name: "window_flower"
   }
 }
