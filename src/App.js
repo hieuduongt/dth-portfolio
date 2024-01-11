@@ -37,8 +37,8 @@ export const actionBarColors = {
 
 export const backGrounds = {
   appearance_dynamic: {
-    dark: "appearance-dynamic-dark.png",
-    light: "appearance-dynamic-light.png",
+    dark: "../public/appearance-dynamic-dark.png",
+    light: "../public/appearance-dynamic-light.png",
     name: "appearance_dynamic"
   },
   colorful: {
