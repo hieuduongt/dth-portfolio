@@ -88,7 +88,7 @@ const Content = (props) => {
                             </div>
 
                             <div className="setting-title-text">
-                                Theme: {theme.includes("dark") ? "Dark" : "Light"}
+                                Dark Mode
                             </div>
 
                             <div className="setting-switch">
@@ -103,7 +103,7 @@ const Content = (props) => {
                             </div>
 
                             <div className="setting-title-text">
-                                Blurred option
+                                Blurred
                             </div>
 
                             <div className="setting-switch">
