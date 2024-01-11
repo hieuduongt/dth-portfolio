@@ -14,7 +14,7 @@ export function Switch(props: SwitchProps) {
     const [value, setValue] = useState<boolean>();
     const [lever, setLever] = useState<string>();
     const handleOnClick = () => {
-        if(disabled) return;
+        if (disabled) return;
         setLever(prev => {
             if (prev?.includes("inactive")) {
                 return "switch-lever-active";
@@ -33,8 +33,8 @@ export function Switch(props: SwitchProps) {
     return (
         <div className='switch-container'>
             <div className='switch-label'>{label}</div>
-
-            <button className='switch' disabled={disabled} role='switch' aria-checked={value} onClick={() => handleOnClick()}>
+            <button className={`switch ${disabled ? "disabled" : ""}`} role='switch' aria-checked={value} onClick={() => handleOnClick()}>
+                {disabled ? <div className='switch-disabled'></div> : <></>}
                 <div className={`switch-lever ${lever}`}></div>
             </button>
             <div className='switch-additional-label'>{additionalLabel}</div>

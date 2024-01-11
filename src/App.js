@@ -1,5 +1,5 @@
-import './App.css';
-import { createContext, useEffect, useState } from 'react';
+import './styles.css';
+import { createContext, useEffect, useState, useRef } from 'react';
 import TaskBar from "./Layouts/Taskbar/TaskBar";
 import Home from './Pages/Home/Home';
 import PersonalInfo from './Pages/PersonalInfo/PersonalInfo';
@@ -35,8 +35,48 @@ export const actionBarColors = {
   color_5: "color-5"
 }
 
+export const backGrounds = {
+  appearance_dynamic: {
+    dark: "appearance-dynamic-dark.png",
+    light: "appearance-dynamic-light.png",
+    name: "appearance_dynamic"
+  },
+  colorful: {
+    dark: "colorful-dark.jpg",
+    light: "colorful-light.jpg",
+    name: "colorful"
+  },
+  ventura: {
+    dark: "ventura-dark.jpg",
+    light: "ventura-light.jpg",
+    name: "ventura"
+  },
+  window7: {
+    dark: "window-7-dark.jpg",
+    light: "window-7-light.jpg",
+    name: "window7"
+  },
+  window_bliss: {
+    dark: "window-bliss-light.jpg",
+    light: "window-bliss-light.jpg",
+    name: "window_bliss"
+  },
+  window_default: {
+    dark: "window-default-dark.jpg",
+    light: "window-default-light.jpg",
+    name: "window_default"
+  },
+  window_flower: {
+    dark: "window-flower-dark.jpg",
+    light: "window-flower-light.jpg",
+    name: "window_flower"
+  }
+}
+
 function App() {
+  const mainContentRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [currentBackground, setCurrentBackGround] = useState("");
   const [blur, setBlur] = useState(blurLevels.none);
   const [theme, setTheme] = useState(standardTheme.light);
   const [actionBarColor, setActionBarColor] = useState(actionBarColors.color_3);
@@ -243,7 +283,16 @@ function App() {
     });
   }
 
+  const setBackGround = (name, light, dark) => {
+    mainContentRef.current.style.setProperty("--light-url", `url("${light}")`);
+    mainContentRef.current.style.setProperty("--dark-url", `url("${dark}")`);
+    setCurrentBackGround(name);
+  }
+
   useEffect(() => {
+    if(mainContentRef.current) {
+      setBackGround(backGrounds.appearance_dynamic.name, backGrounds.appearance_dynamic.light, backGrounds.appearance_dynamic.dark);
+    }
     const currentHour = new Date().getHours();
     if (18 > currentHour && currentHour > 6) {
       setTheme(standardTheme.light);
@@ -283,10 +332,12 @@ function App() {
         zIndex,
         setNewZIndex,
         actionBarColor,
-        setNewActionBarColor
+        setNewActionBarColor,
+        setBackGround,
+        currentBackground
       }}
     >
-      <div className="main-container">
+      <div className="main-container" ref={(ref) => (mainContentRef.current = ref)}>
         <Settings />
         <PersonalInfo />
         <Home />
