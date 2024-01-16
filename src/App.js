@@ -96,18 +96,10 @@ function App() {
     }
   });
 
-  const [resumeStyle, setResumeStyle] = useState({
-    style: {},
-    defaultPosition: {
-      x: 950,
-      y: 50
-    }
-  });
-
   const [gameStyle, setGameStyle] = useState({
     style: {},
     defaultPosition: {
-      x: 730,
+      x: 780,
       y: 20
     }
   });
@@ -117,14 +109,6 @@ function App() {
     defaultPosition: {
       x: 20,
       y: 20
-    }
-  });
-
-  const [worksStyle, setWorksStyle] = useState({
-    style: {},
-    defaultPosition: {
-      x: 730,
-      y: 250
     }
   });
 
@@ -148,7 +132,7 @@ function App() {
     setGameStyle(prev => ({
       ...prev,
       defaultPosition: {
-        x: 730,
+        x: 780,
         y: 20
       }
     }));
@@ -158,14 +142,6 @@ function App() {
       defaultPosition: {
         x: 20,
         y: 20
-      }
-    }));
-
-    setWorksStyle(prev => ({
-      ...prev,
-      defaultPosition: {
-        x: 730,
-        y: 250
       }
     }));
   }
@@ -252,20 +228,12 @@ function App() {
     setPersonalInfoStyle(value);
   }
 
-  const setNewResumeStyle = (value) => {
-    setResumeStyle(value);
-  }
-
   const setNewGameStyle = (value) => {
     setGameStyle(value);
   }
 
   const setNewSettingsStyle = (value) => {
     setSettingsStyle(value);
-  }
-
-  const setNewWorksStyle = (value) => {
-    setWorksStyle(value);
   }
 
   const setNewActionBarColor = (value) => {
@@ -290,7 +258,7 @@ function App() {
   }
 
   useEffect(() => {
-    if(mainContentRef.current) {
+    if (mainContentRef.current) {
       setBackGround(backGrounds.appearance_dynamic.name, backGrounds.appearance_dynamic.light, backGrounds.appearance_dynamic.dark);
     }
     const currentHour = new Date().getHours();
@@ -321,14 +289,10 @@ function App() {
         setNewHomeStyle,
         personalInfoStyle,
         setNewPersonalInfoStyle,
-        resumeStyle,
-        setNewResumeStyle,
         gameStyle,
         setNewGameStyle,
         settingsStyle,
         setNewSettingsStyle,
-        worksStyle,
-        setNewWorksStyle,
         zIndex,
         setNewZIndex,
         actionBarColor,
@@ -341,7 +305,7 @@ function App() {
         <Settings />
         <PersonalInfo />
         <Home />
-        <Works />
+        {/* <Works /> */}
         <Contact />
       </div>
       <div className="not-support-message">

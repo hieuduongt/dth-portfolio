@@ -1,12 +1,12 @@
 export const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-export const createHiddenStyle = (rect, width, height) => {
+export const createHiddenStyle = (rect, width, height, noEffect = undefined) => {
     return {
         style: {
             fontSize: "0",
             opacity: 0,
             visibility: "hidden",
-            transition: "transform 0.3s ease-in-out, visibility 0.4s ease-in-out, opacity 0.4s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out",
+            transition: noEffect ? "" : "transform 0.3s ease-in-out, visibility 0.4s ease-in-out, opacity 0.4s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out",
             width: "50px !important",
             height: "50px !important",
             transformOrigin: `${rect.left}px ${rect.top}px`

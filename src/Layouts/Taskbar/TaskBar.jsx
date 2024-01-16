@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, createRef } from "react";
 import { AppContext } from "../../App";
 import { Input } from "../../components/Input";
 import { BsSearch } from 'react-icons/bs';
-import { handleOpenAnApplication } from '../../Helpers/Helpers';
+import { handleOpenAnApplication, createHiddenStyle } from '../../Helpers/Helpers';
 
 const CTime = () => {
     let time = new Date().toLocaleTimeString();
@@ -50,33 +50,19 @@ const TaskBar = (props) => {
         setNewHomeStyle,
         personalInfoStyle,
         setNewPersonalInfoStyle,
-        resumeStyle,
-        setNewResumeStyle,
         gameStyle,
         setNewGameStyle,
         settingsStyle,
-        setNewSettingsStyle,
-        worksStyle,
-        setNewWorksStyle
+        setNewSettingsStyle
     } = useContext(AppContext);
 
-    const refs = Array.from({ length: 5 }, () => createRef());
+    const refs = Array.from({ length: 4 }, () => createRef());
 
     const styleMapping = [
         {
             name: "home",
             style: homeStyle,
             setStyle: setNewHomeStyle
-        },
-        {
-            name: "resume",
-            style: resumeStyle,
-            setStyle: setNewResumeStyle
-        },
-        {
-            name: "works",
-            style: worksStyle,
-            setStyle: setNewWorksStyle
         },
         {
             name: "game",
@@ -106,10 +92,18 @@ const TaskBar = (props) => {
     }
 
     useEffect(() => {
-        if (refs[0].current !== null) {
+        if (refs[0].current) {
             refs.forEach(ref => {
                 const name = ref.current.querySelector("img").getAttribute("alt");
                 const style = styleMapping.find(it => it.name === name);
+                if (name === "game") {
+                    const newStyle = createHiddenStyle(ref.current.getBoundingClientRect(), 50, 50, true)
+                    style.setStyle(prev => ({
+                        ...prev,
+                        ...newStyle,
+                        rect: ref.current.getBoundingClientRect()
+                    }));
+                }
                 style.setStyle(prev => ({
                     ...prev,
                     rect: ref.current.getBoundingClientRect()
@@ -141,30 +135,22 @@ const TaskBar = (props) => {
                         <span className="activating-app" style={{ display: runningApp === 1 ? "block" : "none" }}></span>
                         <span className="opened-app" style={{ display: runningApp === 1 ? "none" : (openedApps.personalInfo === 1 ? "block" : "none") }}></span>
                     </div>
-                    <div ref={refs[2]} className="application" onClick={(e) => openApp(2, "works", worksStyle, setNewWorksStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                        <span className="application-name">
-                            Works
-                        </span>
-                        <img src="works-logo-app.png" alt="works" />
-                        <span className="activating-app" style={{ display: runningApp === 2 ? "block" : "none" }}></span>
-                        <span className="opened-app" style={{ display: runningApp === 2 ? "none" : (openedApps.works === 1 ? "block" : "none") }}></span>
-                    </div>
-                    <div ref={refs[3]} className="application" onClick={(e) => openApp(3, "game", gameStyle, setNewGameStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                    <div ref={refs[2]} className="application" onClick={(e) => openApp(2, "game", gameStyle, setNewGameStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
                         <span className="application-name">
                             Game
                         </span>
                         <img src="game-logo-app.png" alt="game" />
-                        <span className="activating-app" style={{ display: runningApp === 3 ? "block" : "none" }}></span>
-                        <span className="opened-app" style={{ display: runningApp === 3 ? "none" : (openedApps.game === 1 ? "block" : "none") }}></span>
+                        <span className="activating-app" style={{ display: runningApp === 2 ? "block" : "none" }}></span>
+                        <span className="opened-app" style={{ display: runningApp === 2 ? "none" : (openedApps.game === 1 ? "block" : "none") }}></span>
                     </div>
                     <div className="application-devider"></div>
-                    <div ref={refs[4]} className="application" onClick={(e) => openApp(4, "settings", settingsStyle, setNewSettingsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                    <div ref={refs[3]} className="application" onClick={(e) => openApp(3, "settings", settingsStyle, setNewSettingsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
                         <span className="application-name">
                             Settings
                         </span>
                         <img src="settings-logo-app.png" alt="settings" />
-                        <span className="activating-app" style={{ display: runningApp === 4 ? "block" : "none" }}></span>
-                        <span className="opened-app" style={{ display: runningApp === 4 ? "none" : (openedApps.settings === 1 ? "block" : "none") }}></span>
+                        <span className="activating-app" style={{ display: runningApp === 3 ? "block" : "none" }}></span>
+                        <span className="opened-app" style={{ display: runningApp === 3 ? "none" : (openedApps.settings === 1 ? "block" : "none") }}></span>
                     </div>
                 </div>
 

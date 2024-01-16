@@ -959,11 +959,11 @@ body {
   cursor: pointer;
 }
 
-.wallpaper-card:hover > img {
+.wallpaper-card:hover>img {
   box-shadow: 0px 0px 0px 3px rgba(22, 119, 255, 0.548);
 }
 
-.wallpaper-card > img {
+.wallpaper-card>img {
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -1256,4 +1256,110 @@ body {
 
 .modal-timing {
   font-size: 20px;
+}
+
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  margin: auto;
+  width: 100%;
+  justify-content: center;
+}
+
+.left-profile {
+  width: 100%;
+  max-width: 800px;
+}
+
+.right-profile {
+  max-width: 400px;
+  width: 100%;
+  height: 100%;
+}
+
+.skills {
+  width: 100%;
+}
+
+.skill {
+  min-height: 50px;
+}
+
+.skill>.skill-name {
+  min-width: 100px;
+  margin-bottom: 5px;
+}
+
+.level {
+  width: 100%;
+  height: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #0871c6;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.level-progress-75 {
+  width: 75%;
+}
+
+.level-progress-90 {
+  width: 90%;
+}
+
+.skill-title {
+  margin-bottom: 10px;
+}
+
+.skill-title>span {
+  font-family: Poppins, sans-serif;
+  font-size: 1.1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.summary-content {}
+
+h1.summary-title {
+  font-size: 15.5pt;
+  font-family: "Calibri", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.project {
+  margin-left: 20px;
+  font-size: 13px;
+}
+
+.project-date {
+  font-size: 9.0pt;
+  font-family: "Calibri", sans-serif;
+}
+
+.project-name {
+  font-size: 11.0pt;
+  font-family: "Calibri", sans-serif;
+  font-weight: bold;
+}
+
+.my-cv {
+  text-align: center;
+  width: 100%;
 }
