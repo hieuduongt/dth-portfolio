@@ -6,128 +6,7 @@ const Content = (props) => {
     const { theme, className } = props;
     return (
         <div className={className}>
-            Hiếu đẹp trai Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
-            Hiếu đẹp trai
+            Welcome to HieuDuongIT website
         </div>
     )
 }
@@ -157,7 +36,7 @@ const Home = (props) => {
                 styleContext={homeStyle}
                 windowName="home"
                 index={0}
-                name="Home"
+                name="Welcome"
             >
                 <Content theme={theme} />
             </Window>
