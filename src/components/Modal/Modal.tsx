@@ -32,9 +32,9 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
     okText: string | undefined;
     cancelText: string | undefined;
     modaltitle: string | undefined;
-    show: boolean | null;
-    backdropclose: boolean | null;
-    isalert: boolean | null;
+    show: boolean | undefined;
+    backdropclose: boolean | undefined;
+    isalert: boolean | undefined;
     closeafter?: number | undefined;
     onOk: () => void;
     onCancel: () => void;
@@ -53,11 +53,11 @@ export function Modal(props: ModalProps) {
 
     return (
         <div className={`modal-container ${open ? "open" : "close"}`}>
-            <div className={`${theme.includes("dark") ? "dark-background-transparent " : "light-background-transparent "} modal-background `}
-                onClick={closeafter ? () => {} : backdropclose ? () => onCancel() : () => { }}
+            <div className={`${theme.includes("dark") ? "dark-background-transparent " : "light-background-transparent "} blur-3 modal-background `}
+                onClick={closeafter ? () => {} : backdropclose === true ? () => onCancel() : () => {}}
             >
             </div>
-            <div className={`modal ${theme} br-2`} style={{ width: size ? size.width : 600 }}>
+            <div className={`modal ${theme} blur-3 br-2`} style={{ width: size ? size.width : 600 }}>
                 <div className='modal-header'>
                     <div className='modal-title'>
                         {modaltitle || "Modal Title"}
@@ -69,7 +69,7 @@ export function Modal(props: ModalProps) {
                             </div>
                             :
                             <div className='modal-close-button'>
-                                <Button color='error-color' icon={closeIcon ? closeIcon : <IoClose size={25} />} icononly onClick={() => onCancel()}>Close</Button>
+                                <Button color='error-color' icon={closeIcon ? closeIcon : <IoClose size={25} />} icononly={true} onClick={() => onCancel()}>Close</Button>
                             </div>
                     }
 

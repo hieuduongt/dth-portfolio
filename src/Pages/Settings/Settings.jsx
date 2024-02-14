@@ -89,13 +89,13 @@ const Content = (props) => {
         currentBackground,
         setBackGround
     } = props;
-    const [currentSetting, setCurrentSetting] = useState(settings.colorSetting);
+    const [currentSetting, setCurrentSetting] = useState(settings.wallpaperSetting);
 
     return (
         <div className={className}>
             <div className="setting-content">
                 <div className="main-settings">
-                    <div className={`info ${theme} ${blur} br-1`}>
+                    <div className={`info ${theme} br-1`}>
                         <div className="setting-section bd-b">
                             <div className="setting-icon">
                                 <img src="theme-setting-icon.png" alt="" />
@@ -117,10 +117,10 @@ const Content = (props) => {
                                 Blurred
                             </div>
                             <div className="setting-switch">
-                                <Switch checked={blur ? true : false} onChange={(value) => { value ? setNewBlurLevel(blurLevels.level3) : setNewBlurLevel(blurLevels.none) }} />
+                                <Switch checked={blur ? true : false} onChange={(value) => { value ? setNewBlurLevel(blurLevels.blur) : setNewBlurLevel(blurLevels.none) }} />
                             </div>
                         </div>
-                        <div className={`setting-section selectable bd-b ${currentSetting === settings.colorSetting ? "current-setting" : ""}`} onClick={() => setCurrentSetting(settings.colorSetting)}>
+                        <div className={`desktop setting-section selectable bd-b ${currentSetting === settings.colorSetting ? "current-setting" : ""}`} onClick={() => setCurrentSetting(settings.colorSetting)}>
                             <div className="setting-icon">
                                 <img src="color-selection-icon.png" alt="" />
                             </div>
@@ -139,7 +139,7 @@ const Content = (props) => {
                     </div>
                 </div>
                 <div className="setting-detail-content">
-                    <div className={`info ${theme} ${blur} br-1`}>
+                    <div className={`info ${theme} br-1`}>
                         {currentSetting === settings.colorSetting ? <ColorPanelContent actionBarColor={actionBarColor} setNewActionBarColor={setNewActionBarColor} /> : <></>}
                         {currentSetting === settings.wallpaperSetting ? <WallpaperContent currentBackground={currentBackground} setBackGround={setBackGround} /> : <></>}
                     </div>
@@ -170,7 +170,7 @@ const Settings = (props) => {
         <>
             <Content
                 theme={theme}
-                className={`mobile content ${theme} ${blur} br-1`}
+                className={`mobile window-content content ${theme} ${blur} br-1`}
                 setNewTheme={setNewTheme}
                 blur={blur}
                 setNewBlurLevel={setNewBlurLevel}

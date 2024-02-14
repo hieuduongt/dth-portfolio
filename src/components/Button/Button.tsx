@@ -9,9 +9,9 @@ enum Colors {
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     color?: "default-color" | "success-color" | "warning-color" | "error-color";
-    icon?: React.ReactNode | null;
+    icon?: React.ReactNode | undefined;
     iconposition?: "before" | "after";
-    icononly?: boolean;
+    icononly?: boolean | undefined;
 }
 
 export function Button(props: ButtonProps) {
