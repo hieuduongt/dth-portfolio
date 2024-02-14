@@ -170,7 +170,7 @@ const Settings = (props) => {
         <>
             <Content
                 theme={theme}
-                className={`mobile window-content content ${theme} ${blur} br-1`}
+                className={`mobile window-content mobile-content ${theme} ${blur} br-1`}
                 setNewTheme={setNewTheme}
                 blur={blur}
                 setNewBlurLevel={setNewBlurLevel}
