@@ -428,7 +428,7 @@ const PersonalInfo = (props) => {
 
     return (
         <>
-            <Content theme={theme} className={`mobile window-content content ${theme} ${blur} br-1`} />
+            <Content theme={theme} className={`mobile window-content mobile-content ${theme} ${blur} br-1`} />
             <Window
                 minHeight={430}
                 minWidth={400}

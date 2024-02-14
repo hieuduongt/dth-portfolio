@@ -21,7 +21,7 @@ const Home = (props) => {
 
     return (
         <>
-            <Content theme={theme} className={`mobile window-content content ${theme} ${blur} br-1`} />
+            <Content theme={theme} className={`mobile window-content mobile-content ${theme} ${blur} br-1`} />
             <Window
                 setStyleContext={setNewHomeStyle}
                 handleOnMouseDown={() => setNewZIndex("home")}
