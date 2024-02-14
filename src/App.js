@@ -4,8 +4,7 @@ import TaskBar from "./Layouts/Taskbar/TaskBar";
 import Home from './Pages/Home/Home';
 import PersonalInfo from './Pages/PersonalInfo/PersonalInfo';
 import Settings from './Pages/Settings/Settings';
-import Contact from './Pages/Game/Game';
-import Works from './Pages/Works/Works';
+import Game from './Pages/Game/Game';
 import { Modal } from './components/Modal';
 import { isTablet, mobileModel, deviceType } from 'react-device-detect';
 
@@ -20,11 +19,7 @@ export const standardTheme = {
 
 export const blurLevels = {
   none: "",
-  level1: "blur-1",
-  level2: "blur-2",
-  level3: "blur-3",
-  level4: "blur-4",
-  level5: "blur-5"
+  blur: "blur-3",
 }
 
 export const actionBarColors = {
@@ -77,7 +72,7 @@ function App() {
   const mainContentRef = useRef(null);
   const [open, setOpen] = useState(false);
   const [currentBackground, setCurrentBackGround] = useState("");
-  const [blur, setBlur] = useState(blurLevels.none);
+  const [blur, setBlur] = useState(blurLevels.blur);
   const [theme, setTheme] = useState(standardTheme.light);
   const [actionBarColor, setActionBarColor] = useState(actionBarColors.color_3);
   const [homeStyle, setHomeStyle] = useState({
@@ -267,6 +262,7 @@ function App() {
     } else {
       setTheme(standardTheme.dark);
     }
+    setNewBlurLevel(blurLevels.blur);
     if (isTablet) {
       setOpen(true);
     }
@@ -302,17 +298,23 @@ function App() {
       }}
     >
       <div className="main-container" ref={(ref) => (mainContentRef.current = ref)}>
-        <Settings />
-        <PersonalInfo />
         <Home />
-        {/* <Works /> */}
-        <Contact />
+        <PersonalInfo />
+        <Settings />
+        <Game />
       </div>
       <div className="not-support-message">
         Your device is not compatible with our current system, please upgrade your device or use a compatible device to make sure your experience should not be affected!
       </div>
       <TaskBar />
-      <Modal modalsize='small' backdropclose="true" isalert="true" modaltitle={`You are using ${mobileModel != "none" ? mobileModel : deviceType}`} show={open} onCancel={() => setOpen(false)}>
+      <Modal
+        modalsize='small'
+        backdropclose={false}
+        isalert={true}
+        modaltitle={`You are using ${mobileModel != "none" ? mobileModel : deviceType}`}
+        show={open}
+        onCancel={() => setOpen(false)}
+        >
         Your {mobileModel} is supported for the computer features, but we recommend you use a computer browser to have the best experience!
         To use the computer features, please rotate your device to the horizontal view, and if the layout is broken, please reload the page!
       </Modal>

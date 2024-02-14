@@ -13,7 +13,7 @@ import { PiBagSimpleFill } from "react-icons/pi";
 import { MdCastForEducation } from "react-icons/md";
 
 const Content = (props) => {
-    const { theme, blur, className } = props;
+    const { theme, className } = props;
     return (
         <div className={className}>
             <div className="avatar-content">
@@ -53,7 +53,7 @@ const Content = (props) => {
 
             </div>
             <div className="profile">
-                <div className={`info ${theme} ${blur} br-1 right-profile`}>
+                <div className={`info ${theme} br-1 right-profile`}>
                     <div className="summary-info bd-b">
                         <Button icon={<BsPhone size={25} />} icononly="true" color="error-color" />
                         <div className="summary-text">
@@ -149,7 +149,7 @@ const Content = (props) => {
 
                     </div>
                 </div>
-                <div className={`info ${theme} ${blur} br-1 left-profile`}>
+                <div className={`info ${theme} br-1 left-profile`}>
                     <div className="summary-content">
                         <h1 className="summary-title">
                             <FaUser />Summary
@@ -428,7 +428,7 @@ const PersonalInfo = (props) => {
 
     return (
         <>
-            <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} />
+            <Content theme={theme} className={`mobile window-content content ${theme} ${blur} br-1`} />
             <Window
                 minHeight={430}
                 minWidth={400}

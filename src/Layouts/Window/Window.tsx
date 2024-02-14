@@ -106,7 +106,7 @@ export function Window(props: WindowProps) {
                 expanded={expanded}
                 name={name}
             />
-            <div style={{ overflow: "auto", height: "100%"}}>
+            <div className='window-content'>
                 {children}
             </div>
 
