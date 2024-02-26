@@ -69,7 +69,8 @@ body {
   box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 24px 10px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
-.content.dark-background, .content.dark-background-transparent {
+.content.dark-background,
+.content.dark-background-transparent {
   box-shadow: rgba(255, 255, 255, 0.08) 0px 1px 30px 5px, rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
 }
 
@@ -620,6 +621,11 @@ body {
   flex-wrap: nowrap;
   align-items: center;
   font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: nowrap;
 }
 
 .action-bar.dark-background {
