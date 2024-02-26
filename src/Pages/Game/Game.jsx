@@ -36,7 +36,11 @@ const Game = (props) => {
                 index={4}
                 styleContext={gameStyle}
                 setStyleContext={setNewGameStyle}
-                name="Game"
+                name={
+                    <span>
+                        <a href="https://caro-game.hieuduongit.com" target="_blank">Hieuduong caro game</a>
+                    </span>
+                }
             >
                 <Content theme={theme} />
             </Window>

@@ -3,6 +3,7 @@ import ActionBar from '../ActionBar/ActionBar';
 import { AppContext } from '../../App';
 import { Rnd } from 'react-rnd';
 import { handleOpenAnApplication } from '../../Helpers/Helpers';
+import { ReactNode } from 'react';
 
 interface Size {
     width: number | string;
@@ -26,7 +27,7 @@ interface WindowProps extends React.HTMLAttributes<HTMLDivElement> {
     index?: number;
     styleContext?: any;
     setStyleContext?: any;
-    name?: string;
+    name?: string|ReactNode;
 }
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
