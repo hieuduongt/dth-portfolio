@@ -5,8 +5,8 @@ import { Window } from '../../Layouts/Window';
 const Content = (props) => {
     const { theme, className } = props;
     return (
-        <div className={className} style={{height: "100%"}}>
-            <iframe src="https://caro-game.hieuduongit.com/" height={"100%"} width={"100%"} style={{borderRadius: "10px", border: "none"}}/>
+        <div className={className} style={{ height: "100%" }}>
+            <iframe src="https://caro-game.hieuduongit.com/" height={"100%"} width={"100%"} style={{ borderRadius: "10px", border: "none" }} />
         </div>
     )
 }
@@ -37,8 +37,10 @@ const Game = (props) => {
                 styleContext={gameStyle}
                 setStyleContext={setNewGameStyle}
                 name={
-                    <span>
-                        <a href="https://caro-game.hieuduongit.com" target="_blank">Hieuduong caro game</a>
+                    <span className="action-bar-link"
+                        onClick={() => window.open("https://caro-game.hieuduongit.com", "_blank")}
+                    >
+                        Hieuduong caro game
                     </span>
                 }
             >
