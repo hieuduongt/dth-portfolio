@@ -444,23 +444,21 @@ body {
 .light-background {
   background-color: #f1f3f4;
   color: black;
-  transition: background-color .3s ease-out;
 }
 
 .light-background-transparent {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
   color: black;
   transition: background-color .3s ease-out;
 }
 
 .dark-background {
-  background-color: #283142;
+  background-color: rgba(34, 39, 46, 1);
   color: white;
-  transition: background-color .3s ease-out;
 }
 
 .dark-background-transparent {
-  background-color: #2831423f;
+  background-color: rgba(34, 39, 46, 0.5);
   color: white;
   transition: background-color .3s ease-out;
 }
@@ -1397,4 +1395,12 @@ h1.summary-title {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.action-bar-link {
+  cursor: pointer;
+}
+
+.action-bar-link:hover {
+  color: #0871c6;
 }

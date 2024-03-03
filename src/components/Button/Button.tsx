@@ -12,12 +12,13 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     icon?: React.ReactNode | undefined;
     iconposition?: "before" | "after";
     icononly?: boolean | undefined;
+    disabled: boolean | undefined;
 }
 
 export function Button(props: ButtonProps) {
-    const { color, children, icon, iconposition, icononly } = props;
+    const { color, children, icon, iconposition, icononly, disabled } = props;
     return (
-        <button {...props} className={`btn ${color || Colors['default-color']}`}>
+        <button {...props} disabled={disabled} className={`btn ${color || Colors['default-color']}`}>
             {icononly ?
                 <span style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                     {icon}
