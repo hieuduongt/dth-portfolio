@@ -4,6 +4,7 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
     icon: React.ReactNode | null;
     iconposition: "before" | "after";
     scalesize: "default" | "small" | "large";
+    placeholder?: string;
 }
 
 const scaleNumber = [
@@ -18,7 +19,7 @@ const scaleNumber = [
 ];
 
 export function Input(props: InputProps) {
-    const { icon, scalesize, iconposition } = props;
+    const { icon, scalesize, iconposition, placeholder } = props;
     const [size, setSize] = useState(
         {
             value: 30,
@@ -45,7 +46,7 @@ export function Input(props: InputProps) {
                     :
                     <></>
             }
-            <input {...props} size={size.value - 10} style={{ ...props.style, height: size.value, padding: `${icon && iconposition === "before" ? `0 ${size.value}px` : "0 10px"}` }} className={'input ' + props.className} />
+            <input {...props} placeholder={placeholder || ""} size={size.value - 10} style={{ ...props.style, height: size.value, padding: `${icon && iconposition === "before" ? `0 ${size.value}px` : "0 10px"}` }} className={'input ' + props.className} />
             {
                 icon && iconposition && iconposition === "after" ?
                     <span className='input-icon-right' style={{ width: size.value, color: "black" }}>

@@ -203,7 +203,7 @@ const Content = (props) => {
                                 TBA Doncaster at Senior Software Engineer, Nashtech
                             </div>
                             <div className="project-date">
-                                November 2023 — January 2024
+                                November 2023 — May 2024
                             </div>
                             <ul className="project-description">
                                 <li>
