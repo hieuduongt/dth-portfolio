@@ -107,7 +107,7 @@ export function Window(props: WindowProps) {
                 expanded={expanded}
                 name={name}
             />
-            <div className='window-content'>
+            <div className={`window-content`}>
                 {children}
             </div>
 

@@ -8,11 +8,12 @@ const ActionBar = (props) => {
     const { onSave, onClose, onExpand, expanded, name } = props;
     const {
         theme,
-        actionBarColor
+        actionBarColor,
+        blur
     } = useContext(AppContext);
 
     return (
-        <div className={`action-bar ${theme.includes("transparent") ? theme : actionBarColor}`} style={{
+        <div className={`action-bar ${theme.includes("transparent") ? "" : actionBarColor} ${blur}`} style={{
             borderTopLeftRadius: expanded ? 0 : "10px",
             borderTopRightRadius: expanded ? 0 : "10px",
         }}>
