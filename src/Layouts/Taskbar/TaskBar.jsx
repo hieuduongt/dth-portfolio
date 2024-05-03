@@ -53,8 +53,11 @@ const TaskBar = (props) => {
         gameStyle,
         setNewGameStyle,
         settingsStyle,
-        setNewSettingsStyle
+        setNewSettingsStyle,
+        setLoading,
+        setNewZIndex
     } = useContext(AppContext);
+    const [loadedApps, setLoadedApps] = useState(0);
 
     const refs = Array.from({ length: 4 }, () => createRef());
 
@@ -83,34 +86,36 @@ const TaskBar = (props) => {
 
     const openApp = (index, name, style, setNewStyle) => {
         if (refs[index].current !== null) {
-            setNewStyle(prev => ({
-                ...prev,
-                rect: refs[index].current.getBoundingClientRect()
-            }));
+            handleOpenAnApplication(index, name, style, setNewStyle, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex, refs[index].current.getBoundingClientRect());
         }
-        handleOpenAnApplication(index, name, style, setNewStyle, setIsRunningApp, setAreOpenedApps, openedApps, refs[index].current.getBoundingClientRect());
     }
 
     useEffect(() => {
-        if (refs[0].current) {
+        if (refs[0].current && loadedApps === 4) {
             refs.forEach(ref => {
-                const name = ref.current.querySelector("img").getAttribute("alt");
-                const style = styleMapping.find(it => it.name === name);
-                if (name === "game") {
-                    const newStyle = createHiddenStyle(ref.current.getBoundingClientRect(), 50, 50, true)
+                const img = ref.current.querySelector("img").getAttribute("src");
+                if (img) {
+                    const name = ref.current.querySelector("img").getAttribute("alt");
+                    const style = styleMapping.find(it => it.name === name);
+                    if (name === "game") {
+                        const newStyle = createHiddenStyle(ref.current.getBoundingClientRect(), 50, 50, true)
+                        style.setStyle(prev => ({
+                            ...prev,
+                            ...newStyle,
+                            rect: ref.current.getBoundingClientRect()
+                        }));
+                    }
                     style.setStyle(prev => ({
                         ...prev,
-                        ...newStyle,
                         rect: ref.current.getBoundingClientRect()
                     }));
                 }
-                style.setStyle(prev => ({
-                    ...prev,
-                    rect: ref.current.getBoundingClientRect()
-                }));
             });
+            setLoading(false);
+        } else {
+            setLoading(true);
         }
-    }, []);
+    }, [loadedApps]);
 
     return (
         <div className="taskbar">
@@ -123,27 +128,19 @@ const TaskBar = (props) => {
                 </div>
             </div>
 
-            <div className={`application-area ${theme} ${blur}`}>
-                <div ref={refs[0]} className="application" onClick={(e) => openApp(0, "home", homeStyle, setNewHomeStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                    <img src="home-logo-app.png" alt="home" />
-                    <span className="activating-app" style={{ display: runningApp === 0 ? "block" : "none" }}></span>
-                    <span className="opened-app" style={{ display: runningApp === 0 ? "none" : (openedApps.home === 1 ? "block" : "none") }}></span>
+            <div className={`application-area`}>
+                <div ref={refs[0]} className={`application ${openedApps.home === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(0, "home", homeStyle, setNewHomeStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                    <img src="home-logo-app.png" alt="home" onLoad={() => setLoadedApps(prev => prev + 1)}/>
                 </div>
-                <div ref={refs[1]} className="application" onClick={(e) => openApp(1, "resume", personalInfoStyle, setNewPersonalInfoStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                    <img src="personal-logo-app.png" alt="personal" />
-                    <span className="activating-app" style={{ display: runningApp === 1 ? "block" : "none" }}></span>
-                    <span className="opened-app" style={{ display: runningApp === 1 ? "none" : (openedApps.personalInfo === 1 ? "block" : "none") }}></span>
+                <div ref={refs[1]} className={`application ${openedApps.personal === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(1, "personal", personalInfoStyle, setNewPersonalInfoStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                    <img src="personal-logo-app.png" alt="personal" onLoad={() => setLoadedApps(prev => prev + 1)}/>
                 </div>
-                <div ref={refs[2]} className="application" onClick={(e) => openApp(2, "game", gameStyle, setNewGameStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                    <img src="game-logo-app.png" alt="game" />
-                    <span className="activating-app" style={{ display: runningApp === 2 ? "block" : "none" }}></span>
-                    <span className="opened-app" style={{ display: runningApp === 2 ? "none" : (openedApps.game === 1 ? "block" : "none") }}></span>
+                <div ref={refs[2]} className={`application ${openedApps.game === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(2, "game", gameStyle, setNewGameStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                    <img src="game-logo-app.png" alt="game" onLoad={() => setLoadedApps(prev => prev + 1)}/>
                 </div>
 
-                <div ref={refs[3]} className="application" onClick={(e) => openApp(3, "settings", settingsStyle, setNewSettingsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
-                    <img src="settings-logo-app.png" alt="settings" />
-                    <span className="activating-app" style={{ display: runningApp === 3 ? "block" : "none" }}></span>
-                    <span className="opened-app" style={{ display: runningApp === 3 ? "none" : (openedApps.settings === 1 ? "block" : "none") }}></span>
+                <div ref={refs[3]} className={`application ${openedApps.settings === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(3, "settings", settingsStyle, setNewSettingsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                    <img src="settings-logo-app.png" alt="settings" onLoad={() => setLoadedApps(prev => prev + 1)}/>
                 </div>
 
 
@@ -151,12 +148,12 @@ const TaskBar = (props) => {
 
                 </div>
             </div>
-            <div className="taskbar-space"></div>
+            {/* <div className="taskbar-space"></div> */}
             <div className={`weather-area ${theme} ${blur}`}>
                 <div className="weather">
 
-                    <a class="weatherwidget-io" href="https://forecast7.com/en/21d00105d82/hanoi/" onClick={() => {}} data-label_1="HÀ NỘI" data-label_2="WEATHER" data-font="Roboto Slab" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="weather_one" >HÀ NỘI WEATHER</a>
-                    
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/21d00105d82/hanoi/" onClick={() => { }} data-label_1="HÀ NỘI" data-label_2="WEATHER" data-font="Roboto Slab" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="weather_one" >HÀ NỘI WEATHER</a>
+
                 </div>
             </div>
             <div className={`time-calendar ${theme} ${blur}`}>

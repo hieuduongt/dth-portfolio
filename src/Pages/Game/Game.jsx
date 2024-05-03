@@ -19,8 +19,8 @@ const Game = (props) => {
         <>
             {/* <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} /> */}
             <Window
-                handleOnMouseDown={() => setNewZIndex("contact")}
-                zIndex={zIndex.find(item => item.name === "contact").zIndex}
+                handleOnMouseDown={() => setNewZIndex("game")}
+                zIndex={zIndex.find(item => item.name === "game").zIndex}
                 className="window desktop"
                 defaultPosition={gameStyle.defaultPosition}
                 position={{
@@ -32,7 +32,7 @@ const Game = (props) => {
                     width: gameStyle?.size?.width || "",
                 }}
                 style={{ ...gameStyle.style }}
-                windowName="contact"
+                windowName="game"
                 index={4}
                 styleContext={gameStyle}
                 setStyleContext={setNewGameStyle}
@@ -40,7 +40,7 @@ const Game = (props) => {
                     <span className="action-bar-link"
                         onClick={() => window.open("https://caro-game.hieuduongit.com", "_blank")}
                     >
-                        Hieuduong caro game
+                        Caro game
                     </span>
                 }
             >

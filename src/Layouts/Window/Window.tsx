@@ -39,6 +39,7 @@ export function Window(props: WindowProps) {
         setIsRunningApp,
         openedApps,
         setAreOpenedApps,
+        setNewZIndex
     } = useContext(AppContext);
     const [windowSize, setWindowSize] = useState<Size>({
         width: "",
@@ -102,8 +103,8 @@ export function Window(props: WindowProps) {
                     setAnimation("");
                 }
                 }
-                onClose={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps)}
-                onSave={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps)}
+                onClose={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex)}
+                onSave={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex)}
                 expanded={expanded}
                 name={name}
             />

@@ -1,6 +1,6 @@
 import { AiOutlineClose } from 'react-icons/ai';
-import { FaRegWindowRestore } from 'react-icons/fa';
-import { GoDash } from 'react-icons/go';
+import { FaRegCircle } from 'react-icons/fa';
+import { GoPlus, GoDash } from "react-icons/go";
 import { AppContext } from "../../App";
 import { useContext } from 'react';
 
@@ -13,24 +13,32 @@ const ActionBar = (props) => {
     } = useContext(AppContext);
 
     return (
-        <div className={`action-bar ${theme.includes("transparent") ? "" : actionBarColor} ${blur}`} style={{
+        <div className={`action-bar ${theme.includes("transparent") ? "" : actionBarColor}`} style={{
             borderTopLeftRadius: expanded ? 0 : "10px",
             borderTopRightRadius: expanded ? 0 : "10px",
         }}>
-            <div className="action-buttons">
+            <div className={`app-name ${blur} ${theme}`}>
+                &nbsp;{name}
+            </div>
+            <div className="add-more-tab">
+                <GoPlus size={20} />
+            </div>
 
-                <button style={theme.includes("dark") ? { color: "white", borderTopRightRadius: !expanded ? "7.5px" : 0 } : { color: "black", borderTopRightRadius: !expanded ? "10px" : 0 }} className="action-icon" onClick={onSave || (() => { })}>
-                    <AiOutlineClose size={13} />
-                </button>
-                <button style={theme.includes("dark") ? { color: "white" } : { color: "black" }} className="action-icon" onClick={onExpand || (() => { })}>
-                    <FaRegWindowRestore size={13} />
-                </button>
+            <div className='drag-area'>
+
+            </div>
+            <div className={`action-buttons ${blur} ${theme}`}>
                 <button style={theme.includes("dark") ? { color: "white" } : { color: "black" }} className="action-icon" onClick={onClose || (() => { })}>
                     <GoDash size={13} />
                 </button>
-                <div className='drag-area'>
-                    &nbsp;{name}
-                </div>
+
+                <button style={theme.includes("dark") ? { color: "white" } : { color: "black" }} className="action-icon" onClick={onExpand || (() => { })}>
+                    <FaRegCircle size={13} />
+                </button>
+
+                <button style={theme.includes("dark") ? { color: "white" } : { color: "black" }} className="action-icon" onClick={onSave || (() => { })}>
+                    <AiOutlineClose size={13} />
+                </button>
             </div>
         </div>
     )

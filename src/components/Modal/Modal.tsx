@@ -69,7 +69,7 @@ export function Modal(props: ModalProps) {
                             </div>
                             :
                             <div className='modal-close-button'>
-                                <Button color='error-color' icon={closeIcon ? closeIcon : <IoClose size={25} />} icononly={true} onClick={() => onCancel()}>Close</Button>
+                                <Button color='error-color' icon={closeIcon ? closeIcon : <IoClose size={25} />} icononly="true" onClick={() => onCancel()}>Close</Button>
                             </div>
                     }
 

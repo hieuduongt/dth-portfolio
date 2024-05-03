@@ -6,7 +6,7 @@ export const createHiddenStyle = (rect, width, height, noEffect = undefined) => 
             fontSize: "0",
             opacity: 0,
             visibility: "hidden",
-            transition: noEffect ? "" : "transform 0.3s ease-in-out, visibility 0.4s ease-in-out, opacity 0.4s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out",
+            transition: noEffect ? "" : "transform 0.3s ease-in-out 0s, visibility 0s linear 0.3s, opacity 0.3s linear 0s, width 0.25s ease-in-out, height 0.25s ease-in-out",
             width: "50px !important",
             height: "50px !important",
             transformOrigin: `${rect.left}px ${rect.top}px`
@@ -28,16 +28,22 @@ export const createVisibleStyle = (rect, animation = true) => {
         style: {
             opacity: 1,
             visibility: "visible",
-            transition: animation ? "right 0.3s linear, left 0.3s linear, bottom 0.3s linear, transform 0.3s ease-in-out, translate 0.3s ease-in-out, visibility 0.1s ease-in-out, opacity 0.1s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out" : "",
+            transition: animation ? "transform 0.3s ease-in-out 0s, translate 0.3s ease-in-out, visibility 0s linear 0s, opacity 0.15s linear 0.15s, width 0.3s ease-in-out, height 0.3s ease-in-out" : "",
         },
         rect: rect
     };
 }
 
-export const handleOpenAnApplication = async (index, name, style, setStyle, setIsRunningApp, setAreOpenedApps, openedApps, rect) => {
+export const handleOpenAnApplication = async (index, name, style, setStyle, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex, rect) => {
     setIsRunningApp(index);
-    setAreOpenedApps({ ...openedApps, [name]: 1 });
-    const newStyle = !style.style || style.style.visibility === 'hidden' ? createVisibleStyle(rect || style.rect) : createHiddenStyle(rect || style.rect, 50, 50);
+    setAreOpenedApps({ ...openedApps, [name]: openedApps[name] === 1 ? 0 : 1 });
+    let newStyle;
+    if(!style.style || style.style.visibility === 'hidden') {
+        newStyle = createVisibleStyle(rect || style.rect);
+        setNewZIndex(name);
+    } else {
+        newStyle = createHiddenStyle(rect || style.rect, 40, 40);
+    }
     setStyle(newStyle);
     if (newStyle.style.visibility === "visible") {
         const styleWithNoAnimation = createVisibleStyle(rect, false);

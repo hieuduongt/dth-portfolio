@@ -100,8 +100,8 @@ body {
   position: fixed;
   bottom: 10px;
   z-index: 1;
-  height: 80px;
-  gap: 10px;
+  height: 60px;
+  gap: 30px;
   margin-left: 10px;
   margin-right: 10px;
   transition: transform 0.3s ease-in-out;
@@ -113,7 +113,8 @@ body {
   align-content: center;
   justify-content: center;
   border-radius: 12px;
-  box-shadow: 0 0 40px 0 rgba(0, 0, 0, .45);
+  /* box-shadow: 0 0 40px 0 rgba(0, 0, 0, .45); */
+  width: 100%;
 }
 
 .taskbar:hover {
@@ -205,7 +206,7 @@ body {
 
 .main-container {
   height: 100%;
-  transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease 0s;
 }
 
 .personal-info {
@@ -606,41 +607,18 @@ body {
 .action-bar {
   transition: background-color 0.3s ease-in-out;
   position: relative;
-  /* box-shadow: rgba(0, 0, 0, 0.334) 0px 5px 5px -5px; */
-}
-
-.action-bar::before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  border-top-left-radius: 12px;
-  background: #00000000;
-  box-shadow: 0 -5px 0 0 #ffffff6b;
-}
-
-.action-bar::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  right: 0;
-  height: 20px;
-  width: 20px;
-  border-top-right-radius: 12px;
-  background: #00000000;
-  box-shadow: 10px 0 0 0 #ffffff6b;
+  min-height: 55px;
+  display: flex;
+  align-items: center;
 }
 
 .drag-area {
   width: 100%;
-  height: 35px;
+  height: 100%;
   cursor: move;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  font-weight: bold;
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-line-clamp: 1;
@@ -650,15 +628,18 @@ body {
 
 .action-buttons {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
   align-items: center;
+  height: 35px;
+  border-radius: 20px;
+  margin-right: 10px;
 }
 
 .action-buttons>.action-icon {
   text-align: center;
-  width: 40px;
+  width: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -666,15 +647,32 @@ body {
   min-height: 35px;
   background: none;
   border: none;
+  border-radius: 50%;
+  transition: background-color 0.3s linear 0.1s;
 }
 
 .action-buttons>.action-icon:hover {
   background-color: #9f9f9fd6;
   cursor: pointer;
+  transition: background-color 0.3s linear 0.1s;
 }
 
-.action-buttons>.action-icon:first-child:hover {
+.action-buttons>.action-icon:last-child:hover {
   background-color: #ff4000d6;
+}
+
+.app-name {
+  font-weight: bold;
+  border-radius: 20px;
+  min-height: 35px;
+  height: 35px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  width: 200px;
+  min-width: 100px;
 }
 
 .input-bar {
@@ -733,65 +731,57 @@ body {
   width: 100%;
 }
 
-.application-area>.application,
-.main>.application {
+.application-area>.application {
   position: relative;
   margin-left: 10px;
-  height: 50px;
-  width: 50px;
-  min-height: 50px;
-  min-width: 50px;
+  height: 60px;
+  width: 60px;
+  min-height: 40px;
+  min-width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: box-shadow 0.3s ease-in-out;
-  border-radius: 12px;
+  transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  border-radius: 50%;
 }
 
 .application>img {
-  width: 100%;
-  height: 100%;
-  z-index: 4;
-  transition: box-shadow 0.6s ease-in-out;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.6s ease-in-out;
 }
 
 .application-area>.application:hover {
-  box-shadow: 0px 0px 0px 5px rgba(50, 255, 153, 0.5);
+  box-shadow: 0px 0px 0px 5px rgb(22 119 255);
   cursor: pointer;
 }
 
-.main>.application:hover {
-  box-shadow: 0px 0px 10px 3px rgba(58, 51, 255, 0.7);
+.application-area>.application:hover>img {
+  transform: scale(1.15);
+}
+
+.main>.application:hover>img {
+  box-shadow: 0px 0px 10px 3px rgb(22 119 255);
 }
 
 .main>.application {
   cursor: pointer;
-  transition: box-shadow 0.3s ease-in-out;
+  border-radius: none;
+  position: relative;
+  margin-left: 10px;
+  height: 40px;
+  width: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.activating-app {
-  width: 12px;
-  height: 4px;
-  background-color: #2bb673;
-  position: absolute;
-  bottom: -8px;
-  border-radius: 2.4px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  z-index: 5;
-  transform: scaleX(1);
-  transition: all ease-in;
-}
-
-.opened-app {
-  width: 5px;
-  height: 5px;
-  background-color: #7a7a7a;
-  position: absolute;
-  bottom: -8px;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  z-index: 5;
+.application-area>.application.opened-app {
+  background-color: rgba(83, 196, 26, 0.505);
+  box-shadow: 0px 0px 0px 2.5px rgb(82 196 26);
 }
 
 .tool-area {
@@ -948,7 +938,21 @@ body {
   height: 100%;
 }
 
-.wallpaper-select-container {}
+.add-more-tab {
+  border-radius: 50%;
+  min-width: 25px;
+  min-height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  transition: background-color 0.3s linear 0s;
+}
+
+.add-more-tab:hover {
+  background-color: rgba(22, 119, 255, 0.548);
+  cursor: pointer;
+}
 
 .list-wallpapers {
   display: flex;
@@ -1386,7 +1390,46 @@ h1.summary-title {
 .weather {
   overflow: hidden;
   position: relative;
-  height: 80px;
+  height: 60px;
   width: 320px;
   border-radius: 12px;
+}
+
+.starting-screen {
+  position: absolute;
+  background-color: #000000;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1s ease-in-out;
+}
+
+.started {
+  transform: translateY(-100%);
+}
+
+.starting-logo {
+  width: 200px;
+  height: 200px;
+}
+
+.starting-logo>img {
+  width: 100%;
+  height: 100%;
+}
+
+.loading-spin {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }

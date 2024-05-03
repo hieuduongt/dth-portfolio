@@ -192,7 +192,7 @@ const Settings = (props) => {
                     width: settingsStyle?.size?.width || ""
                 }}
                 style={{ ...settingsStyle.style }}
-                windowName="blogs"
+                windowName="settings"
                 index={3}
                 styleContext={settingsStyle}
                 setStyleContext={setNewSettingsStyle}

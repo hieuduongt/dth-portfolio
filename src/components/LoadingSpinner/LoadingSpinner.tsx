@@ -1,0 +1,18 @@
+import React from 'react';
+import './LoadingSpinner.css';
+
+interface LoadingSpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
+
+}
+
+export function LoadingSpinner(props: LoadingSpinnerProps) {
+    return (
+        <svg className="spinner">
+            <circle>
+                <animateTransform attributeName="transform" type="rotate" values="-90;810" keyTimes="0;1" dur="2s" repeatCount="indefinite"></animateTransform>
+                <animate attributeName="stroke-dashoffset" values="0%;0%;-157.080%" calcMode="spline" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" keyTimes="0;0.5;1" dur="2s" repeatCount="indefinite"></animate>
+                <animate attributeName="stroke-dasharray" values="0% 314.159%;157.080% 157.080%;0% 314.159%" calcMode="spline" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" keyTimes="0;0.5;1" dur="2s" repeatCount="indefinite"></animate>
+            </circle>
+        </svg>
+    )
+}

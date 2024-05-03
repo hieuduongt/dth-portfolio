@@ -12,7 +12,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     icon?: React.ReactNode | undefined;
     iconposition?: "before" | "after";
     icononly?: boolean | undefined;
-    disabled: boolean | undefined;
+    disabled?: boolean | undefined;
 }
 
 export function Button(props: ButtonProps) {
