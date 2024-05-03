@@ -447,6 +447,7 @@ const PersonalInfo = (props) => {
                 style={{ ...personalInfoStyle.style }}
                 styleContext={personalInfoStyle}
                 setStyleContext={setNewPersonalInfoStyle}
+                windowName="personal"
                 name="Personal Info"
             >
                 <Content theme={theme} blur={blur} />

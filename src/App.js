@@ -1,6 +1,7 @@
 import './styles.css';
 import { createContext, useEffect, useState, useRef } from 'react';
 import TaskBar from "./Layouts/Taskbar/TaskBar";
+import Starting from './Pages/Starting/Starting';
 import Home from './Pages/Home/Home';
 import PersonalInfo from './Pages/PersonalInfo/PersonalInfo';
 import Settings from './Pages/Settings/Settings';
@@ -71,6 +72,7 @@ export const backGrounds = {
 function App() {
   const mainContentRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currentBackground, setCurrentBackGround] = useState("");
   const [blur, setBlur] = useState(blurLevels.blur);
   const [theme, setTheme] = useState(standardTheme.light);
@@ -144,36 +146,27 @@ function App() {
   const [runningApp, setRunningApp] = useState(0);
   const [openedApps, setOpenedApps] = useState({
     home: 1,
-    personalInfo: 1,
-    works: 1,
+    personal: 1,
     settings: 1,
-    game: 1
+    game: 0
   });
 
   const [zIndex, setZIndex] = useState([
     {
       name: "home",
-      zIndex: 4
-    },
-    {
-      name: "resume",
       zIndex: 3
     },
     {
-      name: "works",
+      name: "settings",
       zIndex: 2
     },
     {
-      name: "settings",
-      zIndex: 5
-    },
-    {
-      name: "contact",
-      zIndex: 1
+      name: "game",
+      zIndex: 4
     },
     {
       name: "personal",
-      zIndex: 6
+      zIndex: 1
     }
   ]);
 
@@ -294,10 +287,12 @@ function App() {
         actionBarColor,
         setNewActionBarColor,
         setBackGround,
-        currentBackground
+        currentBackground,
+        setLoading
       }}
     >
       <div className="main-container" ref={(ref) => (mainContentRef.current = ref)}>
+        <Starting started={!loading}/>
         <Home />
         <PersonalInfo />
         <Settings />
