@@ -9,6 +9,7 @@ import Game from './Pages/Game/Game';
 import { Modal } from './components/Modal';
 import { isTablet, mobileModel, deviceType } from 'react-device-detect';
 
+
 export const AppContext = createContext();
 
 export const standardTheme = {
@@ -263,6 +264,38 @@ function App() {
     window.addEventListener("resize", initStyles);
     return () => window.removeEventListener('resize', initStyles);
   }, []);
+
+  const getImagesSrc = (r) => {
+    let images = [];
+    r.keys().map((item, index) => {
+      images.push({
+        name: item.replace('./', ''),
+        src: r(item)
+      });
+    });
+    return images;
+  }
+
+  useEffect(() => {
+    const loadImage = image => {
+      return new Promise((resolve, reject) => {
+        const loadImg = new Image()
+        loadImg.src = image.src
+        loadImg.onload = () =>
+          setTimeout(() => {
+            resolve(image.src)
+          }, 2000)
+
+        loadImg.onerror = err => reject(err)
+      })
+    }
+
+    const images = getImagesSrc(require.context('../public', false, /\.(png|jpe?g|svg)$/));
+
+    Promise.all(images.map(image => loadImage(image)))
+      .then(() => setLoading(false))
+      .catch(err => console.log("Failed to load images", err))
+  }, [])
 
   return (
     <AppContext.Provider
