@@ -101,7 +101,7 @@ body {
   bottom: 10px;
   z-index: 1;
   height: 60px;
-  gap: 30px;
+  gap: 20px;
   margin-left: 10px;
   margin-right: 10px;
   transition: transform 0.3s ease-in-out;
@@ -113,7 +113,7 @@ body {
   align-content: center;
   justify-content: center;
   border-radius: 12px;
-  /* box-shadow: 0 0 40px 0 rgba(0, 0, 0, .45); */
+  gap: 10px;
   width: 100%;
 }
 
@@ -507,7 +507,7 @@ body {
 }
 
 .br-1 {
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 .br-2 {
@@ -728,7 +728,7 @@ body {
 .taskbar>.time-calendar {
   display: flex;
   gap: 10px;
-  border-radius: 12px;
+  border-radius: 30px;
   flex-direction: row;
   align-items: center;
 }
@@ -739,7 +739,6 @@ body {
 
 .application-area>.application {
   position: relative;
-  margin-left: 10px;
   height: 60px;
   width: 60px;
   min-height: 40px;
@@ -794,16 +793,48 @@ body {
   display: flex;
   align-items: center;
   align-content: center;
-  flex-direction: row-reverse;
-  padding-right: 10px;
-  padding-left: 10px;
+  justify-content: center;
+  border-radius: 20px;
+  height: 40px;
+  gap: 10px;
+  min-width: 100px;
+  margin-left: 10px;
+  transition: background-color 0.2s ease-in-out 0s;
+}
+
+.notifications {
+  width: 40px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  border-radius: 30px;
+  transition: background-color 0.2s ease-in-out 0s;
+}
+
+.notifications:hover {
+  background-color: #cccccca3;
+}
+
+.tool-area:hover {
+  background-color: #cccccca3;
+}
+
+.date-and-time:hover {
+  background-color: #cccccca3;
 }
 
 .date-and-time {
-  text-align: right;
-  margin-left: 10px;
-  width: 130px;
   font-weight: bold;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  width: 50px;
+  cursor: default;
+  transition: background-color 0.2s ease-in-out 0s;
 }
 
 .app-open-animation {
@@ -1397,8 +1428,8 @@ h1.summary-title {
   overflow: hidden;
   position: relative;
   height: 60px;
-  width: 320px;
-  border-radius: 12px;
+  min-width: 100px;
+  border-radius: 30px;
 }
 
 .starting-screen {

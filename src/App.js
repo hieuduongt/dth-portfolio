@@ -291,8 +291,8 @@ function App() {
         setLoading
       }}
     >
+      <Starting started={!loading}/>
       <div className="main-container" ref={(ref) => (mainContentRef.current = ref)}>
-        <Starting started={!loading}/>
         <Home />
         <PersonalInfo />
         <Settings />

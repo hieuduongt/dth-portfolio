@@ -14,8 +14,8 @@ const ActionBar = (props) => {
 
     return (
         <div className={`action-bar ${styleContext.style.visibility === "hidden" ? "hidden" : ""} ${theme.includes("transparent") ? "" : actionBarColor}`} style={{
-            borderTopLeftRadius: expanded ? 0 : "10px",
-            borderTopRightRadius: expanded ? 0 : "10px",
+            borderTopLeftRadius: expanded ? 0 : "15px",
+            borderTopRightRadius: expanded ? 0 : "15px",
         }}>
             <div className={`app-name ${blur} ${theme}`}>
                 &nbsp;{name}
