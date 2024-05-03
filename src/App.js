@@ -23,13 +23,13 @@ export const blurLevels = {
   blur: "blur-3",
 }
 
-export const actionBarColors = {
-  color_1: "color-1",
-  color_2: "color-2",
-  color_3: "color-3",
-  color_4: "color-4",
-  color_5: "color-5"
-}
+export const actionBarColors = [
+  "#ffabd8",
+  "#ffd19b",
+  "#0871c6",
+  "#07c598",
+  "#ff925d"
+]
 
 export const backGrounds = {
   appearance_dynamic: {
@@ -76,7 +76,8 @@ function App() {
   const [currentBackground, setCurrentBackGround] = useState("");
   const [blur, setBlur] = useState(blurLevels.blur);
   const [theme, setTheme] = useState(standardTheme.light);
-  const [actionBarColor, setActionBarColor] = useState(actionBarColors.color_3);
+  const [actionBarColor, setActionBarColor] = useState(actionBarColors[2]);
+  const [actionBarColorPicker, setActionBarColorPicker] = useState("");
   const [homeStyle, setHomeStyle] = useState({
     style: {},
     defaultPosition: {
@@ -288,10 +289,12 @@ function App() {
         setNewActionBarColor,
         setBackGround,
         currentBackground,
-        setLoading
+        setLoading,
+        actionBarColorPicker,
+        setActionBarColorPicker
       }}
     >
-      <Starting started={!loading}/>
+      <Starting started={!loading} />
       <div className="main-container" ref={(ref) => (mainContentRef.current = ref)}>
         <Home />
         <PersonalInfo />
@@ -309,7 +312,7 @@ function App() {
         modaltitle={`You are using ${mobileModel != "none" ? mobileModel : deviceType}`}
         show={open}
         onCancel={() => setOpen(false)}
-        >
+      >
         Your {mobileModel} is supported for the computer features, but we recommend you use a computer browser to have the best experience!
         To use the computer features, please rotate your device to the horizontal view, and if the layout is broken, please reload the page!
       </Modal>

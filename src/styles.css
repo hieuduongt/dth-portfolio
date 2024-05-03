@@ -584,33 +584,12 @@ body {
   text-align: center;
 }
 
-.color-1 {
-  background-color: #ffabd8;
-}
-
-.color-2 {
-  background-color: #ffd19b;
-}
-
-.color-3 {
-  background-color: #0871c6;
-}
-
-.color-4 {
-  background-color: #07c598;
-}
-
-.color-5 {
-  background-color: #ff925d;
-}
-
 .action-bar {
-  transition: background-color 0.3s ease-in-out;
   position: relative;
   min-height: 55px;
   display: flex;
   align-items: center;
-  transition: opacity 0.15s linear 0s, visibility 0.15s linear 0s;
+  transition: background-color 0.3s ease-in-out, opacity 0.15s linear 0s, visibility 0.15s linear 0s;
 }
 
 .action-bar.hidden {
@@ -1111,22 +1090,48 @@ body {
   margin-top: 10px;
   display: flex;
   width: fit-content;
-}
-
-.color-selection:hover .color-panel {
-  width: 100px;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .color-panel {
   z-index: 1;
   min-height: 40px;
   cursor: pointer;
-  transition: width 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 80px;
+  transition: width 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s linear;
+  width: 40px;
+}
+
+.color-panel:hover {
+  transform: scale(1.1);
 }
 
 .current-color-panel {
-  box-shadow: 0px 0px 0px 4px rgb(22 119 255);
+  box-shadow: 0px 0px 0px 4px rgba(22, 255, 88, 0.711);
+}
+
+.color-picker {
+  z-index: 1;
+  min-height: 40px;
+  cursor: pointer;
+  transition: width 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s linear;
+  width: 45px;
+  height: 45px;
+  min-width: 40px;
+  border: 2px solid #ccc;
+}
+
+.color-picker:hover {
+  transform: scale(1.1);
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+  padding: 0; 
+}
+.color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 12px;
 }
 
 .setting-switch {
