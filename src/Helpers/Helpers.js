@@ -7,13 +7,13 @@ export const createHiddenStyle = (rect, width, height, noEffect = undefined) => 
             opacity: 0,
             visibility: "hidden",
             transition: noEffect ? "" : "transform 0.3s ease-in-out 0s, visibility 0s linear 0.3s, opacity 0.3s linear 0s, width 0.25s ease-in-out, height 0.25s ease-in-out",
-            width: "50px !important",
-            height: "50px !important",
+            width: "40px !important",
+            height: "40px !important",
             transformOrigin: `${rect.left}px ${rect.top}px`
         },
         position: {
-            x: rect.left,
-            y: rect.top
+            x: rect.left + 10,
+            y: rect.top + 10
         },
         size: {
             width: width,
