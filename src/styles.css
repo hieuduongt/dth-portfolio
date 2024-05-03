@@ -610,6 +610,12 @@ body {
   min-height: 55px;
   display: flex;
   align-items: center;
+  transition: opacity 0.15s linear 0s, visibility 0.15s linear 0s;
+}
+
+.action-bar.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .drag-area {

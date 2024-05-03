@@ -138,14 +138,10 @@ const TaskBar = (props) => {
                 <div ref={refs[2]} className={`application ${openedApps.game === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(2, "game", gameStyle, setNewGameStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
                     <img src="game-logo-app.png" alt="game" onLoad={() => setLoadedApps(prev => prev + 1)}/>
                 </div>
-
                 <div ref={refs[3]} className={`application ${openedApps.settings === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(3, "settings", settingsStyle, setNewSettingsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
                     <img src="settings-logo-app.png" alt="settings" onLoad={() => setLoadedApps(prev => prev + 1)}/>
                 </div>
-
-
                 <div className="tool-area">
-
                 </div>
             </div>
             {/* <div className="taskbar-space"></div> */}

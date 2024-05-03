@@ -27,7 +27,7 @@ interface WindowProps extends React.HTMLAttributes<HTMLDivElement> {
     index?: number;
     styleContext?: any;
     setStyleContext?: any;
-    name?: string|ReactNode;
+    name?: string | ReactNode;
 }
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
@@ -103,6 +103,7 @@ export function Window(props: WindowProps) {
                     setAnimation("");
                 }
                 }
+                styleContext={styleContext}
                 onClose={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex)}
                 onSave={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex)}
                 expanded={expanded}

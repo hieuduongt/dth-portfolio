@@ -5,7 +5,7 @@ import { AppContext } from "../../App";
 import { useContext } from 'react';
 
 const ActionBar = (props) => {
-    const { onSave, onClose, onExpand, expanded, name } = props;
+    const { onSave, onClose, onExpand, expanded, name, styleContext } = props;
     const {
         theme,
         actionBarColor,
@@ -13,7 +13,7 @@ const ActionBar = (props) => {
     } = useContext(AppContext);
 
     return (
-        <div className={`action-bar ${theme.includes("transparent") ? "" : actionBarColor}`} style={{
+        <div className={`action-bar ${styleContext.style.visibility === "hidden" ? "hidden" : ""} ${theme.includes("transparent") ? "" : actionBarColor}`} style={{
             borderTopLeftRadius: expanded ? 0 : "10px",
             borderTopRightRadius: expanded ? 0 : "10px",
         }}>
