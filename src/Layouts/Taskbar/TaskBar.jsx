@@ -101,7 +101,7 @@ const TaskBar = (props) => {
                     const name = ref.current.querySelector("img").getAttribute("alt");
                     const style = styleMapping.find(it => it.name === name);
                     if (name === "game") {
-                        const newStyle = createHiddenStyle(ref.current.getBoundingClientRect(), 50, 50, true)
+                        const newStyle = createHiddenStyle(ref.current.getBoundingClientRect(), 40, 40, true)
                         style.setStyle(prev => ({
                             ...prev,
                             ...newStyle,
@@ -114,9 +114,6 @@ const TaskBar = (props) => {
                     }));
                 }
             });
-            setLoading(false);
-        } else {
-            setLoading(true);
         }
     }, [loadedApps]);
 

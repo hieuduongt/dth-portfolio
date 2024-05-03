@@ -8,7 +8,7 @@ const Starting = (props) => {
                 <img src="starting-logo.png" alt="starting logo" />
             </div>
             <div className="loading-spin">
-                <LoadingSpinner />
+                {!started ? <LoadingSpinner /> : <div style={{fontWeight: "bold", fontSize: 20}}>Welcome</div>}
             </div>
             
         </div>
