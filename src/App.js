@@ -244,8 +244,8 @@ function App() {
   }
 
   const setBackGround = (name, light, dark) => {
-    mainContentRef.current.style.setProperty("--light-url", `url("${light}")`);
-    mainContentRef.current.style.setProperty("--dark-url", `url("${dark}")`);
+    mainContentRef.current.style.setProperty("--light-url", `url("../../${light}")`);
+    mainContentRef.current.style.setProperty("--dark-url", `url("../../${dark}")`);
     setCurrentBackGround(name);
   }
 
