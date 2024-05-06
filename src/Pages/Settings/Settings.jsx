@@ -18,7 +18,7 @@ const ColorPanelContent = (props) => {
             <div className="color-selection">
                 <input className="color-picker br-1" type="color" name="hieu" id="hieu" value={actionBarColor} onChange={(e) => setNewActionBarColor(e.target.value)} />
                 {actionBarColors.map(color => (
-                    <div style={{backgroundColor: color}} className={`color-panel br-1 ${actionBarColor === color ? "current-color-panel" : ""}`} onClick={() => setNewActionBarColor(color)}>
+                    <div style={{ backgroundColor: color }} className={`color-panel br-1 ${actionBarColor === color ? "current-color-panel" : ""}`} onClick={() => setNewActionBarColor(color)}>
                     </div>
                 ))}
             </div>
@@ -27,34 +27,21 @@ const ColorPanelContent = (props) => {
 }
 
 const WallpaperContent = (props) => {
-    const { currentBackground, setBackGround } = props;
+    const { currentBackground, setBackGround, wallpapers } = props;
+
     return (
         <div className="wallpaper-select-container br-1">
             <div className="setting-title-text">
                 Wallpaper Settings
             </div>
             <div className="list-wallpapers">
-                <div className={`wallpaper-card`} onClick={() => setBackGround(backGrounds.appearance_dynamic.name, backGrounds.appearance_dynamic.light, backGrounds.appearance_dynamic.dark)}>
-                    <img src={backGrounds.appearance_dynamic.light} alt="appearance_dynamic" className={`${currentBackground === backGrounds.appearance_dynamic.name ? "current-wallpaper" : ""}`} />
-                </div>
-                <div className={`wallpaper-card`} onClick={() => setBackGround(backGrounds.colorful.name, backGrounds.colorful.light, backGrounds.colorful.dark)}>
-                    <img src={backGrounds.colorful.light} alt="colorful" className={`${currentBackground === backGrounds.colorful.name ? "current-wallpaper" : ""}`} />
-                </div>
-                <div className={`wallpaper-card`} onClick={() => setBackGround(backGrounds.ventura.name, backGrounds.ventura.light, backGrounds.ventura.dark)}>
-                    <img src={backGrounds.ventura.light} alt="ventura" className={`${currentBackground === backGrounds.ventura.name ? "current-wallpaper" : ""}`} />
-                </div>
-                <div className={`wallpaper-card`} onClick={() => setBackGround(backGrounds.window_default.name, backGrounds.window_default.light, backGrounds.window_default.dark)}>
-                    <img src={backGrounds.window_default.light} alt="ventura" className={`${currentBackground === backGrounds.window_default.name ? "current-wallpaper" : ""}`} />
-                </div>
-                <div className={`wallpaper-card`} onClick={() => setBackGround(backGrounds.window7.name, backGrounds.window7.light, backGrounds.window7.dark)}>
-                    <img src={backGrounds.window7.light} alt="ventura" className={`${currentBackground === backGrounds.window7.name ? "current-wallpaper" : ""}`} />
-                </div>
-                <div className={`wallpaper-card`} onClick={() => setBackGround(backGrounds.window_bliss.name, backGrounds.window_bliss.light, backGrounds.window_bliss.dark)}>
-                    <img src={backGrounds.window_bliss.light} alt="ventura" className={`${currentBackground === backGrounds.window_bliss.name ? "current-wallpaper" : ""}`} />
-                </div>
-                <div className={`wallpaper-card`} onClick={() => setBackGround(backGrounds.window_flower.name, backGrounds.window_flower.light, backGrounds.window_flower.dark)}>
-                    <img src={backGrounds.window_flower.light} alt="ventura" className={`${currentBackground === backGrounds.window_flower.name ? "current-wallpaper" : ""}`} />
-                </div>
+                {
+                    wallpapers ? wallpapers.map(w => (
+                        <div className="wallpaper-card" onClick={() => setBackGround(w.name, w.light, w.dark)}>
+                            <img src={w.light} alt="appearance_dynamic" className={`${currentBackground === w.name ? "current-wallpaper" : ""}`} />
+                        </div>
+                    )) : <></>
+                }
             </div>
         </div>
     )
@@ -69,7 +56,8 @@ const Content = (props) => {
         actionBarColor,
         setNewActionBarColor,
         currentBackground,
-        setBackGround
+        setBackGround,
+        wallpapers
     } = props;
     const [currentSetting, setCurrentSetting] = useState(settings.wallpaperSetting);
 
@@ -112,7 +100,7 @@ const Content = (props) => {
                         </div>
                         <div className={`setting-section selectable ${currentSetting === settings.wallpaperSetting ? "current-setting" : ""}`} onClick={() => setCurrentSetting(settings.wallpaperSetting)}>
                             <div className="setting-icon">
-                                <img src="wallpaper-icon.png" alt="" />
+                                <img src="setting-wallpaper-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
                                 Wallpaper Settings
@@ -123,7 +111,7 @@ const Content = (props) => {
                 <div className="setting-detail-content">
                     <div className={`info ${theme} br-1`}>
                         {currentSetting === settings.colorSetting ? <ColorPanelContent actionBarColor={actionBarColor} setNewActionBarColor={setNewActionBarColor} /> : <></>}
-                        {currentSetting === settings.wallpaperSetting ? <WallpaperContent currentBackground={currentBackground} setBackGround={setBackGround} /> : <></>}
+                        {currentSetting === settings.wallpaperSetting ? <WallpaperContent currentBackground={currentBackground} setBackGround={setBackGround} wallpapers={wallpapers} /> : <></>}
                     </div>
                 </div>
             </div>
@@ -145,7 +133,8 @@ const Settings = (props) => {
         zIndex,
         setNewZIndex,
         currentBackground,
-        setBackGround
+        setBackGround,
+        wallpapers
     } = useContext(AppContext);
 
     return (
@@ -158,7 +147,7 @@ const Settings = (props) => {
                 setNewBlurLevel={setNewBlurLevel}
                 setNewActionBarColor={setNewActionBarColor}
                 actionBarColor={actionBarColor}
-                
+
                 currentBackground={currentBackground}
                 setBackGround={setBackGround} />
             <Window
@@ -189,7 +178,7 @@ const Settings = (props) => {
                     setNewActionBarColor={setNewActionBarColor}
                     actionBarColor={actionBarColor}
                     currentBackground={currentBackground}
-                    
+                    wallpapers={wallpapers}
                     setBackGround={setBackGround} />
             </Window>
         </>

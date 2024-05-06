@@ -1445,7 +1445,7 @@ h1.summary-title {
   height: 100%;
   z-index: 999;
   display: flex;
-  gap: 20px;
+  gap: 10px;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
@@ -1468,6 +1468,16 @@ h1.summary-title {
 }
 
 .loading-spin {
+  visibility: visible;
+  opacity: 1;
+}
+
+.loading-spin.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.startup-loading {
   color: white;
   display: flex;
   flex-direction: column;
@@ -1475,4 +1485,22 @@ h1.summary-title {
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.startup-text {
+  font-weight: bold;
+  font-size: 20px;
+  animation: appear 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
 }

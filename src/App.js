@@ -34,38 +34,38 @@ export const actionBarColors = [
 
 export const backGrounds = {
   appearance_dynamic: {
-    dark: "../../appearance-dynamic-dark.png",
-    light: "../../appearance-dynamic-light.png",
+    dark: "wallpaper_appearance-dynamic-dark.png",
+    light: "wallpaper_appearance-dynamic-light.png",
     name: "appearance_dynamic"
   },
   colorful: {
-    dark: "../../colorful-dark.jpg",
-    light: "../../colorful-light.jpg",
+    dark: "colorful-dark.jpg",
+    light: "colorful-light.jpg",
     name: "colorful"
   },
   ventura: {
-    dark: "../../ventura-dark.jpg",
-    light: "../../ventura-light.jpg",
+    dark: "ventura-dark.jpg",
+    light: "ventura-light.jpg",
     name: "ventura"
   },
   window7: {
-    dark: "../../window-7-dark.jpg",
-    light: "../../window-7-light.jpg",
+    dark: "window-7-dark.jpg",
+    light: "window-7-light.jpg",
     name: "window7"
   },
   window_bliss: {
-    dark: "../../window-bliss-light.jpg",
-    light: "../../window-bliss-light.jpg",
+    dark: "window-bliss-light.jpg",
+    light: "window-bliss-light.jpg",
     name: "window_bliss"
   },
   window_default: {
-    dark: "../../window-default-dark.jpg",
-    light: "../../window-default-light.jpg",
+    dark: "window-default-dark.jpg",
+    light: "window-default-light.jpg",
     name: "window_default"
   },
   window_flower: {
-    dark: "../../window-flower-dark.jpg",
-    light: "../../window-flower-light.jpg",
+    dark: "window-flower-dark.jpg",
+    light: "window-flower-light.jpg",
     name: "window_flower"
   }
 }
@@ -75,10 +75,12 @@ function App() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentBackground, setCurrentBackGround] = useState("");
+  const [wallpapers, setWallpapers] = useState([]);
   const [blur, setBlur] = useState(blurLevels.blur);
   const [theme, setTheme] = useState(standardTheme.light);
   const [actionBarColor, setActionBarColor] = useState(actionBarColors[2]);
   const [actionBarColorPicker, setActionBarColorPicker] = useState("");
+  const [loadingProgress, setLoadingProgress] = useState("MacDows is starting...");
   const [homeStyle, setHomeStyle] = useState({
     style: {},
     defaultPosition: {
@@ -248,8 +250,12 @@ function App() {
   }
 
   useEffect(() => {
+    setLoading(true);
+
     if (mainContentRef.current) {
-      setBackGround(backGrounds.appearance_dynamic.name, backGrounds.appearance_dynamic.light, backGrounds.appearance_dynamic.dark);
+      const images = getImagesSrc(require.context('../public', false, /\.(png|jpe?g|svg)$/));
+      setWallpapers(images);
+      setBackGround(images[5].name, images[5].light, images[5].dark);
     }
     const currentHour = new Date().getHours();
     if (18 > currentHour && currentHour > 6) {
@@ -262,40 +268,51 @@ function App() {
       setOpen(true);
     }
     window.addEventListener("resize", initStyles);
+    // setLoading(false);
+    emulatorWindowsStartupScreen();
     return () => window.removeEventListener('resize', initStyles);
   }, []);
 
   const getImagesSrc = (r) => {
-    let images = [];
-    r.keys().map((item, index) => {
-      images.push({
-        name: item.replace('./', ''),
-        src: r(item)
-      });
+    const images = [];
+    const reg = /(?<name>^wallpaper[\w-]+)(-light|-dark)/i;
+    r.keys().forEach((item, index) => {
+      if (reg.test(item.replace('./', ''))) {
+        images.push({
+          src: item.replace('./', '')
+        })
+      }
     });
-    return images;
+    const filteredImages = [];
+
+    for (let i = 0; i < images.length; i++) {
+      const image = images[i];
+      for (let j = i + 1; j < images.length; j++) {
+        const otherImage = images[j];
+        if (reg.exec(otherImage.src).groups.name === reg.exec(image.src).groups.name) {
+          filteredImages.push({
+            name: reg.exec(image.src).groups.name,
+            dark: image.src.includes("dark") ? image.src : otherImage.src,
+            light: image.src.includes("light") ? image.src : otherImage.src
+          })
+        }
+      }
+    }
+    return filteredImages;
   }
 
-  useEffect(() => {
-    const loadImage = image => {
-      return new Promise((resolve, reject) => {
-        const loadImg = new Image()
-        loadImg.src = image.src
-        loadImg.onload = () =>
-          setTimeout(() => {
-            resolve(image.src)
-          }, 2000)
+  const emulatorWindowsStartupScreen = async () => {
 
-        loadImg.onerror = err => reject(err)
-      })
-    }
+    const startingMacDows = new Promise((resolve, reject) => {
+      setTimeout(resolve, 3000, "Welcome to MacDows");
+    });
 
-    const images = getImagesSrc(require.context('../public', false, /\.(png|jpe?g|svg)$/));
+    await startingMacDows.then((value) => {
+      setLoadingProgress(value);
+    });
 
-    Promise.all(images.map(image => loadImage(image)))
-      .then(() => setLoading(false))
-      .catch(err => console.log("Failed to load images", err))
-  }, [])
+    setLoading(false);
+  }
 
   return (
     <AppContext.Provider
@@ -324,16 +341,24 @@ function App() {
         currentBackground,
         setLoading,
         actionBarColorPicker,
-        setActionBarColorPicker
+        setActionBarColorPicker,
+        wallpapers
       }}
     >
-      <Starting started={!loading} />
+      <Starting started={!loading} displayText={loadingProgress} />
       <div className="main-container" ref={(ref) => (mainContentRef.current = ref)}>
-        <Home />
-        <PersonalInfo />
-        <Settings />
-        <Game />
+        {
+          loading ? <></> :
+            <>
+              <Home />
+              <PersonalInfo />
+              <Settings />
+              <Game />
+            </>
+        }
+
       </div>
+
       <div className="not-support-message">
         Your device is not compatible with our current system, please upgrade your device or use a compatible device to make sure your experience should not be affected!
       </div>
