@@ -24,23 +24,6 @@ const CTime = () => {
     )
 }
 
-const CDate = () => {
-    let date = new Date().toLocaleDateString();
-    const [cdate, setDate] = useState(date);
-    const UpdateDate = () => {
-        date = new Date().toLocaleDateString()
-        setDate(date)
-    }
-    useEffect(() => {
-        setInterval(UpdateDate);
-    }, []);
-    return (
-        <span>
-            {cdate}
-        </span>
-    )
-}
-
 const TaskBar = (props) => {
     const {
         theme,
@@ -57,7 +40,6 @@ const TaskBar = (props) => {
         setNewGameStyle,
         settingsStyle,
         setNewSettingsStyle,
-        setLoading,
         setNewZIndex
     } = useContext(AppContext);
     const [loadedApps, setLoadedApps] = useState(0);
