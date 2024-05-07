@@ -104,8 +104,8 @@ export function Window(props: WindowProps) {
                 }
                 }
                 styleContext={styleContext}
-                onClose={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex)}
-                onSave={() => handleOpenAnApplication(index, windowName, styleContext, setStyleContext, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex)}
+                onClose={() => handleOpenAnApplication(windowName, styleContext, setStyleContext, setAreOpenedApps, openedApps, setNewZIndex)}
+                onSave={() => handleOpenAnApplication(windowName, styleContext, setStyleContext, setAreOpenedApps, openedApps, setNewZIndex)}
                 expanded={expanded}
                 name={name}
             />
