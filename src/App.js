@@ -9,7 +9,7 @@ import Game from './Pages/Game/Game';
 import { Modal } from './components/Modal';
 import { isTablet, mobileModel, deviceType } from 'react-device-detect';
 import QuickSettings from './Layouts/QuickSettings/QuickSetting';
-
+import Notification from './Layouts/Notifications/Notification';
 
 export const AppContext = createContext();
 
@@ -75,7 +75,9 @@ function App() {
   const mainContentRef = useRef(null);
   const [open, setOpen] = useState(false);
   const [openQuickSetting, setOpenQuickSetting] = useState(false);
+  const [openNotification, setOpenNotification] = useState(false);
   const [nightlight, setNightlight] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
   const [brightness, setBrightness] = useState(100);
   const [loading, setLoading] = useState(true);
   const [currentBackground, setCurrentBackGround] = useState("");
@@ -349,7 +351,11 @@ function App() {
         openQuickSetting,
         setOpenQuickSetting,
         setNightlight,
-        setBrightness
+        setBrightness,
+        openNotification,
+        setOpenNotification,
+        notificationCount,
+        setNotificationCount
       }}
     >
       <Starting started={!loading} displayText={loadingProgress} />
@@ -372,6 +378,7 @@ function App() {
 
       </div>
       <QuickSettings />
+      <Notification />
       <div className="not-support-message">
         Your device is not compatible with our current system, please upgrade your device or use a compatible device to make sure your experience should not be affected!
       </div>
