@@ -1522,6 +1522,7 @@ h1.summary-title {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
 }
 
 .quick-settings.opened {
@@ -1747,4 +1748,26 @@ h1.summary-title {
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.night-light {
+  width: 100%;
+  height: 100%;
+  background-color: #4750189b;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+  transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.night-light.off {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.night-light.on {
+  visibility: visible;
+  opacity: 1;
 }

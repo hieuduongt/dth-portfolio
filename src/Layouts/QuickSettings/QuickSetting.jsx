@@ -14,7 +14,7 @@ import { formatDate } from "../../Helpers/Helpers";
 import { TbPointFilled } from "react-icons/tb";
 
 const QuickSettings = (props) => {
-    const { theme, blur, openQuickSetting, setOpenQuickSetting } = useContext(AppContext);
+    const { theme, blur, openQuickSetting, setOpenQuickSetting, setNightlight } = useContext(AppContext);
     const popoverRef = useRef(null);
     const [quickSettings, setQuickSettings] = useState([
         {
@@ -80,6 +80,10 @@ const QuickSettings = (props) => {
                 if (qs.name === element.name) {
                     const newEl = { ...element };
                     newEl.turnOn = !newEl.turnOn;
+                    if (qs.name === "nightlight") {
+                        setNightlight(newEl.turnOn);
+                    }
+
                     newQs[index] = newEl;
                     break;
                 }

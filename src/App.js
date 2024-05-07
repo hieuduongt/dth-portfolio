@@ -75,6 +75,7 @@ function App() {
   const mainContentRef = useRef(null);
   const [open, setOpen] = useState(false);
   const [openQuickSetting, setOpenQuickSetting] = useState(false);
+  const [nightlight, setNightlight] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentBackground, setCurrentBackGround] = useState("");
   const [wallpapers, setWallpapers] = useState([]);
@@ -345,7 +346,8 @@ function App() {
         setActionBarColorPicker,
         wallpapers,
         openQuickSetting,
-        setOpenQuickSetting
+        setOpenQuickSetting,
+        setNightlight
       }}
     >
       <Starting started={!loading} displayText={loadingProgress} />
@@ -359,6 +361,10 @@ function App() {
               <Game />
             </>
         }
+        <div className={`night-light ${nightlight ? "on" : "off"}`}>
+
+        </div>
+
       </div>
       <QuickSettings />
       <div className="not-support-message">
