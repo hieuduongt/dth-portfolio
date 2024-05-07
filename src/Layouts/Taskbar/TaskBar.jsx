@@ -44,7 +44,9 @@ const TaskBar = (props) => {
         setOpenQuickSetting,
         openNotification,
         setOpenNotification,
-        notificationCount
+        notificationCount,
+        openWindowNewFeeds,
+        setOpenWindowNewFeeds
     } = useContext(AppContext);
     const [loadedApps, setLoadedApps] = useState(0);
 
@@ -106,7 +108,7 @@ const TaskBar = (props) => {
     return (
         <div className="taskbar">
             <div className={`main ${theme} ${blur}`}>
-                <div className="application">
+                <div className="application window-logo" onClick={() => setOpenWindowNewFeeds(prev => !prev)}>
                     <img src="windows-logo.png" alt="me" className="window-logo" />
                 </div>
                 <div className="search-area">

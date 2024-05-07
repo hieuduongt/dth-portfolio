@@ -36,7 +36,7 @@ export function Window(props: WindowProps) {
     const {
         theme,
         blur,
-        setIsRunningApp,
+        actionBarColor,
         openedApps,
         setAreOpenedApps,
         setNewZIndex
@@ -56,8 +56,8 @@ export function Window(props: WindowProps) {
     return (
         <Rnd
             dragHandleClassName="drag-area"
-            style={{ ...style, zIndex: expanded ? 8 : zIndex, transition: animation || (style?.transition ? style.transition : ""), display: "flex", flexDirection: "column" }}
-            className={`window content ${theme} ${blur} ${!windowSize.width ? "br-1" : ""} ${className}`}
+            style={{ ...style, zIndex: expanded ? 8 : zIndex, transition: animation || (style?.transition ? style.transition : ""), display: "flex", flexDirection: "column", backgroundColor: theme.includes("transparent") ? "" : actionBarColor}}
+            className={`window content ${theme.includes("transparent") ? theme : ""} ${blur} ${!windowSize.width ? "br-1" : ""} ${className}`}
             minWidth={size?.width ? 0 : minWidth || 300}
             minHeight={size?.width ? 0 : minHeight || 200}
             default={{
@@ -109,7 +109,7 @@ export function Window(props: WindowProps) {
                 expanded={expanded}
                 name={name}
             />
-            <div className={`window-content`}>
+            <div className={`window-content ${theme.includes("transparent") ? "" : theme}`}>
                 {children}
             </div>
 

@@ -10,6 +10,7 @@ import { Modal } from './components/Modal';
 import { isTablet, mobileModel, deviceType } from 'react-device-detect';
 import QuickSettings from './Layouts/QuickSettings/QuickSetting';
 import Notification from './Layouts/Notifications/Notification';
+import WindowNewFeeds from './Layouts/WindowNewFeeds/WindowNewFeeds';
 
 export const AppContext = createContext();
 
@@ -76,6 +77,7 @@ function App() {
   const [open, setOpen] = useState(false);
   const [openQuickSetting, setOpenQuickSetting] = useState(false);
   const [openNotification, setOpenNotification] = useState(false);
+  const [openWindowNewFeeds, setOpenWindowNewFeeds] = useState(false);
   const [nightlight, setNightlight] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
   const [brightness, setBrightness] = useState(100);
@@ -355,7 +357,9 @@ function App() {
         openNotification,
         setOpenNotification,
         notificationCount,
-        setNotificationCount
+        setNotificationCount,
+        openWindowNewFeeds,
+        setOpenWindowNewFeeds
       }}
     >
       <Starting started={!loading} displayText={loadingProgress} />
@@ -379,6 +383,7 @@ function App() {
       </div>
       <QuickSettings />
       <Notification />
+      <WindowNewFeeds />
       <div className="not-support-message">
         Your device is not compatible with our current system, please upgrade your device or use a compatible device to make sure your experience should not be affected!
       </div>

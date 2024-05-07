@@ -86,6 +86,8 @@ body {
   overflow: auto;
   height: 100%;
   padding: 10px;
+  border-radius: 20px 20px 15px 15px;
+  margin: 0px 5px 5px 5px;
 }
 
 .info {
@@ -851,6 +853,7 @@ body {
   opacity: 1;
   visibility: visible;
   display: flex;
+  transition: background-color 0.3s ease-in-out, opacity 0.15s linear 0s, visibility 0.15s linear 0s;
 }
 
 .theme-setting {
@@ -1537,7 +1540,7 @@ h1.summary-title {
   bottom: 80px;
   right: 10px;
   width: 300px;
-  height: 600px;
+  height: 500px;
   z-index: 19;
   padding: 10px;
   display: flex;
@@ -1666,7 +1669,6 @@ h1.summary-title {
 }
 
 .notification-panel {
-  max-width: 300px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1677,15 +1679,15 @@ h1.summary-title {
 }
 
 .notification {
+  width: 275px;
   display: flex;
   flex-direction: column;
   padding: 10px;
-  max-width: 280px;
-  width: 100%;
   gap: 10px;
   cursor: pointer;
   max-height: 500px;
   transition: max-height 0.3s ease-out;
+  border: 0.3px solid #cccccccd;
 }
 
 .notification.closed {
@@ -1985,4 +1987,58 @@ h1.summary-title {
 .night-light.on {
   visibility: visible;
   opacity: 1;
+}
+
+.window-new-feeds {
+  z-index: 18;
+  position: absolute;
+  bottom: 80px;
+  left: 10px;
+  width: 392px;
+  height: 600px;
+  transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out, opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.window-new-feeds.opened {
+  height: 600px;
+  visibility: visible;
+  opacity: 1;
+}
+
+.window-new-feeds.closed {
+  height: 0;
+  padding: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.new-feeds {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-feed-header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+}
+
+.all-apps {
+  width: 100%;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.back-icon {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
