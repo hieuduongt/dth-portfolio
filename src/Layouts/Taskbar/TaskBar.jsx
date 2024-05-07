@@ -3,7 +3,7 @@ import { AppContext } from "../../App";
 import { Input } from "../../components/Input";
 import { BsSearch } from 'react-icons/bs';
 import { FaBatteryFull } from "react-icons/fa6";
-import { CiVolumeHigh  } from "react-icons/ci";
+import { CiVolumeHigh } from "react-icons/ci";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { FaWifi } from "react-icons/fa6";
 import { handleOpenAnApplication, createHiddenStyle } from '../../Helpers/Helpers';
@@ -41,7 +41,10 @@ const TaskBar = (props) => {
         setNewSettingsStyle,
         setNewZIndex,
         openQuickSetting,
-        setOpenQuickSetting
+        setOpenQuickSetting,
+        openNotification,
+        setOpenNotification,
+        notificationCount
     } = useContext(AppContext);
     const [loadedApps, setLoadedApps] = useState(0);
 
@@ -137,18 +140,22 @@ const TaskBar = (props) => {
             <div className={`tools-and-time ${theme} ${blur}`}>
                 <div
                     className={`tool-area ${openQuickSetting ? "opened" : ""}`}
-                    tabIndex="1"
                     onClick={() => setOpenQuickSetting(prev => !prev)}
                 >
-                    <CiVolumeHigh size={20}/>
-                    <FaWifi size={18}/>
-                    <FaBatteryFull size={20}/>
+                    <CiVolumeHigh size={20} />
+                    <FaWifi size={18} />
+                    <FaBatteryFull size={20} />
                 </div>
                 <div className="date-and-time">
                     <div className="time"><CTime /></div>
                 </div>
-                <div className="notifications">
-                    <BiMessageSquareDots size={20}/>
+                <div
+                    className={`notification-tile ${openNotification ? "opened" : ""}`}
+                    onClick={() => setOpenNotification(prev => !prev)}
+                >
+                    <BiMessageSquareDots size={20} />
+                    {notificationCount === 0 ? <></> : <div className="notification-badge">{notificationCount}</div>}
+
                 </div>
             </div>
         </div>
