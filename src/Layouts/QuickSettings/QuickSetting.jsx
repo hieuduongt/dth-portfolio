@@ -14,7 +14,7 @@ import { formatDate } from "../../Helpers/Helpers";
 import { TbPointFilled } from "react-icons/tb";
 
 const QuickSettings = (props) => {
-    const { theme, blur, openQuickSetting, setOpenQuickSetting, setNightlight } = useContext(AppContext);
+    const { theme, blur, openQuickSetting, setOpenQuickSetting, setNightlight, setBrightness } = useContext(AppContext);
     const popoverRef = useRef(null);
     const [quickSettings, setQuickSettings] = useState([
         {
@@ -138,7 +138,7 @@ const QuickSettings = (props) => {
                 </div>
                 <div className="light">
                     <MdOutlineLightMode size={20} style={{ minWidth: 30 }} />
-                    <Slider defaultLevel={100} />
+                    <Slider defaultLevel={100} handleOnChange={(value) => setBrightness(value)}/>
                 </div>
             </div>
             <div className="time-and-battery">
