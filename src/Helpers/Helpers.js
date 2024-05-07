@@ -34,8 +34,7 @@ export const createVisibleStyle = (rect, animation = true) => {
     };
 }
 
-export const handleOpenAnApplication = async (index, name, style, setStyle, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex, rect) => {
-    setIsRunningApp(index);
+export const handleOpenAnApplication = async (name, style, setStyle, setAreOpenedApps, openedApps, setNewZIndex, rect) => {
     setAreOpenedApps({ ...openedApps, [name]: openedApps[name] === 1 ? 0 : 1 });
     let newStyle;
     if(!style.style || style.style.visibility === 'hidden') {
@@ -50,4 +49,9 @@ export const handleOpenAnApplication = async (index, name, style, setStyle, setI
         await sleep(300);
         setStyle(styleWithNoAnimation);
     }
+}
+
+export const formatDate = () => {
+    const date = new Date();
+    return (date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear());
 }

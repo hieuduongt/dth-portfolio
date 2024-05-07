@@ -2,12 +2,13 @@ import { useContext, useEffect, useState, createRef } from "react";
 import { AppContext } from "../../App";
 import { Input } from "../../components/Input";
 import { BsSearch } from 'react-icons/bs';
-import { CiVolumeHigh, CiBatteryFull } from "react-icons/ci";
+import { FaBatteryFull } from "react-icons/fa6";
+import { CiVolumeHigh  } from "react-icons/ci";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { FaWifi } from "react-icons/fa6";
 import { handleOpenAnApplication, createHiddenStyle } from '../../Helpers/Helpers';
 
-const CTime = () => {
+export const CTime = () => {
     let time = /\d{0,2}:\d{0,2}/.exec(new Date().toTimeString())[0];
     const [ctime, setTime] = useState(time);
     const UpdateTime = () => {
@@ -28,8 +29,6 @@ const TaskBar = (props) => {
     const {
         theme,
         blur,
-        runningApp,
-        setIsRunningApp,
         openedApps,
         setAreOpenedApps,
         homeStyle,
@@ -40,7 +39,9 @@ const TaskBar = (props) => {
         setNewGameStyle,
         settingsStyle,
         setNewSettingsStyle,
-        setNewZIndex
+        setNewZIndex,
+        openQuickSetting,
+        setOpenQuickSetting
     } = useContext(AppContext);
     const [loadedApps, setLoadedApps] = useState(0);
 
@@ -71,7 +72,7 @@ const TaskBar = (props) => {
 
     const openApp = (index, name, style, setNewStyle) => {
         if (refs[index].current !== null) {
-            handleOpenAnApplication(index, name, style, setNewStyle, setIsRunningApp, setAreOpenedApps, openedApps, setNewZIndex, refs[index].current.getBoundingClientRect());
+            handleOpenAnApplication(name, style, setNewStyle, setAreOpenedApps, openedApps, setNewZIndex, refs[index].current.getBoundingClientRect());
         }
     }
 
@@ -111,16 +112,16 @@ const TaskBar = (props) => {
             </div>
 
             <div className={`application-area`}>
-                <div ref={refs[0]} className={`application ${openedApps.home === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(0, "home", homeStyle, setNewHomeStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                <div ref={refs[0]} className={`application ${openedApps.home === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(0, "home", homeStyle, setNewHomeStyle, setAreOpenedApps, openedApps)}>
                     <img src="home-logo-app.png" alt="home" onLoad={() => setLoadedApps(prev => prev + 1)} />
                 </div>
-                <div ref={refs[1]} className={`application ${openedApps.personal === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(1, "personal", personalInfoStyle, setNewPersonalInfoStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                <div ref={refs[1]} className={`application ${openedApps.personal === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(1, "personal", personalInfoStyle, setNewPersonalInfoStyle, setAreOpenedApps, openedApps)}>
                     <img src="personal-logo-app.png" alt="personal" onLoad={() => setLoadedApps(prev => prev + 1)} />
                 </div>
-                <div ref={refs[2]} className={`application ${openedApps.game === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(2, "game", gameStyle, setNewGameStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                <div ref={refs[2]} className={`application ${openedApps.game === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(2, "game", gameStyle, setNewGameStyle, setAreOpenedApps, openedApps)}>
                     <img src="game-logo-app.png" alt="game" onLoad={() => setLoadedApps(prev => prev + 1)} />
                 </div>
-                <div ref={refs[3]} className={`application ${openedApps.settings === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(3, "settings", settingsStyle, setNewSettingsStyle, setIsRunningApp, setAreOpenedApps, openedApps)}>
+                <div ref={refs[3]} className={`application ${openedApps.settings === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(3, "settings", settingsStyle, setNewSettingsStyle, setAreOpenedApps, openedApps)}>
                     <img src="settings-logo-app.png" alt="settings" onLoad={() => setLoadedApps(prev => prev + 1)} />
                 </div>
             </div>
@@ -133,17 +134,21 @@ const TaskBar = (props) => {
                 </div>
             </div>
 
-            <div className={`time-calendar ${theme} ${blur}`}>
-                <div className={`tool-area`}>
-                    <CiVolumeHigh />
-                    <FaWifi />
-                    <CiBatteryFull />
+            <div className={`tools-and-time ${theme} ${blur}`}>
+                <div
+                    className={`tool-area ${openQuickSetting ? "opened" : ""}`}
+                    tabIndex="1"
+                    onClick={() => setOpenQuickSetting(prev => !prev)}
+                >
+                    <CiVolumeHigh size={20}/>
+                    <FaWifi size={18}/>
+                    <FaBatteryFull size={20}/>
                 </div>
                 <div className="date-and-time">
                     <div className="time"><CTime /></div>
                 </div>
                 <div className="notifications">
-                    <BiMessageSquareDots />
+                    <BiMessageSquareDots size={20}/>
                 </div>
             </div>
         </div>
