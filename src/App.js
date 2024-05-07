@@ -76,6 +76,7 @@ function App() {
   const [open, setOpen] = useState(false);
   const [openQuickSetting, setOpenQuickSetting] = useState(false);
   const [nightlight, setNightlight] = useState(false);
+  const [brightness, setBrightness] = useState(100);
   const [loading, setLoading] = useState(true);
   const [currentBackground, setCurrentBackGround] = useState("");
   const [wallpapers, setWallpapers] = useState([]);
@@ -347,7 +348,8 @@ function App() {
         wallpapers,
         openQuickSetting,
         setOpenQuickSetting,
-        setNightlight
+        setNightlight,
+        setBrightness
       }}
     >
       <Starting started={!loading} displayText={loadingProgress} />
@@ -362,7 +364,10 @@ function App() {
             </>
         }
         <div className={`night-light ${nightlight ? "on" : "off"}`}>
-
+        </div>
+        <div className={`brightness`} style={{
+          backgroundColor: `rgb(0 0 0 / ${100 - brightness}%)`
+        }}>
         </div>
 
       </div>

@@ -2,13 +2,15 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 
 interface SliderProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultLevel?: number;
+    handleOnChange?: (value) => void;
 }
 
 export function Slider(props: SliderProps) {
-    const { defaultLevel } = props;
+    const { defaultLevel, handleOnChange } = props;
     const [level, setLevel] = useState(defaultLevel || 0);
     const handleChange = (value) => {
         setLevel(value.target.value);
+        if(handleOnChange) handleOnChange(value.target.value);
     }
     return (
         <div className="slider">
