@@ -147,7 +147,7 @@ const Settings = (props) => {
                 setNewBlurLevel={setNewBlurLevel}
                 setNewActionBarColor={setNewActionBarColor}
                 actionBarColor={actionBarColor}
-
+                wallpapers={wallpapers}
                 currentBackground={currentBackground}
                 setBackGround={setBackGround} />
             <Window
