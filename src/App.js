@@ -396,8 +396,7 @@ function App() {
         show={open}
         onCancel={() => setOpen(false)}
       >
-        Your {mobileModel} is supported for the computer features, but we recommend you use a computer browser to have the best experience!
-        To use the computer features, please rotate your device to the horizontal view, and if the layout is broken, please reload the page!
+        Your {mobileModel} is supported for the computer features, but some features and user interfaces might not work properly, so we recommend you use a computer browser for the best experience!<br/> To use the computer features, please rotate your device to the horizontal view, and if the layout is broken, please reload the page!
       </Modal>
     </AppContext.Provider >
   );
