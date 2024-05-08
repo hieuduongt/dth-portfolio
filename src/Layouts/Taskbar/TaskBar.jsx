@@ -7,6 +7,7 @@ import { CiVolumeHigh } from "react-icons/ci";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { FaWifi } from "react-icons/fa6";
 import { handleOpenAnApplication, createHiddenStyle } from '../../Helpers/Helpers';
+import { TbDeviceDesktopSearch } from "react-icons/tb";
 
 export const CTime = () => {
     let time = /\d{0,2}:\d{0,2}/.exec(new Date().toTimeString())[0];
@@ -107,16 +108,17 @@ const TaskBar = (props) => {
 
     return (
         <div className="taskbar">
-            <div className={`main ${theme} ${blur}`}>
-                <div className="application window-logo" onClick={() => setOpenWindowNewFeeds(prev => !prev)}>
+            <div className={`main`}>
+                <div className={`application window-logo ${theme} ${blur}`} onClick={() => setOpenWindowNewFeeds(prev => !prev)}>
                     <img src="windows-logo.png" alt="me" className="window-logo" />
                 </div>
-                <div className="search-area">
-                    <Input placeholder="Search anything" className="br-3" scalesize="large" icon={<BsSearch />} iconposition="before" />
+                <div className={`search-area ${theme} ${blur} br-3`}>
+                    <Input placeholder="Search anything" className="br-3" scalesize="large" style={{width: 150}} iconBefore={<BsSearch />} iconAfter={<TbDeviceDesktopSearch size={18} />} iconposition="before" />
                 </div>
             </div>
 
             <div className={`application-area`}>
+
                 <div ref={refs[0]} className={`application ${openedApps.home === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(0, "home", homeStyle, setNewHomeStyle, setAreOpenedApps, openedApps)}>
                     <img src="home-logo-app.png" alt="home" onLoad={() => setLoadedApps(prev => prev + 1)} />
                 </div>

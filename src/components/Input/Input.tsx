@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
-    icon: React.ReactNode | null;
-    iconposition: "before" | "after";
+    iconBefore: React.ReactNode | null;
+    iconAfter: React.ReactNode | null;
     scalesize: "default" | "small" | "large";
     placeholder?: string;
 }
@@ -19,7 +19,7 @@ const scaleNumber = [
 ];
 
 export function Input(props: InputProps) {
-    const { icon, scalesize, iconposition, placeholder } = props;
+    const { iconBefore, scalesize, iconAfter, placeholder } = props;
     const [size, setSize] = useState(
         {
             value: 30,
@@ -39,18 +39,18 @@ export function Input(props: InputProps) {
     return (
         <div className='input-bar'>
             {
-                icon && (iconposition ? iconposition === "before" : true) ?
+                iconBefore ?
                     <span className='input-icon-left' style={{ width: size.value, color: "black" }}>
-                        {icon}
+                        {iconBefore}
                     </span>
                     :
                     <></>
             }
-            <input {...props} placeholder={placeholder || ""} size={size.value - 10} style={{ ...props.style, height: size.value, padding: `${icon && iconposition === "before" ? `0 ${size.value}px` : "0 10px"}` }} className={'input ' + props.className} />
+            <input {...props} placeholder={placeholder || ""} size={size.value - 10} style={{ ...props.style, height: size.value, padding: `${iconBefore ? `0 ${size.value}px` : "0 10px"}` }} className={'input ' + props.className} />
             {
-                icon && iconposition && iconposition === "after" ?
+                iconAfter ?
                     <span className='input-icon-right' style={{ width: size.value, color: "black" }}>
-                        {icon}
+                        {iconAfter}
                     </span>
                     :
                     <></>
