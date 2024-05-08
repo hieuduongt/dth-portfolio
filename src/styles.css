@@ -298,8 +298,12 @@ body {
 }
 
 .search-area {
-  margin-left: 10px;
-  margin-right: 10px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 @media screen and (max-width: 250px) {
@@ -708,7 +712,7 @@ body {
 .taskbar>.weather-area,
 .taskbar>.tools-and-time {
   display: flex;
-  gap: 3px;
+  gap: 5px;
   border-radius: 30px;
   flex-direction: row;
   align-items: center;
@@ -756,14 +760,18 @@ body {
   cursor: pointer;
   border-radius: none;
   position: relative;
-  margin-left: 10px;
-  height: 40px;
-  width: 40px;
-  min-height: 40px;
-  min-width: 40px;
+  height: 60px;
+  width: 60px;
+  min-height: 60px;
+  min-width: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+}
+
+.search-input {
+  height: 60px;
 }
 
 .application-area>.application.opened-app {
@@ -1994,7 +2002,7 @@ h1.summary-title {
   position: absolute;
   bottom: 80px;
   left: 10px;
-  width: 392px;
+  width: 600px;
   height: 600px;
   transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out, opacity 0.3s ease-in-out, height 0.3s ease-in-out;
 }
