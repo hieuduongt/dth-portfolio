@@ -21,7 +21,7 @@ export const standardTheme = {
   darkTransparent: "dark-background-transparent"
 }
 
-export const blurLevels = {
+export const blurOption = {
   none: "",
   blur: "blur-3",
 }
@@ -31,7 +31,8 @@ export const actionBarColors = [
   "#ffd19b",
   "#0871c6",
   "#07c598",
-  "#ff925d"
+  "#ff925d",
+  "#0028cd"
 ]
 
 export const backGrounds = {
@@ -75,6 +76,7 @@ export const backGrounds = {
 function App() {
   const mainContentRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [xpStyle, setXpStyle] = useState(false);
   const [openQuickSetting, setOpenQuickSetting] = useState(false);
   const [openNotification, setOpenNotification] = useState(false);
   const [openWindowNewFeeds, setOpenWindowNewFeeds] = useState(false);
@@ -84,7 +86,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [currentBackground, setCurrentBackGround] = useState("");
   const [wallpapers, setWallpapers] = useState([]);
-  const [blur, setBlur] = useState(blurLevels.blur);
+  const [blur, setBlur] = useState(blurOption.blur);
   const [theme, setTheme] = useState(standardTheme.light);
   const [actionBarColor, setActionBarColor] = useState(actionBarColors[2]);
   const [actionBarColorPicker, setActionBarColorPicker] = useState("");
@@ -183,7 +185,7 @@ function App() {
   ]);
 
   const setNewTheme = (value) => {
-    if (blur === blurLevels.none) {
+    if (blur === blurOption.none) {
       setTheme(value);
     } else if (value.includes("dark")) {
       setTheme(standardTheme.darkTransparent);
@@ -193,7 +195,7 @@ function App() {
   }
 
   const setNewBlurLevel = (value) => {
-    if (value === blurLevels.none) {
+    if (value === blurOption.none) {
       setTheme(prev => {
         if (prev.includes(standardTheme.light)) {
           return standardTheme.light;
@@ -209,6 +211,7 @@ function App() {
         return standardTheme.darkTransparent;
       });
       setBlur(value);
+      setXpStyle(false);
     }
   }
 
@@ -252,8 +255,8 @@ function App() {
   }
 
   const setBackGround = (name, light, dark) => {
-    mainContentRef.current.style.setProperty("--light-url", `url("../../${light}")`);
-    mainContentRef.current.style.setProperty("--dark-url", `url("../../${dark}")`);
+    mainContentRef.current.style.setProperty("--light-url", `url("${light}")`);
+    mainContentRef.current.style.setProperty("--dark-url", `url("${dark}")`);
     setCurrentBackGround(name);
   }
 
@@ -271,7 +274,7 @@ function App() {
     } else {
       setTheme(standardTheme.dark);
     }
-    setNewBlurLevel(blurLevels.blur);
+    setNewBlurLevel(blurOption.blur);
     if (isTablet) {
       setOpen(true);
     }
@@ -299,14 +302,29 @@ function App() {
         if (reg.exec(otherImage.src).groups.name === reg.exec(image.src).groups.name) {
           filteredImages.push({
             name: reg.exec(image.src).groups.name,
-            dark: image.src.includes("dark") ? image.src : otherImage.src,
-            light: image.src.includes("light") ? image.src : otherImage.src
+            dark: image.src.includes("dark") ? `../../${image.src}` : `../../${otherImage.src}`,
+            light: image.src.includes("light") ? `../../${image.src}` : `../../${otherImage.src}`
           })
         }
       }
     }
     return filteredImages;
   }
+
+  useEffect(() => {
+    if (wallpapers.length) {
+      if (xpStyle) {
+        setNewBlurLevel(blurOption.none);
+        setNewActionBarColor(actionBarColors[actionBarColors.length - 1]);
+        setBackGround(wallpapers[4].name, wallpapers[4].light, wallpapers[4].dark);
+        setTheme(standardTheme.light);
+      } else {
+        setBackGround(wallpapers[5].name, wallpapers[5].light, wallpapers[5].dark);
+        setNewActionBarColor(actionBarColors[2]);
+      }
+    }
+
+  }, [xpStyle, wallpapers]);
 
   const emulatorWindowsStartupScreen = async () => {
 
@@ -359,11 +377,14 @@ function App() {
         notificationCount,
         setNotificationCount,
         openWindowNewFeeds,
-        setOpenWindowNewFeeds
+        setOpenWindowNewFeeds,
+        xpStyle,
+        setXpStyle
       }}
     >
       <Starting started={!loading} displayText={loadingProgress} />
       <div className="main-container" ref={(ref) => (mainContentRef.current = ref)}>
+        <WindowNewFeeds />
         {
           loading ? <></> :
             <>
@@ -383,7 +404,7 @@ function App() {
       </div>
       <QuickSettings />
       <Notification />
-      <WindowNewFeeds />
+
       <div className="not-support-message">
         Your device is not compatible with our current system, please upgrade your device or use a compatible device to make sure your experience should not be affected!
       </div>
@@ -396,7 +417,7 @@ function App() {
         show={open}
         onCancel={() => setOpen(false)}
       >
-        Your {mobileModel} is supported for the computer features, but some features and user interfaces might not work properly, so we recommend you use a computer browser for the best experience!<br/> To use the computer features, please rotate your device to the horizontal view, and if the layout is broken, please reload the page!
+        Your {mobileModel} is supported for the computer features, but some features and user interfaces might not work properly, so we recommend you use a computer browser for the best experience!<br /> To use the computer features, please rotate your device to the horizontal view, and if the layout is broken, please reload the page!
       </Modal>
     </AppContext.Provider >
   );

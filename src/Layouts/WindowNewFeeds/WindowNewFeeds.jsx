@@ -1,4 +1,4 @@
-import { useContext, useState, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { AppContext } from "../../App";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
@@ -27,9 +27,9 @@ const WindowNewFeeds = (props) => {
         <div ref={popoverRef} className={`window-new-feeds ${theme} ${blur} br-3 ${openWindowNewFeeds ? "opened" : "closed"}`}>
             <div className="new-feeds">
                 <div className="new-feed-header">
-                    <dv className="all-apps">
+                    <div className="all-apps">
                         All Applications
-                    </dv>
+                    </div>
                     <div className={`back-icon ${theme}`}>
                         <IoMdArrowRoundBack size={20}/>
                     </div>

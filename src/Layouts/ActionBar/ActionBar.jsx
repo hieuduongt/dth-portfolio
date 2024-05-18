@@ -8,16 +8,17 @@ const ActionBar = (props) => {
     const { onSave, onClose, onExpand, expanded, name, styleContext } = props;
     const {
         theme,
-        actionBarColor,
+        xpStyle,
         blur
     } = useContext(AppContext);
 
     return (
-        <div className={`action-bar ${styleContext.style.visibility === "hidden" ? "hidden" : ""}`} style={{
+        <div className={`action-bar ${styleContext.style.visibility === "hidden" ? "hidden" : ""} ${xpStyle ? "xp-style" : ""}`} style={{
             borderTopLeftRadius: expanded ? 0 : "15px",
             borderTopRightRadius: expanded ? 0 : "15px"
         }}>
-            <div className={`app-name ${blur} ${theme}`}>
+            <div className={`tab-name ${blur} ${theme}`}>
+                <div className='layout'></div>
                 &nbsp;{name}
             </div>
             <div className="add-more-tab">
