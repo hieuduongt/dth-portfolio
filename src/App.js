@@ -278,9 +278,7 @@ function App() {
     if (isTablet) {
       setOpen(true);
     }
-    window.addEventListener("resize", initStyles);
     emulatorWindowsStartupScreen();
-    return () => window.removeEventListener('resize', initStyles);
   }, []);
 
   const getImagesSrc = (r) => {

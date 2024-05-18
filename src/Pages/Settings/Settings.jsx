@@ -93,7 +93,7 @@ const Content = (props) => {
                                 <Switch checked={blur ? true : false} onChange={(value) => { value ? setNewBlurLevel(blurOption.blur) : setNewBlurLevel(blurOption.none) }} />
                             </div>
                         </div>
-                        <div className="setting-section bd-b">
+                        <div className="desktop setting-section bd-b">
                             <div className="setting-icon">
                                 <img src="setting-xp-style-icon.png" alt="" />
                             </div>
