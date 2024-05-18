@@ -96,7 +96,7 @@ const Content = (props) => {
                     <div className={`info ${theme} br-1`}>
                         <div className="setting-section bd-b">
                             <div className="setting-icon">
-                                <img src="theme-setting-icon.png" alt="" />
+                                <img src="setting-darkmode-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
                                 {content.inside.settings.find(s => s.name === "darkmode").label[language]}
@@ -109,7 +109,7 @@ const Content = (props) => {
                         </div>
                         <div className="setting-section bd-b">
                             <div className="setting-icon">
-                                <img src="blurred-setting-icon.png" alt="" />
+                                <img src="theme-setting-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
                                 {content.inside.settings.find(s => s.name === "blur").label[language]}
@@ -148,7 +148,7 @@ const Content = (props) => {
                         </div>
                         <div className={`setting-section selectable ${currentSetting === settings.languageSetting ? "current-setting" : ""}`} onClick={() => setCurrentSetting(settings.languageSetting)}>
                             <div className="setting-icon">
-                                <img src="setting-wallpaper-icon.png" alt="" />
+                                <img src="settings-language-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
                                 {content.inside.settings.find(s => s.name === "language").label[language]}

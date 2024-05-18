@@ -375,8 +375,8 @@ export const contents = {
                     {
                         name: "blur",
                         label: {
-                            vi: "Chế Độ Mờ",
-                            en: "Blurred"
+                            vi: "Chế Độ Mờ Nền",
+                            en: "Background Blurred"
                         },
                         content: {
                             vi: "",
