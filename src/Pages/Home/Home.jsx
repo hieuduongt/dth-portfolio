@@ -1,27 +1,24 @@
 import { AppContext } from "../../App";
 import { useContext } from 'react';
 import { Window } from '../../Layouts/Window';
+import { contents } from "../../Helpers/Content";
 
 const Content = (props) => {
-    const { theme, className } = props;
+    const { className, content, language } = props;
     return (
         <div className={`${className}`}>
-            Welcome to HieuDuongIT website!
-            <br />
-            I built this website with the styles mixed by MacOS and Windows systems and some UI customizes.
-            <br />
-            This is a website to show you my information including my personal information, experiences, and job histories!
+            {content.inside.welcome[language]}
         </div>
     )
 }
 
 const Home = (props) => {
     const { children } = props;
-    const { theme, blur, homeStyle, zIndex, setNewZIndex, setNewHomeStyle } = useContext(AppContext);
-
+    const { theme, blur, homeStyle, zIndex, setNewZIndex, setNewHomeStyle, language } = useContext(AppContext);
+    const content = contents.layouts.find(c => c.name === "home_application");
     return (
         <>
-            <Content theme={theme} className={`mobile window-content mobile-content ${theme} ${blur} br-1`} />
+            <Content theme={theme} className={`mobile window-content mobile-content ${theme} ${blur} br-1`} language={language} content={content}/>
             <Window
                 setStyleContext={setNewHomeStyle}
                 handleOnMouseDown={() => setNewZIndex("home")}
@@ -40,9 +37,9 @@ const Home = (props) => {
                 styleContext={homeStyle}
                 windowName="home"
                 index={0}
-                name="Welcome"
+                name={content.content[language]}
             >
-                <Content theme={theme} />
+                <Content theme={theme} language={language} content={content}/>
             </Window>
         </>
 

@@ -73,9 +73,21 @@ export const backGrounds = {
   }
 }
 
+export const languages = [
+  {
+    label: "Tiếng Việt",
+    value: "vi"
+  },
+  {
+    label: "English",
+    value: "en"
+  }
+]
+
 function App() {
   const mainContentRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [language, setLanguage] = useState("vi");
   const [xpStyle, setXpStyle] = useState(false);
   const [openQuickSetting, setOpenQuickSetting] = useState(false);
   const [openNotification, setOpenNotification] = useState(false);
@@ -377,7 +389,9 @@ function App() {
         openWindowNewFeeds,
         setOpenWindowNewFeeds,
         xpStyle,
-        setXpStyle
+        setXpStyle,
+        language,
+        setLanguage
       }}
     >
       <Starting started={!loading} displayText={loadingProgress} />

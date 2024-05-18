@@ -647,6 +647,11 @@ body {
   width: 200px;
   min-width: 100px;
   position: relative;
+  font-size: 0.7rem;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: nowrap;
 }
 
 .tab-name.blur-3 {
@@ -2127,4 +2132,63 @@ h1.summary-title {
 
 .windows-xp-tab.opened-app {
   background-color: #0044c5;
+}
+
+.language-selection-container {
+  border-radius: 15px;
+}
+
+.dropdown-list {
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  color: #000000;
+}
+
+.list-options {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  height: max-content;
+  display: none;
+}
+
+.selected-value {
+  width: 100%;
+}
+
+.list-options.opened {
+  display: block;
+}
+
+.option {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.option:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.option:last-child {
+  border-radius: 0px 0px 10px 10px;
+}
+
+.option:hover {
+  background-color: #ccc;
+}
+
+.option.selected {
+  background-color: #e6f4ff;
 }

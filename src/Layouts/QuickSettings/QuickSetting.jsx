@@ -12,44 +12,63 @@ import { CTime } from "../Taskbar/TaskBar";
 import { FaBatteryFull } from "react-icons/fa6";
 import { formatDate } from "../../Helpers/Helpers";
 import { TbPointFilled } from "react-icons/tb";
+import { contents } from "../../Helpers/Content";
 
 const QuickSettings = (props) => {
-    const { theme, blur, openQuickSetting, setOpenQuickSetting, setNightlight, setBrightness } = useContext(AppContext);
+    const { theme, blur, openQuickSetting, setOpenQuickSetting, setNightlight, setBrightness, language } = useContext(AppContext);
     const popoverRef = useRef(null);
     const [quickSettings, setQuickSettings] = useState([
         {
             name: "wifi",
-            displayName: "Wifi",
+            displayName: {
+                vi: "Wifi",
+                en: "Wifi"
+            },
             turnOn: true,
             icon: <FaWifi size={22} />
         },
         {
             name: "bluetooth",
-            displayName: "Bluetooth",
+            displayName: {
+                vi: "Bluetooth",
+                en: "Bluetooth"
+            },
             turnOn: true,
             icon: <FaBluetoothB size={22} />
         },
         {
             name: "airplanMode",
-            displayName: "Airplan Mode",
+            displayName: {
+                vi: "Chế độ máy bay",
+                en: "Airplan Mode"
+            },
             turnOn: false,
             icon: <MdAirplanemodeActive size={22} />
         },
         {
             name: "batterySaver",
-            displayName: "Battery Saver",
+            displayName: {
+                vi: "Tiết kiệm pin",
+                en: "Battery Saver"
+            },
             turnOn: false,
             icon: <RiBatterySaverFill size={22} />
         },
         {
             name: "nightlight",
-            displayName: "Nightlight",
+            displayName: {
+                vi: "Ánh sáng đêm",
+                en: "Nightlight"
+            },
             turnOn: false,
             icon: <MdNightlight size={22} />
         },
         {
             name: "accessibility",
-            displayName: "Accessibility",
+            displayName: {
+                vi: "Khả năng ...",
+                en: "Accessibility"
+            },
             turnOn: false,
             icon: <IoAccessibility size={22} />
         }
@@ -125,7 +144,7 @@ const QuickSettings = (props) => {
                                 {qs.icon}
                             </div>
                             <div className="quick-setting-name">
-                                {qs.displayName}
+                                {qs.displayName[language]}
                             </div>
                         </div>
                     ))
