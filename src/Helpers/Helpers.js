@@ -1,14 +1,14 @@
 export const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-export const createHiddenStyle = (rect, width, height, noEffect = undefined) => {
+export const createHiddenStyle = (rect, noEffect = undefined) => {
     return {
         style: {
             fontSize: "0",
             opacity: 0,
             visibility: "hidden",
             transition: noEffect ? "" : "transform 0.3s ease-in-out 0s, visibility 0s linear 0.3s, opacity 0.3s linear 0s, width 0.25s ease-in-out, height 0.25s ease-in-out",
-            width: "40px !important",
-            height: "40px !important",
+            width: `${rect.width}px !important`,
+            height: `${rect.height}px !important`,
             transformOrigin: `${rect.left}px ${rect.top}px`
         },
         position: {
@@ -16,8 +16,8 @@ export const createHiddenStyle = (rect, width, height, noEffect = undefined) => 
             y: rect.top + 10
         },
         size: {
-            width: width,
-            height: height
+            width: rect.width,
+            height: rect.height
         },
         rect: rect
     };
@@ -41,7 +41,7 @@ export const handleOpenAnApplication = async (name, style, setStyle, setAreOpene
         newStyle = createVisibleStyle(rect || style.rect);
         setNewZIndex(name);
     } else {
-        newStyle = createHiddenStyle(rect || style.rect, 40, 40);
+        newStyle = createHiddenStyle(rect || style.rect);
     }
     setStyle(newStyle);
     if (newStyle.style.visibility === "visible") {

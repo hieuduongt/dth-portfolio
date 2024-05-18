@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 
 interface SliderProps extends React.HTMLAttributes<HTMLDivElement> {
     defaultLevel?: number;

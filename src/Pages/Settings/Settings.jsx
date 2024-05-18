@@ -1,4 +1,4 @@
-import { AppContext, actionBarColors, backGrounds, blurLevels } from "../../App";
+import { AppContext, actionBarColors, blurOption } from "../../App";
 import { useContext, useState } from 'react';
 import { Window } from '../../Layouts/Window';
 import { Switch } from "../../components/Switch";
@@ -9,9 +9,10 @@ const settings = {
 }
 
 const ColorPanelContent = (props) => {
-    const { actionBarColor, setNewActionBarColor } = props;
+    const { actionBarColor, setNewActionBarColor, xpStyle } = props;
     return (
-        <div className="color-select-container br-1">
+        <div className="color-select-container br-1" aria-disabled>
+            <div className="disabled-overlay" style={{ display: xpStyle ? "block" : "none" }}></div>
             <div className="setting-title-text">
                 Color Panel Settings
             </div>
@@ -57,7 +58,9 @@ const Content = (props) => {
         setNewActionBarColor,
         currentBackground,
         setBackGround,
-        wallpapers
+        wallpapers,
+        setXpStyle,
+        xpStyle
     } = props;
     const [currentSetting, setCurrentSetting] = useState(settings.wallpaperSetting);
 
@@ -87,10 +90,22 @@ const Content = (props) => {
                                 Blurred
                             </div>
                             <div className="setting-switch">
-                                <Switch checked={blur ? true : false} onChange={(value) => { value ? setNewBlurLevel(blurLevels.blur) : setNewBlurLevel(blurLevels.none) }} />
+                                <Switch checked={blur ? true : false} onChange={(value) => { value ? setNewBlurLevel(blurOption.blur) : setNewBlurLevel(blurOption.none) }} />
                             </div>
                         </div>
-                        <div className={`desktop setting-section selectable bd-b ${currentSetting === settings.colorSetting ? "current-setting" : ""}`} onClick={() => setCurrentSetting(settings.colorSetting)}>
+                        <div className="setting-section bd-b">
+                            <div className="setting-icon">
+                                <img src="setting-xp-style-icon.png" alt="" />
+                            </div>
+                            <div className="setting-title-text">
+                                Windows XP Style
+                            </div>
+                            <div className="setting-switch">
+                                <Switch checked={xpStyle ? true : false} onChange={(value) => setXpStyle(value)} />
+                            </div>
+                        </div>
+                        <div className={`desktop setting-section selectable bd-b ${currentSetting === settings.colorSetting ? "current-setting" : ""}`} onClick={() => xpStyle ? () => {} : setCurrentSetting(settings.colorSetting)}>
+                            <div className="disabled-overlay" style={{ display: xpStyle ? "block" : "none" }}></div>
                             <div className="setting-icon">
                                 <img src="color-selection-icon.png" alt="" />
                             </div>
@@ -110,7 +125,7 @@ const Content = (props) => {
                 </div>
                 <div className="setting-detail-content">
                     <div className={`info ${theme} br-1`}>
-                        {currentSetting === settings.colorSetting ? <ColorPanelContent actionBarColor={actionBarColor} setNewActionBarColor={setNewActionBarColor} /> : <></>}
+                        {currentSetting === settings.colorSetting ? <ColorPanelContent actionBarColor={actionBarColor} setNewActionBarColor={setNewActionBarColor} xpStyle={xpStyle}/> : <></>}
                         {currentSetting === settings.wallpaperSetting ? <WallpaperContent currentBackground={currentBackground} setBackGround={setBackGround} wallpapers={wallpapers} /> : <></>}
                     </div>
                 </div>
@@ -134,7 +149,9 @@ const Settings = (props) => {
         setNewZIndex,
         currentBackground,
         setBackGround,
-        wallpapers
+        wallpapers,
+        xpStyle,
+        setXpStyle
     } = useContext(AppContext);
 
     return (
@@ -179,7 +196,10 @@ const Settings = (props) => {
                     actionBarColor={actionBarColor}
                     currentBackground={currentBackground}
                     wallpapers={wallpapers}
-                    setBackGround={setBackGround} />
+                    setBackGround={setBackGround}
+                    xpStyle={xpStyle}
+                    setXpStyle={setXpStyle}
+                />
             </Window>
         </>
     )

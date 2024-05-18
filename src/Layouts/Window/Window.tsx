@@ -46,7 +46,7 @@ export function Window(props: WindowProps) {
         height: ""
     });
     const [expanded, setExpanded] = useState(false);
-    const { defaultPosition, style, children, className, zIndex, minWidth, minHeight, position, size, windowName, name, index, styleContext, setStyleContext } = props;
+    const { defaultPosition, style, children, className, zIndex, minWidth, minHeight, position, size, windowName, name, styleContext, setStyleContext } = props;
     const [windowPosition, setWindowPosition] = useState<Position>({
         x: defaultPosition?.x ? defaultPosition.x : 50,
         y: defaultPosition?.y ? defaultPosition.y : 50
