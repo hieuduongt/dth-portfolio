@@ -1,20 +1,24 @@
-import { AppContext, actionBarColors, blurOption } from "../../App";
+import { AppContext, actionBarColors, blurOption, languages } from "../../App";
 import { useContext, useState } from 'react';
 import { Window } from '../../Layouts/Window';
 import { Switch } from "../../components/Switch";
+import { contents } from "../../Helpers/Content";
+import { DropDownList } from "../../components/DropDownList";
+
 
 const settings = {
     colorSetting: "colorSetting",
-    wallpaperSetting: "wallpaperSetting"
+    wallpaperSetting: "wallpaperSetting",
+    languageSetting: "languageSetting"
 }
 
 const ColorPanelContent = (props) => {
-    const { actionBarColor, setNewActionBarColor, xpStyle } = props;
+    const { actionBarColor, setNewActionBarColor, xpStyle, content, language } = props;
     return (
         <div className="color-select-container br-1" aria-disabled>
             <div className="disabled-overlay" style={{ display: xpStyle ? "block" : "none" }}></div>
             <div className="setting-title-text">
-                Color Panel Settings
+                {content.inside.settings.find(s => s.name === "color_panel_setting").content[language]}
             </div>
             <div className="color-selection">
                 <input className="color-picker br-1" type="color" name="hieu" id="hieu" value={actionBarColor} onChange={(e) => setNewActionBarColor(e.target.value)} />
@@ -28,12 +32,12 @@ const ColorPanelContent = (props) => {
 }
 
 const WallpaperContent = (props) => {
-    const { currentBackground, setBackGround, wallpapers } = props;
+    const { currentBackground, setBackGround, wallpapers, content, language } = props;
 
     return (
         <div className="wallpaper-select-container br-1">
             <div className="setting-title-text">
-                Wallpaper Settings
+                {content.inside.settings.find(s => s.name === "wallpaper_setting").content[language]}
             </div>
             <div className="list-wallpapers">
                 {
@@ -43,6 +47,24 @@ const WallpaperContent = (props) => {
                         </div>
                     )) : <></>
                 }
+            </div>
+        </div>
+    )
+}
+
+const LanguageContent = (props) => {
+    const { language, setLanguage, content, theme, blur } = props;
+
+    return (
+        <div className="language-selection-container br-1">
+            <div className="selection-title-text">
+                {content.inside.settings.find(s => s.name === "language").content[language]}
+
+            </div>
+            <div className="languages">
+                <DropDownList label="Select Your Language" scalesize={"default"} className={`${theme} ${blur}`} style={{marginTop: 10}} data={languages} defaultselected={languages.find(l => l.value === language)} onchange={(value) => {
+                    if(value) setLanguage(value.value);
+                }}/>
             </div>
         </div>
     )
@@ -60,7 +82,10 @@ const Content = (props) => {
         setBackGround,
         wallpapers,
         setXpStyle,
-        xpStyle
+        xpStyle,
+        language,
+        setLanguage,
+        content
     } = props;
     const [currentSetting, setCurrentSetting] = useState(settings.wallpaperSetting);
 
@@ -74,7 +99,7 @@ const Content = (props) => {
                                 <img src="theme-setting-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
-                                Dark Mode
+                                {content.inside.settings.find(s => s.name === "darkmode").label[language]}
                             </div>
                             <div className="setting-switch">
                                 <Switch checked={theme.includes("dark")} onChange={(value) => {
@@ -87,46 +112,55 @@ const Content = (props) => {
                                 <img src="blurred-setting-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
-                                Blurred
+                                {content.inside.settings.find(s => s.name === "blur").label[language]}
                             </div>
                             <div className="setting-switch">
                                 <Switch checked={blur ? true : false} onChange={(value) => { value ? setNewBlurLevel(blurOption.blur) : setNewBlurLevel(blurOption.none) }} />
                             </div>
                         </div>
-                        <div className="setting-section bd-b">
+                        <div className="desktop setting-section bd-b">
                             <div className="setting-icon">
                                 <img src="setting-xp-style-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
-                                Windows XP Style
+                                {content.inside.settings.find(s => s.name === "windows_xp_style").label[language]}
                             </div>
                             <div className="setting-switch">
                                 <Switch checked={xpStyle ? true : false} onChange={(value) => setXpStyle(value)} />
                             </div>
                         </div>
-                        <div className={`desktop setting-section selectable bd-b ${currentSetting === settings.colorSetting ? "current-setting" : ""}`} onClick={() => xpStyle ? () => {} : setCurrentSetting(settings.colorSetting)}>
+                        <div className={`desktop setting-section selectable bd-b ${currentSetting === settings.colorSetting ? "current-setting" : ""}`} onClick={() => xpStyle ? () => { } : setCurrentSetting(settings.colorSetting)}>
                             <div className="disabled-overlay" style={{ display: xpStyle ? "block" : "none" }}></div>
                             <div className="setting-icon">
                                 <img src="color-selection-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
-                                Color Panel Settings
+                                {content.inside.settings.find(s => s.name === "color_panel_setting").label[language]}
                             </div>
                         </div>
-                        <div className={`setting-section selectable ${currentSetting === settings.wallpaperSetting ? "current-setting" : ""}`} onClick={() => setCurrentSetting(settings.wallpaperSetting)}>
+                        <div className={`setting-section selectable bd-b ${currentSetting === settings.wallpaperSetting ? "current-setting" : ""}`} onClick={() => setCurrentSetting(settings.wallpaperSetting)}>
                             <div className="setting-icon">
                                 <img src="setting-wallpaper-icon.png" alt="" />
                             </div>
                             <div className="setting-title-text">
-                                Wallpaper Settings
+                                {content.inside.settings.find(s => s.name === "wallpaper_setting").label[language]}
+                            </div>
+                        </div>
+                        <div className={`setting-section selectable ${currentSetting === settings.languageSetting ? "current-setting" : ""}`} onClick={() => setCurrentSetting(settings.languageSetting)}>
+                            <div className="setting-icon">
+                                <img src="setting-wallpaper-icon.png" alt="" />
+                            </div>
+                            <div className="setting-title-text">
+                                {content.inside.settings.find(s => s.name === "language").label[language]}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="setting-detail-content">
                     <div className={`info ${theme} br-1`}>
-                        {currentSetting === settings.colorSetting ? <ColorPanelContent actionBarColor={actionBarColor} setNewActionBarColor={setNewActionBarColor} xpStyle={xpStyle}/> : <></>}
-                        {currentSetting === settings.wallpaperSetting ? <WallpaperContent currentBackground={currentBackground} setBackGround={setBackGround} wallpapers={wallpapers} /> : <></>}
+                        {currentSetting === settings.colorSetting ? <ColorPanelContent actionBarColor={actionBarColor} setNewActionBarColor={setNewActionBarColor} xpStyle={xpStyle} content={content} language={language} /> : <></>}
+                        {currentSetting === settings.wallpaperSetting ? <WallpaperContent currentBackground={currentBackground} setBackGround={setBackGround} wallpapers={wallpapers} content={content} language={language} /> : <></>}
+                        {currentSetting === settings.languageSetting ? <LanguageContent language={language} setLanguage={setLanguage} content={content} theme={theme} blur={blur}/> : <></>}
                     </div>
                 </div>
             </div>
@@ -151,9 +185,12 @@ const Settings = (props) => {
         setBackGround,
         wallpapers,
         xpStyle,
-        setXpStyle
+        setXpStyle,
+        language,
+        setLanguage
     } = useContext(AppContext);
 
+    const content = contents.layouts.find(c => c.name === "setting_application");
     return (
         <>
             <Content
@@ -166,7 +203,11 @@ const Settings = (props) => {
                 actionBarColor={actionBarColor}
                 wallpapers={wallpapers}
                 currentBackground={currentBackground}
-                setBackGround={setBackGround} />
+                setBackGround={setBackGround}
+                language={language}
+                setLanguage={setLanguage}
+                content={content}
+            />
             <Window
                 handleOnMouseDown={() => setNewZIndex("settings")}
                 zIndex={zIndex.find(item => item.name === "settings").zIndex}
@@ -185,7 +226,7 @@ const Settings = (props) => {
                 index={3}
                 styleContext={settingsStyle}
                 setStyleContext={setNewSettingsStyle}
-                name="Settings"
+                name={content.content[language]}
             >
                 <Content
                     theme={theme}
@@ -199,6 +240,9 @@ const Settings = (props) => {
                     setBackGround={setBackGround}
                     xpStyle={xpStyle}
                     setXpStyle={setXpStyle}
+                    language={language}
+                    setLanguage={setLanguage}
+                    content={content}
                 />
             </Window>
         </>

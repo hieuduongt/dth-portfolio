@@ -76,6 +76,7 @@ body {
 
 .mobile-content {
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  border-radius: 15px !important;
 }
 
 .mobile-content.dark-background-transparent {
@@ -338,34 +339,6 @@ body {
   }
 }
 
-@media screen and (max-width: 500px) {
-
-  .applications-area>.application:nth-child(5) {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 430px) {
-
-  .applications-area>.application:nth-child(4) {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 360px) {
-
-  .applications-area>.application:nth-child(3) {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 300px) {
-
-  .applications-area>.application:nth-child(2) {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 320px) and (min-width: 280px) {
 
   .summary-text-content {
@@ -392,7 +365,7 @@ body {
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) {
   .main-container {
     margin-right: auto;
     margin-left: auto;
@@ -674,6 +647,11 @@ body {
   width: 200px;
   min-width: 100px;
   position: relative;
+  font-size: 0.7rem;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: nowrap;
 }
 
 .tab-name.blur-3 {
@@ -758,6 +736,7 @@ body {
 .application-area>.application {
   position: relative;
   height: 50px;
+  width: 50px;
   min-height: 40px;
   min-width: 40px;
   display: flex;
@@ -876,6 +855,11 @@ body {
 
 .tool-area:hover {
   background-color: #cccccca3;
+}
+
+.tool-area.xp-style-hover {
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
 }
 
 .date-and-time:hover {
@@ -2108,12 +2092,10 @@ h1.summary-title {
 }
 
 .windows-xp-tab {
-
-}
-
-.windows-xp-tab {
   position: relative;
   height: 40px;
+  width: 100%;
+  max-width: 200px;
   min-height: 40px;
   min-width: 40px;
   display: flex;
@@ -2129,6 +2111,12 @@ h1.summary-title {
 .windows-xp-tab > .app-name {
   font-weight: bold;
   color: white;
+  font-size: 0.7rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: nowrap;
 }
 
 .windows-xp-tab>img.app-icon {
@@ -2144,4 +2132,63 @@ h1.summary-title {
 
 .windows-xp-tab.opened-app {
   background-color: #0044c5;
+}
+
+.language-selection-container {
+  border-radius: 15px;
+}
+
+.dropdown-list {
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  color: #000000;
+}
+
+.list-options {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  height: max-content;
+  display: none;
+}
+
+.selected-value {
+  width: 100%;
+}
+
+.list-options.opened {
+  display: block;
+}
+
+.option {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.option:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.option:last-child {
+  border-radius: 0px 0px 10px 10px;
+}
+
+.option:hover {
+  background-color: #ccc;
+}
+
+.option.selected {
+  background-color: #e6f4ff;
 }

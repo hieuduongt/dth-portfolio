@@ -8,6 +8,7 @@ import { BiMessageSquareDots } from "react-icons/bi";
 import { FaWifi } from "react-icons/fa6";
 import { handleOpenAnApplication, createHiddenStyle } from '../../Helpers/Helpers';
 import { TbDeviceDesktopSearch } from "react-icons/tb";
+import { contents } from "../../Helpers/Content";
 
 export const CTime = () => {
     let time = /\d{0,2}:\d{0,2}/.exec(new Date().toTimeString())[0];
@@ -47,12 +48,13 @@ const TaskBar = (props) => {
         setOpenNotification,
         notificationCount,
         setOpenWindowNewFeeds,
-        xpStyle
+        xpStyle,
+        language
     } = useContext(AppContext);
     const [loadedApps, setLoadedApps] = useState(0);
-    const [appWidth, setAppWidth] = useState(50);
 
     const refs = Array.from({ length: 4 }, () => createRef());
+    const [appWidth, setAppWidth] = useState(0);
 
     const styleMapping = [
         {
@@ -84,6 +86,15 @@ const TaskBar = (props) => {
     }
 
     useEffect(() => {
+        const reInitSyle = () => {
+            setAppWidth(prev => prev + 1);
+        }
+
+        window.addEventListener("resize", reInitSyle);
+        return () => window.removeEventListener('resize', reInitSyle);
+    }, []);
+
+    useEffect(() => {
         if (refs[0].current && loadedApps === 4) {
             refs.forEach(ref => {
                 const img = ref.current.querySelector("img").getAttribute("src");
@@ -105,60 +116,83 @@ const TaskBar = (props) => {
                 }
             });
         }
-    }, [loadedApps]);
+    }, [loadedApps, xpStyle]);
 
     useEffect(() => {
-        if(xpStyle) {
-            setAppWidth(195);
-        } else {
-            setAppWidth(50);
+        if (refs[0].current && loadedApps === 4) {
+            refs.forEach(ref => {
+                const img = ref.current.querySelector("img").getAttribute("src");
+                if (img) {
+                    const name = ref.current.querySelector("img").getAttribute("alt");
+                    const style = styleMapping.find(it => it.name === name);
+                    style.setStyle(prev => ({
+                        ...prev,
+                        rect: ref.current.getBoundingClientRect()
+                    }));
+                }
+            });
         }
-    }, [xpStyle]);
+    }, [appWidth]);
+
+    useEffect(() => {
+        if (!refs[0].current) return;
+        const resizeObserver = new ResizeObserver(() => setAppWidth(prev => prev + 1));
+        resizeObserver.observe(refs[0].current);
+        return () => resizeObserver.disconnect();
+    }, []);
 
     return (
-        <div className="taskbar" style={xpStyle ? {backgroundColor: "#225ad9", borderRadius: "15px", boxShadow: "rgb(255 255 255 / 50%) 0px 0px 15px 0px inset"} : {}}>
-            <div className={`main taskbar-area ${theme} ${blur}`} style={xpStyle ? {borderTopRightRadius: 30, borderBottomRightRadius: 30} : {}}>
-                <div className={`application window-logo`} style={xpStyle ? {width:"120px", backgroundColor: "#6bb16a", boxShadow: "25px 0 20px -20px rgba(0, 0, 0, 0.45)", borderTopRightRadius: 30, borderBottomRightRadius: 30} : {}} onClick={() => setOpenWindowNewFeeds(prev => !prev)}>
-                    <img class="app-icon" src="windows-logo.png" alt="me" className="window-logo" style={{display: xpStyle ? "none" : "block"}}/>
-                    <img style={{display: xpStyle ? "block" : "none", width: "30px", height: "30px"}} src="windows-xp-logo.png" alt="me" className="window-logo" />
-                    <div style={{display: xpStyle ? "block" : "none", marginBottom: 5,fontSize: 26, fontWeight: "bolder", color: "white", textShadow: "0 1px 1px rgba(0,0,0,0.11), 0 2px 2px rgba(0,0,0,0.11), 0 4px 4px rgba(0,0,0,0.11), 0 8px 8px rgba(0,0,0,0.11), 0 16px 16px rgba(0,0,0,0.11), 0 32px 32px rgba(0,0,0,0.11)"}}>Start</div>
+        <div className="taskbar" style={xpStyle ? { backgroundColor: "#225ad9", borderRadius: "15px", boxShadow: "rgb(255 255 255 / 50%) 0px 0px 15px 0px inset" } : {}}>
+            <div className={`main taskbar-area ${theme} ${blur}`} style={xpStyle ? { borderTopRightRadius: 30, borderBottomRightRadius: 30 } : {}}>
+                <div className={`application window-logo`} style={xpStyle ? { width: "120px", backgroundColor: "#6bb16a", boxShadow: "25px 0 20px -20px rgba(0, 0, 0, 0.45)", borderTopRightRadius: 30, borderBottomRightRadius: 30 } : {}} onClick={() => setOpenWindowNewFeeds(prev => !prev)}>
+                    <img class="app-icon" src="windows-logo.png" alt="me" className="window-logo" style={{ display: xpStyle ? "none" : "block" }} />
+                    <img style={{ display: xpStyle ? "block" : "none", width: "30px", height: "30px" }} src="windows-xp-logo.png" alt="me" className="window-logo" />
+                    <div style={{ display: xpStyle ? "block" : "none", marginBottom: 5, fontSize: 26, fontWeight: "bolder", color: "white", textShadow: "0 1px 1px rgba(0,0,0,0.11), 0 2px 2px rgba(0,0,0,0.11), 0 4px 4px rgba(0,0,0,0.11), 0 8px 8px rgba(0,0,0,0.11), 0 16px 16px rgba(0,0,0,0.11), 0 32px 32px rgba(0,0,0,0.11)" }}>Start</div>
                 </div>
                 <div className={`search-area`} >
-                    <Input placeholder="Search anything" className="br-3" scalesize="large" style={{width: 150}} iconBefore={<BsSearch />} iconAfter={<TbDeviceDesktopSearch size={18} />} iconposition="before" />
+                    <Input placeholder="Search anything" className="br-3" scalesize="large" style={{ width: 150 }} iconbefore={<BsSearch />} iconafter={<TbDeviceDesktopSearch size={18} />} iconposition="before" />
                 </div>
             </div>
 
             <div className={`taskbar-area application-area`}>
 
-                <div style={{width: appWidth, justifyContent: xpStyle ? "" : "center", paddingLeft: xpStyle ? "5px" : ""}} ref={refs[0]} className={`${xpStyle ? "windows-xp-tab" : "application"} ${openedApps.home === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(0, "home", homeStyle, setNewHomeStyle, setAreOpenedApps, openedApps)}>
+                <div style={{ justifyContent: xpStyle ? "" : "center", paddingLeft: xpStyle ? "5px" : "" }} ref={refs[0]} className={`${xpStyle ? "windows-xp-tab" : "application"} ${openedApps.home === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(0, "home", homeStyle, setNewHomeStyle, setAreOpenedApps, openedApps)}>
                     <img class="app-icon" src="home-logo-app.png" alt="home" onLoad={() => setLoadedApps(prev => prev + 1)} />
-                    <div style={{display: xpStyle ? "block" : "none"}} className="app-name">Home</div>
+                    <div style={{ display: xpStyle ? "block" : "none" }} className="app-name">
+                        {contents.layouts.find(c => c.name === "home_application").content[language]}
+                    </div>
                 </div>
-                <div style={{width: appWidth, justifyContent: xpStyle ? "" : "center", paddingLeft: xpStyle ? "5px" : ""}} ref={refs[1]} className={`${xpStyle ? "windows-xp-tab" : "application"} ${openedApps.personal === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(1, "personal", personalInfoStyle, setNewPersonalInfoStyle, setAreOpenedApps, openedApps)}>
+                <div style={{ justifyContent: xpStyle ? "" : "center", paddingLeft: xpStyle ? "5px" : "" }} ref={refs[1]} className={`${xpStyle ? "windows-xp-tab" : "application"} ${openedApps.personal === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(1, "personal", personalInfoStyle, setNewPersonalInfoStyle, setAreOpenedApps, openedApps)}>
                     <img class="app-icon" src="personal-logo-app.png" alt="personal" onLoad={() => setLoadedApps(prev => prev + 1)} />
-                    <div style={{display: xpStyle ? "block" : "none"}} className="app-name">My Personal Info</div>
+                    <div style={{ display: xpStyle ? "block" : "none" }} className="app-name">
+                        {contents.layouts.find(c => c.name === "personal_information_application").content[language]}
+                    </div>
                 </div>
-                <div style={{width: appWidth, justifyContent: xpStyle ? "" : "center", paddingLeft: xpStyle ? "5px" : ""}} ref={refs[2]} className={`${xpStyle ? "windows-xp-tab" : "application"} ${openedApps.game === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(2, "game", gameStyle, setNewGameStyle, setAreOpenedApps, openedApps)}>
+                <div style={{ justifyContent: xpStyle ? "" : "center", paddingLeft: xpStyle ? "5px" : "" }} ref={refs[2]} className={`${xpStyle ? "windows-xp-tab" : "application"} ${openedApps.game === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(2, "game", gameStyle, setNewGameStyle, setAreOpenedApps, openedApps)}>
                     <img class="app-icon" src="game-logo-app.png" alt="game" onLoad={() => setLoadedApps(prev => prev + 1)} />
-                    <div style={{display: xpStyle ? "block" : "none"}} className="app-name">Caro Game</div>
+                    <div style={{ display: xpStyle ? "block" : "none" }} className="app-name">
+                    {contents.layouts.find(c => c.name === "game_application").content[language]}
+                    </div>
                 </div>
-                <div style={{width: appWidth, justifyContent: xpStyle ? "" : "center", paddingLeft: xpStyle ? "5px" : ""}} ref={refs[3]} className={`${xpStyle ? "windows-xp-tab" : "application"} ${openedApps.settings === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(3, "settings", settingsStyle, setNewSettingsStyle, setAreOpenedApps, openedApps)}>
+                <div style={{ justifyContent: xpStyle ? "" : "center", paddingLeft: xpStyle ? "5px" : "" }} ref={refs[3]} className={`${xpStyle ? "windows-xp-tab" : "application"} ${openedApps.settings === 1 ? "opened-app" : ""} ${theme} ${blur}`} onClick={(e) => openApp(3, "settings", settingsStyle, setNewSettingsStyle, setAreOpenedApps, openedApps)}>
                     <img class="app-icon" src="settings-logo-app.png" alt="settings" onLoad={() => setLoadedApps(prev => prev + 1)} />
-                    <div style={{display: xpStyle ? "block" : "none"}} className="app-name">Settings</div>
+                    <div style={{ display: xpStyle ? "block" : "none" }} className="app-name">
+                        {contents.layouts.find(c => c.name === "setting_application").content[language]}
+                    </div>
                 </div>
             </div>
             {/* <div className="taskbar-space"></div> */}
-            <div className={`taskbar-area weather-area ${xpStyle ? '' : theme} ${blur}`} style={xpStyle ? {display: "flex", alignItems: "center"} : {}}>
-                <div className="weather" style={xpStyle ? {height: 40} : {}}>
+            <div className={`taskbar-area weather-area ${xpStyle ? '' : theme} ${blur}`} style={xpStyle ? { display: "flex", alignItems: "center" } : {}}>
+                <div className="weather" style={xpStyle ? { height: 40 } : {}}>
 
                     <a class="weatherwidget-io" href="https://forecast7.com/en/21d00105d82/hanoi/" onClick={() => { }} data-label_1="HÀ NỘI" data-label_2="WEATHER" data-font="Roboto Slab" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="weather_one" >HÀ NỘI WEATHER</a>
 
                 </div>
             </div>
 
-            <div className={`taskbar-area tools-and-time ${theme} ${blur}`} style={xpStyle ? {borderTopLeftRadius: 30, borderBottomLeftRadius: 30} : {}}>
+            <div className={`taskbar-area tools-and-time ${theme} ${blur}`} style={xpStyle ? { borderTopLeftRadius: 30, borderBottomLeftRadius: 30, backgroundColor: "#0d96ee", boxShadow: "-25px 0 20px -20px rgba(0, 0, 0, 0.45)" } : {}}>
                 <div
-                    className={`tool-area ${openQuickSetting ? "opened" : ""}`}
+                    className={`tool-area ${openQuickSetting ? "opened" : ""} ${xpStyle ? "xp-style-hover" : ""}`}
                     onClick={() => setOpenQuickSetting(prev => !prev)}
                 >
                     <CiVolumeHigh size={20} />

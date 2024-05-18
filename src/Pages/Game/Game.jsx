@@ -1,6 +1,7 @@
 import { AppContext } from "../../App";
 import { useContext } from 'react';
 import { Window } from '../../Layouts/Window';
+import { contents } from "../../Helpers/Content";
 
 const Content = (props) => {
     const { theme, className } = props;
@@ -13,8 +14,8 @@ const Content = (props) => {
 
 const Game = (props) => {
     const { children } = props;
-    const { theme, gameStyle, setNewGameStyle, zIndex, setNewZIndex } = useContext(AppContext);
-
+    const { theme, gameStyle, setNewGameStyle, zIndex, setNewZIndex, language } = useContext(AppContext);
+    const content = contents.layouts.find(c => c.name === "game_application");
     return (
         <>
             {/* <Content theme={theme} className={`mobile content ${theme} ${blur} br-1`} /> */}
@@ -40,7 +41,7 @@ const Game = (props) => {
                     <span className="action-bar-link"
                         onClick={() => window.open("https://caro-game.hieuduongit.com", "_blank")}
                     >
-                        Caro game
+                        {content.content[language]}
                     </span>
                 }
             >
