@@ -4,6 +4,7 @@ import { Window } from '../../Layouts/Window';
 import { Switch } from "../../components/Switch";
 import { contents } from "../../Helpers/Content";
 import { DropDownList } from "../../components/DropDownList";
+import { saveSetting } from "../../Helpers/Helpers";
 
 
 const settings = {
@@ -14,6 +15,10 @@ const settings = {
 
 const ColorPanelContent = (props) => {
     const { actionBarColor, setNewActionBarColor, xpStyle, content, language } = props;
+    const setNewColor = (color) => {
+        setNewActionBarColor(color);
+        saveSetting("systemColor", color);
+    }
     return (
         <div className="color-select-container br-1" aria-disabled>
             <div className="disabled-overlay" style={{ display: xpStyle ? "block" : "none" }}></div>
@@ -21,9 +26,9 @@ const ColorPanelContent = (props) => {
                 {content.inside.settings.find(s => s.name === "color_panel_setting").content[language]}
             </div>
             <div className="color-selection">
-                <input className="color-picker br-1" type="color" name="hieu" id="hieu" value={actionBarColor} onChange={(e) => setNewActionBarColor(e.target.value)} />
+                <input className="color-picker br-1" type="color" name="hieu" id="hieu" value={actionBarColor} onChange={(e) => setNewColor(e.target.value)} />
                 {actionBarColors.map(color => (
-                    <div style={{ backgroundColor: color }} className={`color-panel br-1 ${actionBarColor === color ? "current-color-panel" : ""}`} onClick={() => setNewActionBarColor(color)}>
+                    <div style={{ backgroundColor: color }} className={`color-panel br-1 ${actionBarColor === color ? "current-color-panel" : ""}`} onClick={() => setNewColor(color)}>
                     </div>
                 ))}
             </div>
@@ -34,6 +39,11 @@ const ColorPanelContent = (props) => {
 const WallpaperContent = (props) => {
     const { currentBackground, setBackGround, wallpapers, content, language } = props;
 
+    const setNewWallpaper = (wallpaper) => {
+        setBackGround(wallpaper.name, wallpaper.light, wallpaper.dark);
+        saveSetting("systemWallpaper", wallpaper.name);
+    }
+
     return (
         <div className="wallpaper-select-container br-1">
             <div className="setting-title-text">
@@ -42,7 +52,7 @@ const WallpaperContent = (props) => {
             <div className="list-wallpapers">
                 {
                     wallpapers ? wallpapers.map(w => (
-                        <div className="wallpaper-card" onClick={() => setBackGround(w.name, w.light, w.dark)}>
+                        <div className="wallpaper-card" onClick={() => setNewWallpaper(w)}>
                             <img src={w.light} alt="appearance_dynamic" className={`${currentBackground === w.name ? "current-wallpaper" : ""}`} />
                         </div>
                     )) : <></>
@@ -54,7 +64,13 @@ const WallpaperContent = (props) => {
 
 const LanguageContent = (props) => {
     const { language, setLanguage, content, theme, blur } = props;
-
+    const setNewLanguage = (language) => {
+        if(language) {
+            setLanguage(language);
+            saveSetting("systemLanguage", language);
+        }
+        
+    }
     return (
         <div className="language-selection-container br-1">
             <div className="selection-title-text">
@@ -63,7 +79,7 @@ const LanguageContent = (props) => {
             </div>
             <div className="languages">
                 <DropDownList label="Select Your Language" scalesize={"default"} className={`${theme} ${blur}`} style={{marginTop: 10}} data={languages} defaultselected={languages.find(l => l.value === language)} onchange={(value) => {
-                    if(value) setLanguage(value.value);
+                    if(value) setNewLanguage(value.value);
                 }}/>
             </div>
         </div>
@@ -88,6 +104,17 @@ const Content = (props) => {
         content
     } = props;
     const [currentSetting, setCurrentSetting] = useState(settings.wallpaperSetting);
+
+    const setBlur = (value) => {
+        const blurLevel = value ? blurOption.blur : blurOption.none;
+        setNewBlurLevel(blurLevel);
+        saveSetting("systemBlurred", value);
+    }
+
+    const setWindowXPStyle = (value) => {
+        setXpStyle(value);
+        saveSetting("windowsXPStyle", value);
+    }
 
     return (
         <div className={className}>
@@ -115,7 +142,7 @@ const Content = (props) => {
                                 {content.inside.settings.find(s => s.name === "blur").label[language]}
                             </div>
                             <div className="setting-switch">
-                                <Switch checked={blur ? true : false} onChange={(value) => { value ? setNewBlurLevel(blurOption.blur) : setNewBlurLevel(blurOption.none) }} />
+                                <Switch checked={blur ? true : false} onChange={(value) => setBlur(value)} />
                             </div>
                         </div>
                         <div className="desktop setting-section bd-b">
@@ -126,7 +153,7 @@ const Content = (props) => {
                                 {content.inside.settings.find(s => s.name === "windows_xp_style").label[language]}
                             </div>
                             <div className="setting-switch">
-                                <Switch checked={xpStyle ? true : false} onChange={(value) => setXpStyle(value)} />
+                                <Switch checked={xpStyle ? true : false} onChange={(value) => setWindowXPStyle(value)} />
                             </div>
                         </div>
                         <div className={`desktop setting-section selectable bd-b ${currentSetting === settings.colorSetting ? "current-setting" : ""}`} onClick={() => xpStyle ? () => { } : setCurrentSetting(settings.colorSetting)}>
