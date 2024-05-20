@@ -332,8 +332,8 @@ function App() {
           const wallpaper = wallpapers.find(w => w.name === currentWallpaper);
           setBackGround(wallpaper.name, wallpaper.light, wallpaper.dark);
         } else {
-          setBackGround(wallpapers[4].name, wallpapers[4].light, wallpapers[4].dark);
-          saveSetting("systemWallpaper", wallpapers[4].name);
+          setBackGround(wallpapers[5].name, wallpapers[5].light, wallpapers[5].dark);
+          saveSetting("systemWallpaper", wallpapers[5].name);
         }
         const currentColor = getSettingByName("systemColor");
         if (currentColor) {
