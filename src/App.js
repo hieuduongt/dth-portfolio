@@ -11,6 +11,7 @@ import { isTablet, mobileModel, deviceType } from 'react-device-detect';
 import QuickSettings from './Layouts/QuickSettings/QuickSetting';
 import Notification from './Layouts/Notifications/Notification';
 import WindowNewFeeds from './Layouts/WindowNewFeeds/WindowNewFeeds';
+import { getSettingByName, getSettingsFromStorage, saveSetting } from './Helpers/Helpers';
 
 export const AppContext = createContext();
 
@@ -101,7 +102,6 @@ function App() {
   const [blur, setBlur] = useState(blurOption.blur);
   const [theme, setTheme] = useState(standardTheme.light);
   const [actionBarColor, setActionBarColor] = useState(actionBarColors[2]);
-  const [actionBarColorPicker, setActionBarColorPicker] = useState("");
   const [loadingProgress, setLoadingProgress] = useState("MacDows is starting...");
   const [homeStyle, setHomeStyle] = useState({
     style: {},
@@ -134,40 +134,6 @@ function App() {
       y: 20
     }
   });
-
-  const initStyles = () => {
-    setHomeStyle(prev => ({
-      ...prev,
-      defaultPosition: {
-        x: 20,
-        y: 250
-      }
-    }));
-
-    setPersonalInfoStyle(prev => ({
-      ...prev,
-      defaultPosition: {
-        x: 350,
-        y: 20
-      }
-    }));
-
-    setGameStyle(prev => ({
-      ...prev,
-      defaultPosition: {
-        x: 780,
-        y: 20
-      }
-    }));
-
-    setSettingsStyle(prev => ({
-      ...prev,
-      defaultPosition: {
-        x: 20,
-        y: 20
-      }
-    }));
-  }
 
   const [runningApp, setRunningApp] = useState(0);
   const [openedApps, setOpenedApps] = useState({
@@ -224,6 +190,7 @@ function App() {
       });
       setBlur(value);
       setXpStyle(false);
+      saveSetting("windowsXPStyle", false);
     }
   }
 
@@ -272,6 +239,36 @@ function App() {
     setCurrentBackGround(name);
   }
 
+  const initSettings = () => {
+    const currentSettings = getSettingsFromStorage();
+
+    if (currentSettings.systemBlurred === null || currentSettings.systemBlurred === undefined) {
+      setNewBlurLevel(blurOption.blur);
+    } else {
+      const blurLevel = currentSettings.systemBlurred ? blurOption.blur : blurOption.none;
+      setNewBlurLevel(blurLevel);
+    }
+
+    if (currentSettings.systemColor) {
+      setNewActionBarColor(currentSettings.systemColor);
+    }
+
+    if (currentSettings.systemWallpaper) {
+      const currentWallpaper = wallpapers.find(w => w.name === currentSettings.systemWallpaper);
+      if (currentWallpaper) {
+        setBackGround(currentWallpaper.name, currentWallpaper.light, currentWallpaper.dark);
+      }
+    }
+
+    if (currentSettings.systemLanguage) {
+      setLanguage(currentSettings.systemLanguage);
+    }
+
+    if (currentSettings.windowsXPStyle) {
+      setXpStyle(true);
+    }
+  }
+
   useEffect(() => {
     setLoading(true);
 
@@ -280,16 +277,14 @@ function App() {
       setWallpapers(images);
       setBackGround(images[5].name, images[5].light, images[5].dark);
     }
+
     const currentHour = new Date().getHours();
     if (18 > currentHour && currentHour > 6) {
       setTheme(standardTheme.light);
     } else {
       setTheme(standardTheme.dark);
     }
-    setNewBlurLevel(blurOption.blur);
-    if (isTablet) {
-      setOpen(true);
-    }
+    initSettings();
     emulatorWindowsStartupScreen();
   }, []);
 
@@ -321,19 +316,39 @@ function App() {
     return filteredImages;
   }
 
-  useEffect(() => {
+  const xpStyleInit = () => {
     if (wallpapers.length) {
       if (xpStyle) {
         setNewBlurLevel(blurOption.none);
+        saveSetting("systemBlurred", false);
         setNewActionBarColor(actionBarColors[actionBarColors.length - 1]);
+        saveSetting("systemColor", actionBarColors[actionBarColors.length - 1]);
         setBackGround(wallpapers[4].name, wallpapers[4].light, wallpapers[4].dark);
+        saveSetting("systemWallpaper", wallpapers[4].name);
         setTheme(standardTheme.light);
       } else {
-        setBackGround(wallpapers[5].name, wallpapers[5].light, wallpapers[5].dark);
-        setNewActionBarColor(actionBarColors[2]);
+        const currentWallpaper = getSettingByName("systemWallpaper");
+        if (currentWallpaper) {
+          const wallpaper = wallpapers.find(w => w.name === currentWallpaper);
+          setBackGround(wallpaper.name, wallpaper.light, wallpaper.dark);
+        } else {
+          setBackGround(wallpapers[4].name, wallpapers[4].light, wallpapers[4].dark);
+          saveSetting("systemWallpaper", wallpapers[4].name);
+        }
+        const currentColor = getSettingByName("systemColor");
+        if (currentColor) {
+          setNewActionBarColor(currentColor);
+        } else {
+          setNewActionBarColor(actionBarColors[2]);
+          saveSetting("systemColor", actionBarColors[2]);
+        }
+
       }
     }
+  }
 
+  useEffect(() => {
+    xpStyleInit();
   }, [xpStyle, wallpapers]);
 
   const emulatorWindowsStartupScreen = async () => {
@@ -343,7 +358,7 @@ function App() {
     });
 
     await startingMacDows.then((value) => {
-      setLoadingProgress(value);
+      initSettings();
     });
 
     setLoading(false);
@@ -375,8 +390,6 @@ function App() {
         setBackGround,
         currentBackground,
         setLoading,
-        actionBarColorPicker,
-        setActionBarColorPicker,
         wallpapers,
         openQuickSetting,
         setOpenQuickSetting,

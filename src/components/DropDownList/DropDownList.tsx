@@ -32,6 +32,7 @@ const scaleNumber = [
 export function DropDownList(props: DivProps) {
     const { scalesize, defaultselected, data, onchange, style, className, label } = props;
     const [selected, setSelected] = useState<ListData>();
+    const [defaultSelectedValue, setDefaultSelectedValue] = useState<ListData>();
     const [open, setOpen] = useState(false);
     const [size, setSize] = useState(
         {
@@ -50,20 +51,25 @@ export function DropDownList(props: DivProps) {
         }
     }, [scalesize]);
 
+    useEffect(() => {
+        if (defaultselected) {
+            setDefaultSelectedValue(defaultselected);
+        }
+    }, [defaultselected]);
+
     const handleWhenSelect = (data: ListData | undefined) => {
         setSelected(data);
+        setDefaultSelectedValue(data);
         if(onchange) onchange(data);
     }
 
     return (
-        <div className={`dropdown-list ${open ? "opened" : ""} ${className||""}`} style={{...style, height: size.value}} tabIndex={1} onFocus={(e) => {
-            e.stopPropagation()
-        }}
+        <div className={`dropdown-list ${open ? "opened" : ""} ${className||""}`} style={{...style, height: size.value}} tabIndex={1} onBlur={(e) => setOpen(false)}
         onClick={() => setOpen(prev => !prev)}
         >
             <div className='selected-value'>
                 {
-                    selected ? selected.label : defaultselected ? defaultselected.label : label
+                    selected ? selected.label : defaultSelectedValue ? defaultSelectedValue.label : label
                 }
             </div>
             <IoIosArrowDropdown />
@@ -71,7 +77,7 @@ export function DropDownList(props: DivProps) {
                 <div className="option" onClick={() => handleWhenSelect(undefined)}></div>
                 {
                     data.map(d => (
-                        <div className={`option ${selected?.value === d.value ? "selected" : ""}`} onClick={() => handleWhenSelect(d)}>
+                        <div className={`option ${selected?.value === d.value || defaultSelectedValue?.value === d.value ? "selected" : ""}`} onClick={() => handleWhenSelect(d)}>
                             {d.label}
                         </div>
                     ))

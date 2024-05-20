@@ -23,6 +23,25 @@ export const createHiddenStyle = (rect, noEffect = undefined) => {
     };
 }
 
+export const getSettingsFromStorage = () => {
+    return JSON.parse(localStorage.getItem("settings")||"{}");
+}
+
+export const getSettingByName = (name = "") => {
+    const currentSettings = getSettingsFromStorage();
+    return currentSettings[name];
+}
+
+export const saveSettingsIntoStorage = (settings) => {
+    return localStorage.setItem("settings", JSON.stringify(settings));
+}
+
+export const saveSetting = (name = "", value = "") => {
+    const currentSettings = getSettingsFromStorage();
+    currentSettings[name] = value;
+    saveSettingsIntoStorage(currentSettings);
+}
+
 export const createVisibleStyle = (rect, animation = true) => {
     return {
         style: {
