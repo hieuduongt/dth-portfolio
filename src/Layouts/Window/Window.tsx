@@ -60,6 +60,12 @@ export function Window(props: WindowProps) {
             className={`window content ${theme.includes("transparent") ? theme : ""} ${blur} ${!windowSize.width ? "br-1" : ""} ${className}`}
             minWidth={size?.width ? 0 : minWidth || 300}
             minHeight={size?.width ? 0 : minHeight || 200}
+            resizeHandleClasses={{
+                top: "window-resize-top-cursor",
+                right: "window-resize-right-cursor",
+                bottom: "window-resize-bottom-cursor",
+                left: "window-resize-left-cursor"
+            }}
             default={{
                 width: 300,
                 height: 200,

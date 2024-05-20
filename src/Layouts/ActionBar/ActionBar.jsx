@@ -25,7 +25,7 @@ const ActionBar = (props) => {
                 <GoPlus size={20} />
             </div>
 
-            <div className='drag-area'>
+            <div className='drag-area' title="Drag to move the window or double-click to expand" onDoubleClick={onExpand || (() => { })}>
 
             </div>
             <div className={`action-buttons ${blur} ${theme}`}>

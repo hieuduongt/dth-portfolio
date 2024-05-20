@@ -581,7 +581,6 @@ body {
 .drag-area {
   width: 100%;
   height: 100%;
-  cursor: move;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -2191,4 +2190,20 @@ h1.summary-title {
 
 .option.selected {
   background-color: #e6f4ff;
+}
+
+.window-resize-top-cursor {
+  cursor: n-resize !important;
+}
+
+.window-resize-right-cursor {
+  cursor: e-resize !important;
+}
+
+.window-resize-bottom-cursor {
+  cursor: s-resize !important;
+}
+
+.window-resize-left-cursor {
+  cursor: w-resize !important;
 }
