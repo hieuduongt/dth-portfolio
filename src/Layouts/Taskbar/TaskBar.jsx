@@ -9,6 +9,7 @@ import { FaWifi } from "react-icons/fa6";
 import { handleOpenAnApplication, createHiddenStyle } from '../../Helpers/Helpers';
 import { TbDeviceDesktopSearch } from "react-icons/tb";
 import { contents } from "../../Helpers/Content";
+import { Weather } from "../../components/Weather";
 
 export const CTime = () => {
     let time = /\d{0,2}:\d{0,2}/.exec(new Date().toTimeString())[0];
@@ -184,9 +185,7 @@ const TaskBar = (props) => {
             {/* <div className="taskbar-space"></div> */}
             <div className={`taskbar-area weather-area ${xpStyle ? '' : theme} ${blur}`} style={xpStyle ? { display: "flex", alignItems: "center" } : {}}>
                 <div className="weather" style={xpStyle ? { height: 40 } : {}}>
-
-                    <a class="weatherwidget-io" href="https://forecast7.com/en/21d00105d82/hanoi/" onClick={() => { }} data-label_1="HÀ NỘI" data-label_2="WEATHER" data-font="Roboto Slab" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="weather_one" >HÀ NỘI WEATHER</a>
-
+                    <Weather language={language} size={xpStyle ? 40 : 50}/>
                 </div>
             </div>
 
